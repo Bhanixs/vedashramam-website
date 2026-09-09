@@ -30,36 +30,45 @@ const ROUTINE = [
   { time: "Night (8:00 PM onwards)", activity: "Dinner, revision of the day’s lessons and rest" },
 ];
 
+const TEACHERS = [
+  { name: "Guru Prasad Bhatt", role: "Vedic Teacher (Krishna Yajur Veda)" },
+  { name: "Gouri Shankara Sharma", role: "Agama Teacher" },
+  { name: "Mehta Sastrigal", role: "Prayoga Teacher" },
+  { name: "Chidambaram Sena Sastrigal", role: "Prayoga Teacher" },
+];
+
 const COURSES = [
   {
-    title: "Veda Adhyayanam (Rig & Krishna Yajur)",
-    desc: "10 to 12 years of rigorous oral training. Vidyarthis are admitted at the age of 8–9 following Upanayanam, committing sacred hymns to memory with exact intonation and Swara.",
+    title: "Krishna Yajur Veda",
+    desc: "Comprehensive adhyayanam in the traditional Gurukula method. Normally takes 10 to 12 years of dedicated adhyayanam to acquire mastery.",
+  },
+  {
+    title: "Agama Traditions",
+    desc: "Systematic instruction in temple rituals, consecration, daily aradhana, and the sacred principles of Agama sastras.",
+  },
+  {
+    title: "Prayoga (Smartham & Srowtham)",
+    desc: "Hands-on application of Vedic procedures for domestic samskaras (Upanayanam, Vivaham, Seemantham) and sacred Srowtha ritual practices.",
   },
   {
     title: "Veda Bhashyam & Sastras",
-    desc: "Higher study of the profound meaning of the Vedas, covering classical disciplines including Vedanta, Nyaya, Vyakarana, and Mimamsa under renowned scholars.",
+    desc: "Deeper study of philosophical and grammatical texts including Vedanta, Nyaya, Vyakarana, and Mimamsa.",
   },
   {
-    title: "Srowtham & Yagna Vidhi",
-    desc: "A specialised 3-year comprehensive course preparing scholars in performing Vedic Yagnas and sacred rituals strictly as laid down in the Sastras.",
+    title: "Contemporary Schooling & Samskritam",
+    desc: "Students simultaneously pursue the modern curriculum (Mathematics, Social Sciences, English) and Sanskrit drama and literature.",
   },
   {
-    title: "Smartham (Prayoga)",
-    desc: "Practical Vedic application for domestic rituals and samskaras including Upanayanam, Vivaham, Seemantham, and allied grihya rites.",
-  },
-  {
-    title: "Itihasas, Puranas & Modern Subjects",
-    desc: "Study of Srimad Ramayana and Srimad Bhagavatam alongside formal instruction in Sanskrit, English, Mathematics, and Social Sciences for well-rounded development.",
+    title: "Go Samrakshanam & Values",
+    desc: "Active participation in Go Samrakshanam (cow protection), seva to elders, community interaction, and value-based character building.",
   },
 ];
 
-const ACHIEVEMENTS = [
-  { count: "150+", label: "Scholars Graduated with Distinction" },
-  { count: "100+", label: "Completed Rigorous Ghana Stage" },
-  { count: "50+", label: "Mastered Krama Stage" },
-  { count: "12+", label: "Serving as Adhyapakas at Patasalas" },
-  { count: "5", label: "Passed Higher Veda Bhashyam Exams" },
-  { count: "3", label: "Attained Salakshana Ghanapati Status" },
+const HIGHLIGHTS = [
+  { count: "55+", label: "Resident Vidyarthis Receiving Traditional Education" },
+  { count: "4", label: "Dedicated Traditional Scholars & Adhyapakas" },
+  { count: "100%", label: "Free Boarding, Traditional Food, Clothing & Healthcare" },
+  { count: "Dual", label: "Integration of Vedic Gurukulam & Modern Schooling" },
 ];
 
 function PatasalaPage() {
@@ -67,7 +76,7 @@ function PatasalaPage() {
     <PageShell transparentHeader>
       <PageBanner
         title="Veda Patasala"
-        subtitle="A residential Gurukulam in the guru-shishya parampara"
+        subtitle="Veda Ashrama Gurukulam — Karuvadikuppam, Puducherry"
         image={heroRecitation}
       />
 
@@ -78,18 +87,55 @@ function PatasalaPage() {
       />
 
       <section className="container-page py-20">
-        <SectionHeading title="About the Veda Patasala" eyebrow="Gurukulam" />
+        <SectionHeading title="About the Gurukulam" eyebrow="Karuvadikuppam, Puducherry" />
         <div className="mx-auto mt-12 max-w-3xl space-y-5 text-[0.95rem] leading-relaxed text-foreground/85">
           <p>
-            The Veda Patasala trains resident Vidyarthis in the authentic Gurukula system — learning through
-            daily oral recitation (adhyayanam), active listening, repetition, and memorisation under qualified
-            Adhyapakas, strictly preserving the unbroken Guru-Sishya parampara.
+            In Karuvadikuppam, Puducherry, Veda Samrat Brahmashri Raja Sastrigal and his family are dedicating
+            their lives to the preservation and development of Vedic knowledge, Sanātana Dharma, Agama traditions,
+            Go Samrakshana and traditional education.
           </p>
           <p>
-            Vidyarthis are admitted at the tender age of 8 to 9 years immediately following their Upanayanam.
-            Throughout their 10 to 12 years of arduous adhyayanam, all students are provided with free boarding,
-            wholesome traditional food, clothing, and medical care in a serene, disciplined atmosphere.
+            Today, around 55 students are receiving traditional Vedic education at the Gurukulam. The students are
+            studying Krishna Yajur Veda, Agama and Prayoga, while also pursuing the regular modern school
+            curriculum. This combination allows the young generation to remain connected with their ancient heritage
+            while receiving contemporary education.
           </p>
+          <p>
+            All Vidyarthis are provided with free wholesome food, clothing, and medical facilities to ensure good
+            health during this entire course of study.
+          </p>
+        </div>
+
+        {/* Teachers & Scholars */}
+        <div className="mx-auto mt-16 max-w-4xl">
+          <h3 className="font-display text-2xl text-maroon text-center">Teachers &amp; Scholars</h3>
+          <p className="mt-2 text-center text-xs uppercase tracking-[0.14em] text-muted-foreground">
+            Preserving a living tradition of Vedic wisdom and spiritual discipline
+          </p>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {TEACHERS.map((t) => (
+              <div key={t.name} className="surface-card flex items-center gap-4 p-5">
+                <span className="h-3 w-3 rotate-45 bg-gold" />
+                <div>
+                  <h4 className="font-display text-base text-maroon">{t.name}</h4>
+                  <p className="text-xs text-muted-foreground">{t.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Highlights */}
+        <div className="mx-auto mt-20 max-w-4xl">
+          <h3 className="font-display text-2xl text-maroon text-center">Gurukulam Highlights</h3>
+          <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+            {HIGHLIGHTS.map((a) => (
+              <div key={a.label} className="surface-card p-6 text-center">
+                <p className="font-display text-3xl font-bold text-primary">{a.count}</p>
+                <p className="mt-2 text-xs font-medium text-foreground/80">{a.label}</p>
+              </div>
+            ))}
+          </div>
         </div>
 
         {/* Courses of Study */}
@@ -100,19 +146,6 @@ function PatasalaPage() {
               <div key={c.title} className="surface-card p-6">
                 <h4 className="font-display text-lg text-maroon">{c.title}</h4>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.desc}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Achievements */}
-        <div className="mx-auto mt-20 max-w-4xl">
-          <h3 className="font-display text-2xl text-maroon text-center">Progress &amp; Achievements</h3>
-          <div className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3">
-            {ACHIEVEMENTS.map((a) => (
-              <div key={a.label} className="surface-card p-6 text-center">
-                <p className="font-display text-3xl font-bold text-primary">{a.count}</p>
-                <p className="mt-2 text-xs font-medium text-foreground/80">{a.label}</p>
               </div>
             ))}
           </div>

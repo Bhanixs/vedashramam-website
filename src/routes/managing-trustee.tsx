@@ -21,58 +21,95 @@ export const Route = createFileRoute("/managing-trustee")({
   component: TrusteePage,
 });
 
-const FACULTY_DOMAINS = [
-  { domain: "Veda Bhashyam & Sastras", desc: "Instruction in Vedanta, Mimamsa, Vyakarana, and higher Vedic interpretation." },
-  { domain: "Rig Veda Adhyayanam", desc: "Complete Samhita, Pada, Krama, and Ghana chanting under Salakshana Ghanapatis." },
-  { domain: "Krishna Yajur Veda", desc: "Taittiriya Sakha adhyayanam, Aranyakam, Upanishads, and allied prayogas." },
-  { domain: "Samskritam & Sahitya", desc: "Classical Sanskrit grammar, literature, and dialogue mastery for all students." },
-  { domain: "Modern Disciplines", desc: "Mathematics, Social Studies, and English to foster capable, well-rounded scholars." },
+const TRUSTEES = [
+  { name: "Veda Samrat Brahmashri Raja Sastrigal", role: "Founder & Managing Trustee" },
+  { name: "Smt. Kalyani", role: "Managing Trustee" },
+  { name: "Sri Arunachalam", role: "Trustee" },
+  { name: "Smt. Subbulakshmi", role: "Trustee" },
+];
+
+const TEACHERS = [
+  { name: "Guru Prasad Bhatt", role: "Vedic Teacher (Krishna Yajur Veda)" },
+  { name: "Gouri Shankara Sharma", role: "Agama Teacher" },
+  { name: "Mehta Sastrigal", role: "Prayoga Teacher" },
+  { name: "Chidambaram Sena Sastrigal", role: "Prayoga Teacher" },
 ];
 
 function TrusteePage() {
   return (
     <PageShell transparentHeader>
-      <PageBanner title="Managing Trustee" subtitle="Sri Rajasasthrigal" image={heroHomam} />
+      <PageBanner
+        title="Managing Trustee"
+        subtitle="Veda Samrat Brahmashri Raja Sastrigal — Founder & Managing Trustee"
+        image={heroHomam}
+      />
 
       <Sloka
-        devanagari="गुरुर्ब्रह्मा गुरुर्विष्णुः गुरुर्देवो महेश्वरः।"
+        devanagari="गुरुर्ब्रह्மா गुरुर्विष्णुः गुरुर्देवो महेश्वरः।"
         transliteration="Gurur Brahma Gurur Vishnuh Gurur Devo Maheshwarah."
         meaning="The Guru is Brahma, Vishnu and Maheshwara; the Guru is the Supreme Reality itself."
       />
 
       <section className="container-page py-20">
-        <SectionHeading title="Sri Rajasasthrigal" eyebrow="Managing Trustee &amp; Administration" />
+        <SectionHeading title="Brahmashri Raja Sastrigal" eyebrow="Founder &amp; Leadership" />
         <div className="mx-auto mt-12 max-w-3xl space-y-5 text-[0.95rem] leading-relaxed text-foreground/85">
           <p>
-            Sri Rajasasthrigal serves as the Managing Trustee of Vedashramam, guiding both the spiritual and
-            administrative direction of the Sabha and the Veda Patasala — overseeing the Adhyapakas, the Vidyarthis’
-            moral and Vedic progress, and the trust’s broader charitable mission.
+            In Karuvadikuppam, Puducherry, Veda Samrat Brahmashri Raja Sastrigal and his family are dedicating
+            their lives to the preservation and development of Vedic knowledge, Sanātana Dharma, Agama traditions,
+            Go Samrakshana and traditional education.
           </p>
           <p>
-            Under his stewardship, the Gurukulam maintains an uncompromising standard of Vedic pedagogy, ensuring
-            that oral adhyayanam is imparted with pristine swara, strict anushthanam, and dedicated service to
-            Sanatana Dharma.
+            He is the founder of Veda Ashrama Gurukulam and Sri Sai Shankara Bhakta Sabha Educational and Go
+            Samrakshana Seva Trust. His parents, Sri Arunachalam and Smt. Subbulakshmi, have also played an
+            important role as trustees in supporting the Vedic institution and its educational mission. Brahmashri
+            Raja Sastrigal and Smt. Kalyani serve as managing trustees and continue to guide and develop these
+            meaningful activities.
+          </p>
+          <p>
+            Their collective service is not simply about teaching scriptures. It is about preserving a living
+            tradition and passing Vedic wisdom, discipline, values, culture, and spiritual knowledge to the next
+            generation under the timeless prayer: <em>“Loka Samastha Sukhino Bhavantu”</em>.
           </p>
         </div>
 
-        {/* Faculty & Academic Structure */}
+        {/* Board of Trustees */}
         <div className="mx-auto mt-16 max-w-4xl">
-          <h3 className="font-display text-2xl text-maroon text-center">Faculty &amp; Academic Guidance</h3>
-          <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {FACULTY_DOMAINS.map((f) => (
-              <div key={f.domain} className="surface-card p-6">
-                <h4 className="font-display text-lg text-maroon">{f.domain}</h4>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{f.desc}</p>
+          <h3 className="font-display text-2xl text-maroon text-center">Board of Trustees</h3>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {TRUSTEES.map((t) => (
+              <div key={t.name} className="surface-card flex items-center gap-4 p-5">
+                <span className="h-3 w-3 rotate-45 bg-gold" />
+                <div>
+                  <h4 className="font-display text-base text-maroon">{t.name}</h4>
+                  <p className="text-xs text-muted-foreground">{t.role}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Faculty & Scholars */}
+        <div className="mx-auto mt-16 max-w-4xl">
+          <h3 className="font-display text-2xl text-maroon text-center">Adhyapakas &amp; Teachers</h3>
+          <div className="mt-8 grid gap-4 sm:grid-cols-2">
+            {TEACHERS.map((t) => (
+              <div key={t.name} className="surface-card flex items-center gap-4 p-5">
+                <span className="h-3 w-3 rotate-45 bg-primary" />
+                <div>
+                  <h4 className="font-display text-base text-maroon">{t.name}</h4>
+                  <p className="text-xs text-muted-foreground">{t.role}</p>
+                </div>
               </div>
             ))}
           </div>
         </div>
 
         <div className="mandala-bg mx-auto mt-14 max-w-3xl rounded-lg border border-border p-8 text-center">
-          <h3 className="font-display text-xl text-maroon">ஸ்ரீ ராஜசாஸ்திரிகள், நிர்வாக அறங்காவலர்</h3>
+          <h3 className="font-display text-xl text-maroon">ஸ்ரீ ராஜசாஸ்திரிகள், நிறுவனர் &amp; நிர்வாக அறங்காவலர்</h3>
           <p className="mt-4 text-sm leading-relaxed text-foreground/80">
-            ஸ்ரீ ராஜசாஸ்திரிகள் வேதாஶ்ரமத்தின் நிர்வாக அறங்காவலராகப் பணியாற்றி, சபை மற்றும் வேத
-            பாடசாலையின் ஆன்மீக மற்றும் நிர்வாக திசைகளை வழிநடத்துகிறார்.
+            வேத சாம்ராட் பிரம்மஸ்ரீ ராஜசாஸ்திரிகள் மற்றும் அவரது குடும்பத்தினர் புதுச்சேரி கருவாடிக்குப்பத்தில்
+            வேத அறிவு, சநாதன தர்மம், ஆகம மரபுகள், கோ சம்ரக்ஷணம் மற்றும் பாரம்பரிய கல்வியின் பாதுகாப்பு மற்றும்
+            வளர்ச்சிக்காகத் தங்களை அர்ப்பணித்துள்ளனர்.
           </p>
         </div>
       </section>

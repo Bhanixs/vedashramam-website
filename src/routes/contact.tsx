@@ -37,12 +37,12 @@ function ContactPage() {
       <PageBanner title="Contact Us" subtitle="We would be glad to hear from you" image={heroHomam} />
 
       <section className="container-page py-20">
-        <SectionHeading title="Get in Touch" eyebrow="Vedashramam, Pondicherry" />
+        <SectionHeading title="Get in Touch" eyebrow="Karuvadikuppam, Puducherry" />
 
         <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1.2fr]">
           <div className="space-y-4">
             {[
-              { icon: MapPin, label: "Address", value: "Vedashramam, Pondicherry" },
+              { icon: MapPin, label: "Address", value: "Veda Ashrama Gurukulam, Karuvadikuppam, Puducherry" },
               { icon: Phone, label: "Phone", value: "To be published" },
               { icon: Mail, label: "Email", value: "To be published" },
             ].map((c) => (

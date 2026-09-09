@@ -1,179 +1,338 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { BookOpen, UtensilsCrossed, Building2 } from "lucide-react";
+import { useState } from "react";
 import { PageShell, PageBanner, SectionHeading, Sloka } from "@/components/site/PageShell";
 import heroTemple from "@/assets/hero-temple.jpg";
+import { CreditCard, ArrowRight, ShieldCheck, Heart, Building2, CheckCircle2, X } from "lucide-react";
 
 export const Route = createFileRoute("/donate")({
   head: () => ({
     meta: [
-      { title: "Donate Now — Support Vedashramam" },
+      { title: "Donate Now — Veda Ashrama Gurukulam, Puducherry" },
       {
         name: "description",
         content:
-          "Support Vedashramam through Vidyadanam and Annadanam — sustaining student boarding, acharya support and facility upkeep at the Veda Patasala.",
+          "Support Veda Ashrama Gurukulam. Contribute for Sankara Jayanthi & Nithya Sevas, sponsor our Vidyarthis, or support the Patasala Building Fund.",
       },
-      { property: "og:title", content: "Donate Now — Support Vedashramam" },
+      { property: "og:title", content: "Donate Now — Vedashramam" },
       {
         property: "og:description",
-        content: "Vidyadanam and Annadanam for the students and acharyas of the Veda Patasala.",
+        content: "Donate online for Sevas, Annadanam, Vidyarthi sponsorship, and the New Patasala Building Fund.",
       },
     ],
   }),
   component: DonatePage,
 });
 
-const WAYS = [
+type DonationStream = {
+  id: string;
+  tag: string;
+  title: string;
+  subtitle: string;
+  detailsLink: string;
+  detailsLabel: string;
+  defaultCategory: string;
+};
+
+const DONATION_STREAMS: DonationStream[] = [
   {
-    icon: BookOpen,
-    title: "Vidyadanam & Student Welfare",
-    body: "Sponsor a Vidyarthi’s comprehensive education, instruction, traditional vastram (dhoties), and study materials for a month or year.",
+    id: "sevas",
+    tag: "Donate for",
+    title: "Veda Ashrama Gurukulam",
+    subtitle: "Contribute for Sankara Jayanthi & Nithya Sevas",
+    detailsLink: "/donate-for-sevas",
+    detailsLabel: "Donate for Sevas / Annadanam",
+    defaultCategory: "Sankara Jayanthi & Nithya Sevas",
   },
   {
-    icon: UtensilsCrossed,
-    title: "Annadanam & Samaradhana",
-    body: "Sponsor daily meals (Bhojanam / Samaradhana) for resident students and Adhyapakas on special family occasions, birthdays, or anniversaries.",
+    id: "vidyarthis",
+    tag: "Donate for",
+    title: "Veda Ashrama Gurukulam",
+    subtitle: "Sponsor our Vidyarthis or support the Gurukulam",
+    detailsLink: "/ways-to-support",
+    detailsLabel: "Ways to Support – Donate Now",
+    defaultCategory: "Vidyarthi Sponsorship & Gurukulam Support",
   },
   {
-    icon: Building2,
-    title: "Patasala Building & Corpus Fund",
-    body: "Contribute to the long-term Sashwata Nidhi endowment and the expansion of classroom facilities, library, and student living quarters.",
+    id: "building",
+    tag: "Donate for",
+    title: "Veda Patasala Building Fund",
+    subtitle: "Contribute to our New Patasala building fund",
+    detailsLink: "/appeal-for-building-construction",
+    detailsLabel: "Appeal for Building Construction",
+    defaultCategory: "New Patasala Building Fund",
   },
 ];
 
-const SEVAS = [
-  { seva: "Daily Rudrabhishekam", schedule: "Daily at 6:00 AM", amount: "₹101 / day", details: "Sankalpam performed daily with sacred abhishekam." },
-  { seva: "Pradosha Puja", schedule: "Every Trayodashi at 5:00 PM", amount: "₹150 / ₹2,400 (Annual)", details: "Special Shiva puja & archana during Pradosham." },
-  { seva: "Ganapathi Homam", schedule: "Sankatahara Chaturthi at 6:00 AM", amount: "₹200 / ₹2,400 (Annual)", details: "Vighnaharta homam for obstacle removal." },
-  { seva: "Avahanti Homam", schedule: "Shukla Panchami at 6:00 AM", amount: "₹200 / ₹2,400 (Annual)", details: "Vedic homam for prosperity and spiritual wisdom." },
-  { seva: "Pada Pooja & Anusham Star", schedule: "Thursdays & Anusham at 7:00 AM", amount: "₹200 / ₹2,400 (Annual)", details: "Acharya pada pooja and Mahaswamigal star worship." },
-  { seva: "Sahasranama & Parayanam", schedule: "Lalitha / Vishnu / Sundarakanda", amount: "₹500 – ₹1,000 / occurrence", details: "Monthly parayanams with community chanting." },
-];
+export function DonatePage() {
+  const [modalOpen, setModalOpen] = useState(false);
+  const [selectedPurpose, setSelectedPurpose] = useState<string>("Sankara Jayanthi & Nithya Sevas");
+  const [amount, setAmount] = useState<string>("5000");
+  const [donorName, setDonorName] = useState<string>("");
+  const [donorPhone, setDonorPhone] = useState<string>("");
+  const [donorPan, setDonorPan] = useState<string>("");
+  const [submitted, setSubmitted] = useState(false);
 
-function DonatePage() {
+  const openDonateModal = (purpose: string) => {
+    setSelectedPurpose(purpose);
+    setSubmitted(false);
+    setModalOpen(true);
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
+
   return (
     <PageShell transparentHeader>
       <PageBanner
         title="Donate Now"
-        subtitle="Loka Samastha Sukhino Bhavantu — Ways to Support"
+        subtitle="Support Veda Ashrama Gurukulam — Karuvadikuppam, Puducherry"
         image={heroTemple}
       />
 
       <Sloka
-        devanagari="असतो मा सद्गमय। तमसो मा ज्योतिर्गमय। मृत्योर्मा अमृतं गमय॥"
-        transliteration="Asato Ma Sadgamaya, Tamaso Ma Jyotirgamaya, Mrityor Ma Amritam Gamaya."
-        meaning="Brihadaranyaka Upanishad — “Lead me from the unreal to the real, from darkness to light, from death to immortality.”"
+        devanagari="दातव्यमिति यद्दानं दीयतेऽनुपकारिणे। देशे काले च पात्रे च तद्दानं सात्त्विकं स्मृतम्॥"
+        transliteration="Datavyamiti Yaddanam Deeyate'nupakarine, Deshe Kale Cha Patre Cha Taddanam Sattvikam Smritam."
+        meaning="Bhagavad Gita (17.20) — “Charity given out of duty, without expectation of return, at the proper place and time, and to a worthy recipient, is Sattvic.”"
       />
 
       <section className="container-page py-20">
-        <SectionHeading title="Support Vedashramam" eyebrow="Vidyadanam · Annadanam · Sevas" />
+        <SectionHeading title="Choose Your Contribution" eyebrow="Donate Now" />
 
-        <p className="mx-auto mt-12 max-w-3xl text-center text-[0.95rem] leading-relaxed text-foreground/85">
-          As a non-profit charitable trust, Vedashramam relies on the munificence and devotion of patrons,
-          philanthropists, and well-wishers to sustain the daily Gurukula education, student boarding, Adhyapaka
-          support, and spiritual activities.
+        <p className="mx-auto mt-6 max-w-2xl text-center text-sm leading-relaxed text-foreground/80">
+          As a non-profit charitable trust, Veda Ashrama Gurukulam relies on the munificence and devotion of patrons,
+          philanthropists, and well-wishers to sustain traditional Vedic education and student welfare.
         </p>
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
-          {WAYS.map((w) => (
-            <div key={w.title} className="surface-card surface-card-hover p-8 text-center">
-              <span className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-accent">
-                <w.icon className="h-6 w-6 text-primary" />
-              </span>
-              <h3 className="mt-6 font-display text-xl text-maroon">{w.title}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{w.body}</p>
+        {/* 3 Core Featured Donation Streams */}
+        <div className="mx-auto mt-14 grid max-w-5xl gap-8 md:grid-cols-3">
+          {DONATION_STREAMS.map((stream) => (
+            <div
+              key={stream.id}
+              className="surface-card flex flex-col justify-between rounded-2xl border-2 border-border/80 p-8 shadow-sm transition-all hover:border-gold/60 hover:shadow-md"
+            >
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">{stream.tag}</span>
+                <h3 className="mt-2 font-display text-2xl text-maroon">{stream.title}</h3>
+                <p className="mt-4 text-sm leading-relaxed text-foreground/85">{stream.subtitle}</p>
+              </div>
+
+              <div className="mt-8 space-y-3 border-t border-border/60 pt-6">
+                <button
+                  type="button"
+                  onClick={() => openDonateModal(stream.defaultCategory)}
+                  className="flex w-full items-center justify-center gap-2 rounded-md bg-primary py-3 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow transition-colors hover:bg-maroon"
+                >
+                  <CreditCard className="h-4 w-4" />
+                  Donate Now
+                </button>
+
+                <div className="text-center">
+                  <Link
+                    to={stream.detailsLink}
+                    className="inline-flex items-center gap-1 text-xs font-medium text-primary transition-colors hover:text-maroon hover:underline"
+                  >
+                    More Details ({stream.detailsLabel})
+                    <ArrowRight className="h-3 w-3" />
+                  </Link>
+                </div>
+              </div>
             </div>
           ))}
         </div>
 
-        {/* Nithya Sevas & Sankalpam Table */}
-        <div className="mx-auto mt-20 max-w-4xl">
-          <h3 className="font-display text-2xl text-maroon text-center">Nithya &amp; Monthly Sevas</h3>
+        {/* Bank & Cheque Details */}
+        <div className="mandala-bg mx-auto mt-20 max-w-3xl rounded-2xl border border-border p-8 shadow-sm">
+          <div className="flex items-center justify-center gap-2 text-maroon">
+            <Building2 className="h-6 w-6 text-gold" />
+            <h3 className="font-display text-2xl">Contributions by Cheque / DD &amp; Bank Transfer</h3>
+          </div>
           <p className="mt-2 text-center text-xs uppercase tracking-[0.14em] text-muted-foreground">
-            Devotees can subscribe for regular sankalpam and receive sacred prasadam
-          </p>
-          <div className="mt-8 overflow-hidden rounded-lg border border-border">
-            <div className="hidden grid-cols-[1.5fr_1.5fr_1.2fr_2fr] bg-accent/50 p-4 text-xs font-semibold uppercase tracking-[0.12em] text-maroon sm:grid">
-              <span>Seva / Occasion</span>
-              <span>Schedule</span>
-              <span>Contribution</span>
-              <span>Details</span>
-            </div>
-            {SEVAS.map((s, i) => (
-              <div
-                key={s.seva}
-                className={`grid grid-cols-1 gap-2 p-5 sm:grid-cols-[1.5fr_1.5fr_1.2fr_2fr] sm:items-center ${
-                  i % 2 === 0 ? "bg-card" : "bg-muted/40"
-                }`}
-              >
-                <span className="font-medium text-foreground">{s.seva}</span>
-                <span className="text-xs text-muted-foreground">{s.schedule}</span>
-                <span className="text-xs font-semibold text-primary">{s.amount}</span>
-                <span className="text-xs text-foreground/80">{s.details}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* In-Kind Contributions Note */}
-        <div className="mx-auto mt-12 max-w-4xl surface-card p-6 text-center">
-          <h4 className="font-display text-lg text-maroon">Contributions in Kind</h4>
-          <p className="mt-2 text-sm text-muted-foreground">
-            Offerings in kind such as Vastram (traditional dhoties for Vidyarthis), Rice, Dal, Ghee, and Oil are gratefully accepted for the daily Annadanam of the Gurukulam.
-          </p>
-        </div>
-
-        <div className="mandala-bg mx-auto mt-16 max-w-3xl rounded-lg border border-border p-8 text-center shadow-soft">
-          <h3 className="font-display text-2xl text-maroon">Bank Transfer &amp; Payment Details</h3>
-          <p className="mt-2 text-xs uppercase tracking-[0.14em] text-muted-foreground">
-            வங்கி விவரங்கள் &amp; நன்கொடை விவரங்கள்
+            வங்கி விவரங்கள் &amp; நேரடி பரிவர்த்தனை
           </p>
 
-          <div className="mt-6 text-left grid gap-4 rounded-md border border-border bg-card p-6 text-sm">
-            <div className="flex justify-between border-b border-border/60 pb-2">
-              <span className="text-muted-foreground">Account Name:</span>
-              <span className="font-semibold text-foreground">Vedashramam Sabha</span>
+          <div className="mt-6 divide-y divide-border/70 rounded-xl border border-border bg-card p-6 text-sm">
+            <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
+              <span className="text-muted-foreground">Account Name / Cheque in favour of:</span>
+              <span className="font-bold text-maroon">VEDA ASHRAMA GURUKULAM</span>
             </div>
-            <div className="flex justify-between border-b border-border/60 pb-2">
-              <span className="text-muted-foreground">Bank &amp; Branch:</span>
-              <span className="font-semibold text-foreground">Puducherry Branch</span>
+            <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
+              <span className="text-muted-foreground">Postal / Ashram Address:</span>
+              <span className="font-semibold text-foreground">
+                The Managing Trustee, Karuvadikuppam, Puducherry
+              </span>
             </div>
-            <div className="flex justify-between border-b border-border/60 pb-2">
-              <span className="text-muted-foreground">Account No / IFSC:</span>
-              <span className="font-semibold text-foreground">[To be published upon gateway finalisation]</span>
+            <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
+              <span className="text-muted-foreground">PAN Number:</span>
+              <span className="font-mono font-bold text-foreground">To be verified prior to publication</span>
             </div>
-            <div className="flex justify-between">
-              <span className="text-muted-foreground">UPI ID:</span>
-              <span className="font-semibold text-foreground">vedashramam@upi</span>
+            <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
+              <span className="text-muted-foreground">80-G Registration:</span>
+              <span className="font-mono font-bold text-primary">AAATS7438NF19923 (AY 2022-23 to AY 2026-27)</span>
             </div>
           </div>
 
-          <p className="mt-6 text-sm leading-relaxed text-foreground/80">
-            For online gateway contributions, specific sponsorship inquiries (Vidyadanam / Annadanam), or Ubhayam sankalpams, please reach out to us directly. Tax receipts under Section 80G will be issued upon receipt.
-          </p>
-          <div className="mt-7 flex flex-wrap justify-center gap-4">
-            <Link
-              to="/contact"
-              className="inline-flex rounded-md bg-primary px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground transition-colors hover:bg-maroon"
-            >
-              Contact Us to Donate / தொடர்புகொள்ள
-            </Link>
-          </div>
-          <div className="mt-6 flex flex-wrap justify-center gap-4 text-xs text-muted-foreground">
-            <span>Donations governed by our:</span>
-            <Link to="/terms" className="text-primary underline-offset-2 hover:underline">
-              Terms &amp; Conditions
-            </Link>
-            <span>•</span>
-            <Link to="/privacy" className="text-primary underline-offset-2 hover:underline">
-              Privacy Policy
-            </Link>
-            <span>•</span>
-            <Link to="/cancellation" className="text-primary underline-offset-2 hover:underline">
-              Cancellation Policy
-            </Link>
+          <div className="mt-6 rounded-xl border border-gold/30 bg-gold/5 p-4 text-xs leading-relaxed text-foreground/85">
+            <p>
+              <strong>Note on 80G Tax Exemption:</strong> Donations above ₹2,000/- should be made in any mode other than
+              cash to qualify as a deduction under Section 80G. Donors are kindly requested to send their PAN number and
+              transaction details so we may dispatch receipts and offer prayers with Sankalpam.
+            </p>
           </div>
         </div>
       </section>
+
+      {/* Online Donation Modal */}
+      {modalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs">
+          <div className="relative w-full max-w-lg rounded-2xl border border-border bg-background p-6 shadow-2xl sm:p-8">
+            <button
+              type="button"
+              onClick={() => setModalOpen(false)}
+              aria-label="Close"
+              className="absolute right-4 top-4 rounded-md p-1.5 text-muted-foreground hover:bg-accent hover:text-foreground"
+            >
+              <X className="h-5 w-5" />
+            </button>
+
+            {!submitted ? (
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <span className="text-xs font-semibold uppercase tracking-wider text-gold">Online Donation</span>
+                <h3 className="font-display text-2xl text-maroon">Support Vedashramam</h3>
+                <p className="text-xs text-muted-foreground">Zero transaction charges apply.</p>
+
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-foreground/75">
+                    Selected Purpose
+                  </label>
+                  <select
+                    value={selectedPurpose}
+                    onChange={(e) => setSelectedPurpose(e.target.value)}
+                    className="mt-1 w-full rounded-md border border-border bg-card px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  >
+                    <option value="Sankara Jayanthi & Nithya Sevas">Sankara Jayanthi &amp; Nithya Sevas</option>
+                    <option value="Vidyarthi Sponsorship & Gurukulam Support">
+                      Vidyarthi Sponsorship &amp; Gurukulam Support
+                    </option>
+                    <option value="New Patasala Building Fund">New Patasala Building Fund</option>
+                    <option value="Sabha Sashwata Nidhi Fund (₹11,000)">
+                      Sabha Sashwata Nidhi Fund (₹11,000)
+                    </option>
+                    <option value="Mid-Day Samaradhana (₹6,000)">Mid-Day Samaradhana (₹6,000)</option>
+                    <option value="General Corpus Contribution">General Corpus Contribution</option>
+                  </select>
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-foreground/75">
+                    Amount (₹ INR)
+                  </label>
+                  <div className="mt-1 flex gap-2">
+                    {["2000", "5000", "11000", "25000"].map((preset) => (
+                      <button
+                        key={preset}
+                        type="button"
+                        onClick={() => setAmount(preset)}
+                        className={`rounded-md border px-3 py-1.5 text-xs font-medium transition-colors ${
+                          amount === preset
+                            ? "border-primary bg-primary text-primary-foreground font-bold"
+                            : "border-border bg-card text-foreground hover:bg-muted"
+                        }`}
+                      >
+                        ₹{preset}
+                      </button>
+                    ))}
+                  </div>
+                  <input
+                    type="number"
+                    value={amount}
+                    onChange={(e) => setAmount(e.target.value)}
+                    required
+                    min="100"
+                    className="mt-2 w-full rounded-md border border-border bg-card px-3 py-2 text-sm font-semibold text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-xs font-semibold uppercase tracking-wider text-foreground/75">
+                    Full Name (For Sankalpam &amp; Receipt)
+                  </label>
+                  <input
+                    type="text"
+                    value={donorName}
+                    onChange={(e) => setDonorName(e.target.value)}
+                    required
+                    placeholder="Enter your name"
+                    className="mt-1 w-full rounded-md border border-border bg-card px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                  />
+                </div>
+
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-foreground/75">
+                      Phone Number
+                    </label>
+                    <input
+                      type="tel"
+                      value={donorPhone}
+                      onChange={(e) => setDonorPhone(e.target.value)}
+                      required
+                      placeholder="+91 Mobile"
+                      className="mt-1 w-full rounded-md border border-border bg-card px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold uppercase tracking-wider text-foreground/75">
+                      PAN Number (80G)
+                    </label>
+                    <input
+                      type="text"
+                      value={donorPan}
+                      onChange={(e) => setDonorPan(e.target.value.toUpperCase())}
+                      placeholder="ABCDE1234F"
+                      className="mt-1 w-full rounded-md border border-border bg-card px-3 py-2 text-sm uppercase text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+                </div>
+
+                <div className="pt-2">
+                  <button
+                    type="submit"
+                    className="w-full rounded-md bg-primary py-3 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow transition-colors hover:bg-maroon"
+                  >
+                    Proceed with ₹{amount}
+                  </button>
+                </div>
+              </form>
+            ) : (
+              <div className="py-6 text-center space-y-4">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-green-700">
+                  <CheckCircle2 className="h-8 w-8" />
+                </div>
+                <h3 className="font-display text-2xl text-maroon">Dhanyosmi! Thank You</h3>
+                <p className="text-sm leading-relaxed text-foreground/80">
+                  Thank you, <strong>{donorName}</strong>. Your intention to contribute{" "}
+                  <strong>₹{amount}</strong> towards <strong>{selectedPurpose}</strong> has been registered.
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Our Trustees will contact you directly at {donorPhone} with bank transfer verification, Sankalpam
+                  details, and your 80-G tax exemption receipt.
+                </p>
+                <div className="pt-4">
+                  <button
+                    type="button"
+                    onClick={() => setModalOpen(false)}
+                    className="rounded-md bg-primary px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-primary-foreground hover:bg-maroon"
+                  >
+                    Close
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      )}
     </PageShell>
   );
 }

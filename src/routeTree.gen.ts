@@ -10,21 +10,47 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutPatasalaRouteImport } from './routes/about-patasala'
+import { Route as AboutSabhaRouteImport } from './routes/about-sabha'
 import { Route as ActivitiesRouteImport } from './routes/activities'
+import { Route as AppealForBuildingConstructionRouteImport } from './routes/appeal-for-building-construction'
 import { Route as CancellationRouteImport } from './routes/cancellation'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as DonateRouteImport } from './routes/donate'
+import { Route as DonateForSevasRouteImport } from './routes/donate-for-sevas'
+import { Route as DownloadsRouteImport } from './routes/downloads'
+import { Route as EpfoForm5aRouteImport } from './routes/epfo-form-5a'
 import { Route as GalleryRouteImport } from './routes/gallery'
 import { Route as ManagingTrusteeRouteImport } from './routes/managing-trustee'
+import { Route as OurAchievementsRouteImport } from './routes/our-achievements'
+import { Route as OurVisionRouteImport } from './routes/our-vision'
+import { Route as PanchangamRouteImport } from './routes/panchangam'
+import { Route as PatasalaDetailsRouteImport } from './routes/patasala-details'
+import { Route as PatasalaManagementRouteImport } from './routes/patasala-management'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as SabhaRouteImport } from './routes/sabha'
+import { Route as SabhaPatronsTrusteesRouteImport } from './routes/sabha-patrons-trustees'
+import { Route as SourcesOfSustenanceRouteImport } from './routes/sources-of-sustenance'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as VedaPatasalaRouteImport } from './routes/veda-patasala'
 import { Route as VedaVaniRouteImport } from './routes/veda-vani'
+import { Route as VedabhavanRouteImport } from './routes/vedabhavan'
+import { Route as WaysToSupportRouteImport } from './routes/ways-to-support'
+import { Route as WhyVedaSamrakshanamRouteImport } from './routes/why-veda-samrakshanam'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutPatasalaRoute = AboutPatasalaRouteImport.update({
+  id: '/about-patasala',
+  path: '/about-patasala',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutSabhaRoute = AboutSabhaRouteImport.update({
+  id: '/about-sabha',
+  path: '/about-sabha',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ActivitiesRoute = ActivitiesRouteImport.update({
@@ -32,6 +58,12 @@ const ActivitiesRoute = ActivitiesRouteImport.update({
   path: '/activities',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AppealForBuildingConstructionRoute =
+  AppealForBuildingConstructionRouteImport.update({
+    id: '/appeal-for-building-construction',
+    path: '/appeal-for-building-construction',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 const CancellationRoute = CancellationRouteImport.update({
   id: '/cancellation',
   path: '/cancellation',
@@ -47,6 +79,21 @@ const DonateRoute = DonateRouteImport.update({
   path: '/donate',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DonateForSevasRoute = DonateForSevasRouteImport.update({
+  id: '/donate-for-sevas',
+  path: '/donate-for-sevas',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DownloadsRoute = DownloadsRouteImport.update({
+  id: '/downloads',
+  path: '/downloads',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const EpfoForm5aRoute = EpfoForm5aRouteImport.update({
+  id: '/epfo-form-5a',
+  path: '/epfo-form-5a',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const GalleryRoute = GalleryRouteImport.update({
   id: '/gallery',
   path: '/gallery',
@@ -57,6 +104,31 @@ const ManagingTrusteeRoute = ManagingTrusteeRouteImport.update({
   path: '/managing-trustee',
   getParentRoute: () => rootRouteImport,
 } as any)
+const OurAchievementsRoute = OurAchievementsRouteImport.update({
+  id: '/our-achievements',
+  path: '/our-achievements',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OurVisionRoute = OurVisionRouteImport.update({
+  id: '/our-vision',
+  path: '/our-vision',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PanchangamRoute = PanchangamRouteImport.update({
+  id: '/panchangam',
+  path: '/panchangam',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PatasalaDetailsRoute = PatasalaDetailsRouteImport.update({
+  id: '/patasala-details',
+  path: '/patasala-details',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PatasalaManagementRoute = PatasalaManagementRouteImport.update({
+  id: '/patasala-management',
+  path: '/patasala-management',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
@@ -65,6 +137,16 @@ const PrivacyRoute = PrivacyRouteImport.update({
 const SabhaRoute = SabhaRouteImport.update({
   id: '/sabha',
   path: '/sabha',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SabhaPatronsTrusteesRoute = SabhaPatronsTrusteesRouteImport.update({
+  id: '/sabha-patrons-trustees',
+  path: '/sabha-patrons-trustees',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SourcesOfSustenanceRoute = SourcesOfSustenanceRouteImport.update({
+  id: '/sources-of-sustenance',
+  path: '/sources-of-sustenance',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TermsRoute = TermsRouteImport.update({
@@ -82,108 +164,235 @@ const VedaVaniRoute = VedaVaniRouteImport.update({
   path: '/veda-vani',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VedabhavanRoute = VedabhavanRouteImport.update({
+  id: '/vedabhavan',
+  path: '/vedabhavan',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WaysToSupportRoute = WaysToSupportRouteImport.update({
+  id: '/ways-to-support',
+  path: '/ways-to-support',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const WhyVedaSamrakshanamRoute = WhyVedaSamrakshanamRouteImport.update({
+  id: '/why-veda-samrakshanam',
+  path: '/why-veda-samrakshanam',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about-patasala': typeof AboutPatasalaRoute
+  '/about-sabha': typeof AboutSabhaRoute
   '/activities': typeof ActivitiesRoute
+  '/appeal-for-building-construction': typeof AppealForBuildingConstructionRoute
   '/cancellation': typeof CancellationRoute
   '/contact': typeof ContactRoute
   '/donate': typeof DonateRoute
+  '/donate-for-sevas': typeof DonateForSevasRoute
+  '/downloads': typeof DownloadsRoute
+  '/epfo-form-5a': typeof EpfoForm5aRoute
   '/gallery': typeof GalleryRoute
   '/managing-trustee': typeof ManagingTrusteeRoute
+  '/our-achievements': typeof OurAchievementsRoute
+  '/our-vision': typeof OurVisionRoute
+  '/panchangam': typeof PanchangamRoute
+  '/patasala-details': typeof PatasalaDetailsRoute
+  '/patasala-management': typeof PatasalaManagementRoute
   '/privacy': typeof PrivacyRoute
   '/sabha': typeof SabhaRoute
+  '/sabha-patrons-trustees': typeof SabhaPatronsTrusteesRoute
+  '/sources-of-sustenance': typeof SourcesOfSustenanceRoute
   '/terms': typeof TermsRoute
   '/veda-patasala': typeof VedaPatasalaRoute
   '/veda-vani': typeof VedaVaniRoute
+  '/vedabhavan': typeof VedabhavanRoute
+  '/ways-to-support': typeof WaysToSupportRoute
+  '/why-veda-samrakshanam': typeof WhyVedaSamrakshanamRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about-patasala': typeof AboutPatasalaRoute
+  '/about-sabha': typeof AboutSabhaRoute
   '/activities': typeof ActivitiesRoute
+  '/appeal-for-building-construction': typeof AppealForBuildingConstructionRoute
   '/cancellation': typeof CancellationRoute
   '/contact': typeof ContactRoute
   '/donate': typeof DonateRoute
+  '/donate-for-sevas': typeof DonateForSevasRoute
+  '/downloads': typeof DownloadsRoute
+  '/epfo-form-5a': typeof EpfoForm5aRoute
   '/gallery': typeof GalleryRoute
   '/managing-trustee': typeof ManagingTrusteeRoute
+  '/our-achievements': typeof OurAchievementsRoute
+  '/our-vision': typeof OurVisionRoute
+  '/panchangam': typeof PanchangamRoute
+  '/patasala-details': typeof PatasalaDetailsRoute
+  '/patasala-management': typeof PatasalaManagementRoute
   '/privacy': typeof PrivacyRoute
   '/sabha': typeof SabhaRoute
+  '/sabha-patrons-trustees': typeof SabhaPatronsTrusteesRoute
+  '/sources-of-sustenance': typeof SourcesOfSustenanceRoute
   '/terms': typeof TermsRoute
   '/veda-patasala': typeof VedaPatasalaRoute
   '/veda-vani': typeof VedaVaniRoute
+  '/vedabhavan': typeof VedabhavanRoute
+  '/ways-to-support': typeof WaysToSupportRoute
+  '/why-veda-samrakshanam': typeof WhyVedaSamrakshanamRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about-patasala': typeof AboutPatasalaRoute
+  '/about-sabha': typeof AboutSabhaRoute
   '/activities': typeof ActivitiesRoute
+  '/appeal-for-building-construction': typeof AppealForBuildingConstructionRoute
   '/cancellation': typeof CancellationRoute
   '/contact': typeof ContactRoute
   '/donate': typeof DonateRoute
+  '/donate-for-sevas': typeof DonateForSevasRoute
+  '/downloads': typeof DownloadsRoute
+  '/epfo-form-5a': typeof EpfoForm5aRoute
   '/gallery': typeof GalleryRoute
   '/managing-trustee': typeof ManagingTrusteeRoute
+  '/our-achievements': typeof OurAchievementsRoute
+  '/our-vision': typeof OurVisionRoute
+  '/panchangam': typeof PanchangamRoute
+  '/patasala-details': typeof PatasalaDetailsRoute
+  '/patasala-management': typeof PatasalaManagementRoute
   '/privacy': typeof PrivacyRoute
   '/sabha': typeof SabhaRoute
+  '/sabha-patrons-trustees': typeof SabhaPatronsTrusteesRoute
+  '/sources-of-sustenance': typeof SourcesOfSustenanceRoute
   '/terms': typeof TermsRoute
   '/veda-patasala': typeof VedaPatasalaRoute
   '/veda-vani': typeof VedaVaniRoute
+  '/vedabhavan': typeof VedabhavanRoute
+  '/ways-to-support': typeof WaysToSupportRoute
+  '/why-veda-samrakshanam': typeof WhyVedaSamrakshanamRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about-patasala'
+    | '/about-sabha'
     | '/activities'
+    | '/appeal-for-building-construction'
     | '/cancellation'
     | '/contact'
     | '/donate'
+    | '/donate-for-sevas'
+    | '/downloads'
+    | '/epfo-form-5a'
     | '/gallery'
     | '/managing-trustee'
+    | '/our-achievements'
+    | '/our-vision'
+    | '/panchangam'
+    | '/patasala-details'
+    | '/patasala-management'
     | '/privacy'
     | '/sabha'
+    | '/sabha-patrons-trustees'
+    | '/sources-of-sustenance'
     | '/terms'
     | '/veda-patasala'
     | '/veda-vani'
+    | '/vedabhavan'
+    | '/ways-to-support'
+    | '/why-veda-samrakshanam'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about-patasala'
+    | '/about-sabha'
     | '/activities'
+    | '/appeal-for-building-construction'
     | '/cancellation'
     | '/contact'
     | '/donate'
+    | '/donate-for-sevas'
+    | '/downloads'
+    | '/epfo-form-5a'
     | '/gallery'
     | '/managing-trustee'
+    | '/our-achievements'
+    | '/our-vision'
+    | '/panchangam'
+    | '/patasala-details'
+    | '/patasala-management'
     | '/privacy'
     | '/sabha'
+    | '/sabha-patrons-trustees'
+    | '/sources-of-sustenance'
     | '/terms'
     | '/veda-patasala'
     | '/veda-vani'
+    | '/vedabhavan'
+    | '/ways-to-support'
+    | '/why-veda-samrakshanam'
   id:
     | '__root__'
     | '/'
+    | '/about-patasala'
+    | '/about-sabha'
     | '/activities'
+    | '/appeal-for-building-construction'
     | '/cancellation'
     | '/contact'
     | '/donate'
+    | '/donate-for-sevas'
+    | '/downloads'
+    | '/epfo-form-5a'
     | '/gallery'
     | '/managing-trustee'
+    | '/our-achievements'
+    | '/our-vision'
+    | '/panchangam'
+    | '/patasala-details'
+    | '/patasala-management'
     | '/privacy'
     | '/sabha'
+    | '/sabha-patrons-trustees'
+    | '/sources-of-sustenance'
     | '/terms'
     | '/veda-patasala'
     | '/veda-vani'
+    | '/vedabhavan'
+    | '/ways-to-support'
+    | '/why-veda-samrakshanam'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutPatasalaRoute: typeof AboutPatasalaRoute
+  AboutSabhaRoute: typeof AboutSabhaRoute
   ActivitiesRoute: typeof ActivitiesRoute
+  AppealForBuildingConstructionRoute: typeof AppealForBuildingConstructionRoute
   CancellationRoute: typeof CancellationRoute
   ContactRoute: typeof ContactRoute
   DonateRoute: typeof DonateRoute
+  DonateForSevasRoute: typeof DonateForSevasRoute
+  DownloadsRoute: typeof DownloadsRoute
+  EpfoForm5aRoute: typeof EpfoForm5aRoute
   GalleryRoute: typeof GalleryRoute
   ManagingTrusteeRoute: typeof ManagingTrusteeRoute
+  OurAchievementsRoute: typeof OurAchievementsRoute
+  OurVisionRoute: typeof OurVisionRoute
+  PanchangamRoute: typeof PanchangamRoute
+  PatasalaDetailsRoute: typeof PatasalaDetailsRoute
+  PatasalaManagementRoute: typeof PatasalaManagementRoute
   PrivacyRoute: typeof PrivacyRoute
   SabhaRoute: typeof SabhaRoute
+  SabhaPatronsTrusteesRoute: typeof SabhaPatronsTrusteesRoute
+  SourcesOfSustenanceRoute: typeof SourcesOfSustenanceRoute
   TermsRoute: typeof TermsRoute
   VedaPatasalaRoute: typeof VedaPatasalaRoute
   VedaVaniRoute: typeof VedaVaniRoute
+  VedabhavanRoute: typeof VedabhavanRoute
+  WaysToSupportRoute: typeof WaysToSupportRoute
+  WhyVedaSamrakshanamRoute: typeof WhyVedaSamrakshanamRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -195,11 +404,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about-patasala': {
+      id: '/about-patasala'
+      path: '/about-patasala'
+      fullPath: '/about-patasala'
+      preLoaderRoute: typeof AboutPatasalaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about-sabha': {
+      id: '/about-sabha'
+      path: '/about-sabha'
+      fullPath: '/about-sabha'
+      preLoaderRoute: typeof AboutSabhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/activities': {
       id: '/activities'
       path: '/activities'
       fullPath: '/activities'
       preLoaderRoute: typeof ActivitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/appeal-for-building-construction': {
+      id: '/appeal-for-building-construction'
+      path: '/appeal-for-building-construction'
+      fullPath: '/appeal-for-building-construction'
+      preLoaderRoute: typeof AppealForBuildingConstructionRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/cancellation': {
@@ -223,6 +453,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DonateRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/donate-for-sevas': {
+      id: '/donate-for-sevas'
+      path: '/donate-for-sevas'
+      fullPath: '/donate-for-sevas'
+      preLoaderRoute: typeof DonateForSevasRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/downloads': {
+      id: '/downloads'
+      path: '/downloads'
+      fullPath: '/downloads'
+      preLoaderRoute: typeof DownloadsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/epfo-form-5a': {
+      id: '/epfo-form-5a'
+      path: '/epfo-form-5a'
+      fullPath: '/epfo-form-5a'
+      preLoaderRoute: typeof EpfoForm5aRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/gallery': {
       id: '/gallery'
       path: '/gallery'
@@ -237,6 +488,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ManagingTrusteeRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/our-achievements': {
+      id: '/our-achievements'
+      path: '/our-achievements'
+      fullPath: '/our-achievements'
+      preLoaderRoute: typeof OurAchievementsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/our-vision': {
+      id: '/our-vision'
+      path: '/our-vision'
+      fullPath: '/our-vision'
+      preLoaderRoute: typeof OurVisionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/panchangam': {
+      id: '/panchangam'
+      path: '/panchangam'
+      fullPath: '/panchangam'
+      preLoaderRoute: typeof PanchangamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/patasala-details': {
+      id: '/patasala-details'
+      path: '/patasala-details'
+      fullPath: '/patasala-details'
+      preLoaderRoute: typeof PatasalaDetailsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/patasala-management': {
+      id: '/patasala-management'
+      path: '/patasala-management'
+      fullPath: '/patasala-management'
+      preLoaderRoute: typeof PatasalaManagementRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/privacy': {
       id: '/privacy'
       path: '/privacy'
@@ -249,6 +535,20 @@ declare module '@tanstack/react-router' {
       path: '/sabha'
       fullPath: '/sabha'
       preLoaderRoute: typeof SabhaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sabha-patrons-trustees': {
+      id: '/sabha-patrons-trustees'
+      path: '/sabha-patrons-trustees'
+      fullPath: '/sabha-patrons-trustees'
+      preLoaderRoute: typeof SabhaPatronsTrusteesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sources-of-sustenance': {
+      id: '/sources-of-sustenance'
+      path: '/sources-of-sustenance'
+      fullPath: '/sources-of-sustenance'
+      preLoaderRoute: typeof SourcesOfSustenanceRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/terms': {
@@ -272,22 +572,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VedaVaniRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vedabhavan': {
+      id: '/vedabhavan'
+      path: '/vedabhavan'
+      fullPath: '/vedabhavan'
+      preLoaderRoute: typeof VedabhavanRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ways-to-support': {
+      id: '/ways-to-support'
+      path: '/ways-to-support'
+      fullPath: '/ways-to-support'
+      preLoaderRoute: typeof WaysToSupportRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/why-veda-samrakshanam': {
+      id: '/why-veda-samrakshanam'
+      path: '/why-veda-samrakshanam'
+      fullPath: '/why-veda-samrakshanam'
+      preLoaderRoute: typeof WhyVedaSamrakshanamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutPatasalaRoute: AboutPatasalaRoute,
+  AboutSabhaRoute: AboutSabhaRoute,
   ActivitiesRoute: ActivitiesRoute,
+  AppealForBuildingConstructionRoute: AppealForBuildingConstructionRoute,
   CancellationRoute: CancellationRoute,
   ContactRoute: ContactRoute,
   DonateRoute: DonateRoute,
+  DonateForSevasRoute: DonateForSevasRoute,
+  DownloadsRoute: DownloadsRoute,
+  EpfoForm5aRoute: EpfoForm5aRoute,
   GalleryRoute: GalleryRoute,
   ManagingTrusteeRoute: ManagingTrusteeRoute,
+  OurAchievementsRoute: OurAchievementsRoute,
+  OurVisionRoute: OurVisionRoute,
+  PanchangamRoute: PanchangamRoute,
+  PatasalaDetailsRoute: PatasalaDetailsRoute,
+  PatasalaManagementRoute: PatasalaManagementRoute,
   PrivacyRoute: PrivacyRoute,
   SabhaRoute: SabhaRoute,
+  SabhaPatronsTrusteesRoute: SabhaPatronsTrusteesRoute,
+  SourcesOfSustenanceRoute: SourcesOfSustenanceRoute,
   TermsRoute: TermsRoute,
   VedaPatasalaRoute: VedaPatasalaRoute,
   VedaVaniRoute: VedaVaniRoute,
+  VedabhavanRoute: VedabhavanRoute,
+  WaysToSupportRoute: WaysToSupportRoute,
+  WhyVedaSamrakshanamRoute: WhyVedaSamrakshanamRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
