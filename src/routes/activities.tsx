@@ -31,19 +31,34 @@ const PROGRAMME = [
 
 const EVENTS = [
   {
-    title: "Acharya Jayanthi Celebrations",
-    body: "A multi-day observance of the Jayanthi of our guiding acharya, with Veda Parayanam, Kamyartha Homams and allied rituals across the programme.",
-    note: "Dates and the full daily programme for the coming year will be announced here.",
+    title: "Adi Sankara Jayanthi & Acharyal Jayanthi Celebrations",
+    body: "Multi-day celebrations featuring Rig, Yajur, and Sama Veda Parayanam, Kamyartha Homams, Maha Rudram, and Sata Chandi Yagams with senior Vedic scholars and Matha representatives.",
+    note: "Observed annually in Vaisakha Masam with special homams and Annadanam.",
   },
   {
-    title: "Annual Day of the Patasala",
-    body: "A single-day showcase of student progress, recitation demonstrations and community gathering, from 9:00 AM onwards.",
-    note: "The annual date will be fixed as the Patasala calendar is set.",
+    title: "Vasanta Navarathri & Sri Ramanavami Celebrations",
+    body: "The grand annual festival observed with daily Srimad Ramayana Moola Parayanam, Navavarana Pooja, and Homa rituals throughout the morning, followed by evening Deeparadhana.",
+    note: "Daily 7:00 AM – 11:00 AM and 6:00 PM – 8:00 PM during Navarathri.",
   },
   {
-    title: "Navarathri & Ramanavami Celebrations",
-    body: "The full festival programme observed at the Ashramam, with parayanam and pooja through the morning and Deeparadhana each evening.",
-    note: "Exact date ranges for the current year will be published ahead of the festival.",
+    title: "Annual Day of the Veda Patasala",
+    body: "A comprehensive gathering showcasing student progress, public recitation demonstrations, awards and purses for graduating Vidyarthis, and a Sanskrit drama enacted by the students.",
+    note: "Celebrated annually in the presence of eminent scholars and devotees.",
+  },
+  {
+    title: "Mahasivarathri Akhanda Rudrabhishekam",
+    body: "Continuous four-kala worship throughout the holy night, beginning with Mahanyasa Purvaka Ekadasa Rudrabhishekam (4:30 PM – 9:00 PM) and progressing through the 2nd, 3rd, and 4th Kalas until dawn.",
+    note: "All four kalas open to devotee participation and sankalpam.",
+  },
+  {
+    title: "Yajur & Samaveda Upakarma (Avani Avittam)",
+    body: "Annual renewal of Yagnopaveetham, Kamokarshit Japam, and Veda Aarambham for resident students and community householders, with complete mantras and audio guidance.",
+    note: "Observed in Sravana and Bhadrapada months as per sastraic dates.",
+  },
+  {
+    title: "Monthly Sevas: Pradosham, Anusham & Chaturthi",
+    body: "Dedicated monthly observances including Pradosha Puja on Trayodashi, Ganapathi Homam on Sankatahara Chaturthi, Avahanti Homam on Shukla Panchami, and Anusham Star Puja.",
+    note: "Devotees can subscribe for sankalpam across all monthly sevas.",
   },
 ];
 

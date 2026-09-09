@@ -21,12 +21,12 @@ export const Route = createFileRoute("/gallery")({
 });
 
 const ITEMS = [
-  { image: heroRecitation, caption: "Daily adhyayanam", category: "Patasala Life" },
-  { image: heroHomam, caption: "Homam at the Ashramam", category: "Rituals" },
-  { image: heroTemple, caption: "Deeparadhana in the evening", category: "Celebrations" },
-  { image: heroHomam, caption: "Kamyartha Homams", category: "Rituals" },
-  { image: heroRecitation, caption: "Students with the acharya", category: "Patasala Life" },
-  { image: heroTemple, caption: "Festival gathering", category: "Celebrations" },
+  { image: heroRecitation, caption: "Daily Veda Adhyayanam in Gurukula tradition", category: "Patasala Life" },
+  { image: heroHomam, caption: "Vaastu Shanti & Kamyartha Homams", category: "Rituals & Yagnas" },
+  { image: heroTemple, caption: "H.H. Kanchi MahaPeriyaval Aradhanai & Deeparadhana", category: "Celebrations" },
+  { image: heroHomam, caption: "Navavarana Pooja & Ramanavami Homa Vidhi", category: "Festivals" },
+  { image: heroRecitation, caption: "Vidyarthis in Swara recitation with the Acharya", category: "Patasala Life" },
+  { image: heroTemple, caption: "Visits of Revered Acharyals & Namasankeertanam", category: "Visits & Sadas" },
 ];
 
 function GalleryPage() {

@@ -23,29 +23,50 @@ export const Route = createFileRoute("/veda-vani")({
   component: BlogPage,
 });
 
-const CATEGORIES = ["Activities & Events", "Articles", "Stotrams"];
+const CATEGORIES = ["All", "Puja Vidhanams", "Activities & Events", "Articles & Stotrams"];
 
 const POSTS = [
   {
     image: heroHomam,
-    category: "Activities & Events",
-    title: "Navarathri & Ramanavami Celebrations",
+    category: "Puja Vidhanams",
+    title: "Vinayaka Chaturthi Vrata Puja Vidhanam",
     excerpt:
-      "The full daily programme observed at the Ashramam — Srimad Ramayana Moola Parayanam and Navavarana Pooja through the morning, Deeparadhana and Mantrapushpam each evening.",
+      "Ganesha or Ganapati is the Lord and destroyer of obstacles (Vighnaharta). Complete guide, sankalpam, and audio recitation for conducting the sacred vrata at home.",
   },
   {
     image: heroRecitation,
-    category: "Articles",
-    title: "The Gurukula Method of Learning",
+    category: "Activities & Events",
+    title: "Samaveda & Yajur Upakarma (Avani Avittam)",
     excerpt:
-      "Why oral transmission from acharya to student — daily recitation and memorisation — remains the heart of Vedic education.",
+      "Complete Upakarma procedure, Kamokarshit Japam, Brahma Yagnam, Yagnopaveetha Dharana mantras, and audio guidance for devotees observing the sacred rites.",
   },
   {
     image: heroTemple,
-    category: "Stotrams",
-    title: "Stotrams for Daily Recitation",
+    category: "Puja Vidhanams",
+    title: "Gokulashtami Puja Vidhanam",
     excerpt:
-      "A growing collection of stotrams and puja vidhanams, with text and guidance for householders observing them at home.",
+      "Celebrating the auspicious appearance of Bhagavan Sri Krishna with complete traditional puja vidhanam, aradhana rituals, stotrams and naivedyam instructions.",
+  },
+  {
+    image: heroHomam,
+    category: "Puja Vidhanams",
+    title: "Varalakshmi Vrata Puja Vidhanam",
+    excerpt:
+      "Varalakshmi Vrata is observed to propitiate Goddess Lakshmi, the consort of Vishnu and bestower of auspicious boons (Varam), with traditional pooja vidhanam.",
+  },
+  {
+    image: heroTemple,
+    category: "Articles & Stotrams",
+    title: "Why Veda Samrakshanam Matters",
+    excerpt:
+      "The eternal glory of the Vedas — cosmic vibrations preserved through oral recitation in the Guru-Sishya parampara, and our duty to sustain this sacred heritage.",
+  },
+  {
+    image: heroRecitation,
+    category: "Activities & Events",
+    title: "Adi Sankara Jayanthi & Acharyal Jayanthi Observances",
+    excerpt:
+      "Multi-day celebration with Rig, Yajur and Sama Veda Parayanam, Kamyartha Homams, Maha Rudram, and Sata Chandi Yagams with senior Vedic scholars.",
   },
 ];
 

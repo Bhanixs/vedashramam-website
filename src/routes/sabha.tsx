@@ -22,9 +22,13 @@ export const Route = createFileRoute("/sabha")({
 });
 
 const OBJECTIVES = [
-  "Promotion of Sanatana Dharma and spiritual and religious activity in the community.",
-  "Preservation of the oral Vedic recitation tradition under the guru-shishya parampara.",
-  "Sustained support for the residential Veda Patasala, its students and its acharyas.",
+  "Function purely as an organisation for spiritual, moral, and cultural up-liftment of society.",
+  "Preservation of the ancient tradition of oral Vedic recitation and study under the Guru-Sishya parampara.",
+  "Continuous support for the residential Veda Patasala, its Vidyarthis, Adhyapakas, and infrastructure.",
+  "Offer a day’s Biksha to His Holiness Jagadguru Sankaracharya during Chatur Masya every year.",
+  "Hospital visits to distribute sacred Prasadam and devotional publications, invoking solace and speedy recovery for patients.",
+  "Inculcate the sacred 'Pidi Arisi Thittam' (a handful of rice daily) and distribute cooked Annadanam among the needy.",
+  "Samskara Sahayam — financial and ceremonial assistance for the cremation and last rites of unattended and orphan souls.",
 ];
 
 function SabhaPage() {
@@ -46,19 +50,25 @@ function SabhaPage() {
         <SectionHeading title="About the Sabha" eyebrow="The Trust" />
         <div className="mx-auto mt-12 max-w-3xl space-y-5 text-[0.95rem] leading-relaxed text-foreground/85">
           <p>
-            Vedashramam Sabha is a non-profit charitable trust dedicated to rendering service in religious and
-            spiritual activities — promoting Sanatana Dharma, supporting the preservation of oral Vedic
-            recitation, and sustaining the Veda Patasala’s residential education programme.
+            The Sabha is registered as a non-profitable Charitable Trust dedicated to rendering yeoman service in
+            religious, Vedic, and spiritual activities — promoting Sanatana Dharma, preserving the sacred oral
+            recitation of the Vedas under the Guru-Sishya parampara, and sustaining the Veda Patasala’s residential
+            education programmes.
           </p>
           <p>
-            The Sabha and the Veda Patasala operate as two connected wings under one institutional home: the
-            Sabha carries the charitable and religious activity, while the Patasala carries the residential
-            teaching of the Vedas in the traditional Gurukula system.
+            With the spontaneous cooperation and generous contributions extended by patrons, philanthropists, and
+            the devotee community, the Sabha acquired its dedicated premises to house comprehensive Vedic study,
+            daily parayanams, and social and spiritual initiatives under one roof.
+          </p>
+          <p>
+            The Sabha and the Veda Patasala operate as two mutually reinforcing pillars: the Sabha undertakes
+            charitable, religious, and community welfare activities, while the Patasala carries forward full-time
+            residential adhyayanam of the Vedas.
           </p>
         </div>
 
         <div className="mx-auto mt-16 max-w-3xl">
-          <h3 className="font-display text-2xl text-maroon">Objectives</h3>
+          <h3 className="font-display text-2xl text-maroon">Aims &amp; Objectives</h3>
           <ul className="mt-6 space-y-4">
             {OBJECTIVES.map((o) => (
               <li key={o} className="surface-card flex gap-4 p-5">
@@ -70,12 +80,12 @@ function SabhaPage() {
         </div>
 
         <div className="mandala-bg mx-auto mt-16 max-w-3xl rounded-lg border border-border p-8 text-center">
-          <h3 className="font-display text-xl text-maroon">சபை பற்றி</h3>
+          <h3 className="font-display text-xl text-maroon">சபை பற்றி &amp; நோக்கங்கள்</h3>
           <p className="mt-4 text-sm leading-relaxed text-foreground/80">
             சபை என்பது சமய மற்றும் ஆன்மீக நடவடிக்கைகளில் சேவை செய்வதற்காக அர்ப்பணிக்கப்பட்ட ஒரு இலாப
             நோக்கற்ற தொண்டு அறக்கட்டளையாகும் — சநாதன தர்மத்தை மேம்படுத்துதல், வாய்மொழி வேத பாராயண
-            மரபின் பாதுகாப்பை ஆதரித்தல், மற்றும் வேத பாடசாலையின் வதிவிடக் கல்வித் திட்டத்தை
-            நிலைநிறுத்துதல்.
+            மரபின் பாதுகாப்பை ஆதரித்தல், பிடி அரிசி திட்டம் மூலம் அன்னதானம் வழங்குதல், மற்றும் ஆதரவற்றோருக்கு
+            சம்ஸ்கார உதவி அளித்தல்.
           </p>
         </div>
       </section>

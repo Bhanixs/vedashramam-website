@@ -28,21 +28,33 @@ export const Route = createFileRoute("/")({
 const SLIDES = [
   {
     image: heroRecitation,
-    title: "Welcome to Vedashramam",
-    subtitle: "Sanatana Dharma Prachara, Veda Patasala, Spiritual Centre",
-    cta: { label: "About the Patasala", to: "/veda-patasala" },
-  },
-  {
-    image: heroHomam,
-    title: "Activities & Celebrations",
-    subtitle: "Veda Parayanam, Homams, Navarathri and Ramanavami observances",
-    cta: { label: "View Programme", to: "/activities" },
+    title: "Vinayaka Chaturthi Vrata Puja Vidhanam",
+    subtitle: "Mp3 Audio & Complete Guide for Vinayaka Chaturthi Puja Vidhanam",
+    cta: { label: "Read More", to: "/veda-vani" },
   },
   {
     image: heroTemple,
-    title: "Support Vedashramam",
-    subtitle: "Vidyadanam and Annadanam for our students and acharyas",
-    cta: { label: "Donate Now", to: "/donate" },
+    title: "Why Veda Samrakshanam",
+    subtitle: "Vedas — The Eternal Glory of Our Sacred Tradition",
+    cta: { label: "Read More", to: "/veda-patasala" },
+  },
+  {
+    image: heroHomam,
+    title: "Appeal for Construction of Veda Patasala",
+    subtitle: "Please support us in this noble endeavour for Vedic education",
+    cta: { label: "Support Us", to: "/donate" },
+  },
+  {
+    image: heroTemple,
+    title: "Subscribe to Nithya Poojas Sankalpam",
+    subtitle: "Loka Samastha Sukhino Bhavantu — Daily & Monthly Sevas",
+    cta: { label: "View Sevas", to: "/donate" },
+  },
+  {
+    image: heroRecitation,
+    title: "Samaveda & Yajur Upakarma",
+    subtitle: "Upakarma (Avani Avittam) procedure, audio recitation & guidance",
+    cta: { label: "Learn More", to: "/veda-vani" },
   },
 ] as const;
 
@@ -127,19 +139,19 @@ const PILLARS = [
     icon: Flame,
     title: "Vedashramam Sabha",
     to: "/sabha",
-    body: "A charitable trust dedicated to rendering service in religious and spiritual activities, and to the preservation of the ancient tradition of oral Vedic recitation under the guru-shishya parampara.",
+    body: "A registered non-profitable charitable trust established for rendering yeoman service in religious and spiritual activities, and preserving the oral recitation of Vedas under the Guru-Sishya parampara.",
   },
   {
     icon: BookOpen,
     title: "Gurukula Veda Patasala",
     to: "/veda-patasala",
-    body: "A traditional residential Gurukulam training students in Vedic chanting, Sanskrit, and ritual knowledge, under the guidance of our acharyas and Managing Trustee, Sri Rajasasthrigal.",
+    body: "A traditional Gurukula system training Vidyarthis in oral chanting, hearing, repeating and committing the sacred Vedas to memory under experienced Acharyas.",
   },
   {
     icon: Newspaper,
     title: "Veda Vani",
     to: "/veda-vani",
-    body: "Follow our journal for the latest on activities at Vedashramam, articles and stotrams on Sanatana Dharma, and puja vidhanams.",
+    body: "Follow our journal for the latest on activities, articles and stotrams on Sanatana Dharma, puja vidhanams, and festival guides.",
   },
 ];
 
@@ -147,23 +159,23 @@ const POSTS = [
   {
     image: heroHomam,
     category: "Activities & Events",
-    title: "Navarathri & Ramanavami Celebrations",
+    title: "Vinayaka Chaturthi Vrata Puja Vidhanam",
     excerpt:
-      "Srimad Ramayana Moola Parayanam, Navavarana Pooja and daily poojas and homams from 7:00 AM to 11:00 AM, with Deeparadhana and Mantrapushpam each evening.",
+      "Ganesha or Ganapati is the Lord and destroyer of obstacles (Vighnaharta). Complete puja vidhanam, sankalpam, audio recitation and guidance for devotees.",
   },
   {
     image: heroRecitation,
-    category: "Patasala",
-    title: "Annual Day Celebrations of the Patasala",
+    category: "Activities & Events",
+    title: "Samaveda & Yajur Upakarma",
     excerpt:
-      "A single-day showcase of student progress, recitation demonstrations and community gathering, from 9:00 AM onwards.",
+      "Complete Upakarma (Avani Avittam) procedure and audio for devotees observing the sacred annual rites, prayers, and renewal of Yagnopaveetham.",
   },
   {
     image: heroTemple,
-    category: "Articles",
-    title: "Why Veda Samrakshanam Matters",
+    category: "Activities & Events",
+    title: "Gokulashtami Puja Vidhanam",
     excerpt:
-      "Learning through daily recitation, memorisation and direct oral transmission from acharya to student — not textbooks alone.",
+      "Celebrating the auspicious appearance of Bhagavan Sri Krishna with traditional puja vidhanam, aradhana rituals, stotrams and naivedyam procedures.",
   },
 ];
 

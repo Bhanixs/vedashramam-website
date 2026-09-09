@@ -25,19 +25,28 @@ export const Route = createFileRoute("/donate")({
 const WAYS = [
   {
     icon: BookOpen,
-    title: "Vidyadanam",
-    body: "Sponsor a student’s Vedic education for a month or a year — covering instruction, boarding and study materials.",
+    title: "Vidyadanam & Student Welfare",
+    body: "Sponsor a Vidyarthi’s comprehensive education, instruction, traditional vastram (dhoties), and study materials for a month or year.",
   },
   {
     icon: UtensilsCrossed,
-    title: "Annadanam",
-    body: "Sponsor meals for the resident students and acharyas on a day of your choosing, or on an occasion in your family.",
+    title: "Annadanam & Samaradhana",
+    body: "Sponsor daily meals (Bhojanam / Samaradhana) for resident students and Adhyapakas on special family occasions, birthdays, or anniversaries.",
   },
   {
     icon: Building2,
-    title: "General Support",
-    body: "Contribute towards acharya support and the upkeep of the Ashramam’s facilities and the Sabha’s activities.",
+    title: "Patasala Building & Corpus Fund",
+    body: "Contribute to the long-term Sashwata Nidhi endowment and the expansion of classroom facilities, library, and student living quarters.",
   },
+];
+
+const SEVAS = [
+  { seva: "Daily Rudrabhishekam", schedule: "Daily at 6:00 AM", amount: "₹101 / day", details: "Sankalpam performed daily with sacred abhishekam." },
+  { seva: "Pradosha Puja", schedule: "Every Trayodashi at 5:00 PM", amount: "₹150 / ₹2,400 (Annual)", details: "Special Shiva puja & archana during Pradosham." },
+  { seva: "Ganapathi Homam", schedule: "Sankatahara Chaturthi at 6:00 AM", amount: "₹200 / ₹2,400 (Annual)", details: "Vighnaharta homam for obstacle removal." },
+  { seva: "Avahanti Homam", schedule: "Shukla Panchami at 6:00 AM", amount: "₹200 / ₹2,400 (Annual)", details: "Vedic homam for prosperity and spiritual wisdom." },
+  { seva: "Pada Pooja & Anusham Star", schedule: "Thursdays & Anusham at 7:00 AM", amount: "₹200 / ₹2,400 (Annual)", details: "Acharya pada pooja and Mahaswamigal star worship." },
+  { seva: "Sahasranama & Parayanam", schedule: "Lalitha / Vishnu / Sundarakanda", amount: "₹500 – ₹1,000 / occurrence", details: "Monthly parayanams with community chanting." },
 ];
 
 function DonatePage() {
@@ -45,7 +54,7 @@ function DonatePage() {
     <PageShell transparentHeader>
       <PageBanner
         title="Donate Now"
-        subtitle="Loka Samastha Sukhino Bhavantu"
+        subtitle="Loka Samastha Sukhino Bhavantu — Ways to Support"
         image={heroTemple}
       />
 
@@ -56,12 +65,12 @@ function DonatePage() {
       />
 
       <section className="container-page py-20">
-        <SectionHeading title="Support Vedashramam" eyebrow="Vidyadanam · Annadanam · General Support" />
+        <SectionHeading title="Support Vedashramam" eyebrow="Vidyadanam · Annadanam · Sevas" />
 
         <p className="mx-auto mt-12 max-w-3xl text-center text-[0.95rem] leading-relaxed text-foreground/85">
-          As a trust, Vedashramam depends on the generosity of well-wishers to sustain the Sabha’s activities and
-          the Veda Patasala’s residential education — covering student boarding, acharya support and facility
-          upkeep.
+          As a non-profit charitable trust, Vedashramam relies on the munificence and devotion of patrons,
+          philanthropists, and well-wishers to sustain the daily Gurukula education, student boarding, Adhyapaka
+          support, and spiritual activities.
         </p>
 
         <div className="mt-14 grid gap-6 md:grid-cols-3">
@@ -74,6 +83,43 @@ function DonatePage() {
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{w.body}</p>
             </div>
           ))}
+        </div>
+
+        {/* Nithya Sevas & Sankalpam Table */}
+        <div className="mx-auto mt-20 max-w-4xl">
+          <h3 className="font-display text-2xl text-maroon text-center">Nithya &amp; Monthly Sevas</h3>
+          <p className="mt-2 text-center text-xs uppercase tracking-[0.14em] text-muted-foreground">
+            Devotees can subscribe for regular sankalpam and receive sacred prasadam
+          </p>
+          <div className="mt-8 overflow-hidden rounded-lg border border-border">
+            <div className="hidden grid-cols-[1.5fr_1.5fr_1.2fr_2fr] bg-accent/50 p-4 text-xs font-semibold uppercase tracking-[0.12em] text-maroon sm:grid">
+              <span>Seva / Occasion</span>
+              <span>Schedule</span>
+              <span>Contribution</span>
+              <span>Details</span>
+            </div>
+            {SEVAS.map((s, i) => (
+              <div
+                key={s.seva}
+                className={`grid grid-cols-1 gap-2 p-5 sm:grid-cols-[1.5fr_1.5fr_1.2fr_2fr] sm:items-center ${
+                  i % 2 === 0 ? "bg-card" : "bg-muted/40"
+                }`}
+              >
+                <span className="font-medium text-foreground">{s.seva}</span>
+                <span className="text-xs text-muted-foreground">{s.schedule}</span>
+                <span className="text-xs font-semibold text-primary">{s.amount}</span>
+                <span className="text-xs text-foreground/80">{s.details}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* In-Kind Contributions Note */}
+        <div className="mx-auto mt-12 max-w-4xl surface-card p-6 text-center">
+          <h4 className="font-display text-lg text-maroon">Contributions in Kind</h4>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Offerings in kind such as Vastram (traditional dhoties for Vidyarthis), Rice, Dal, Ghee, and Oil are gratefully accepted for the daily Annadanam of the Gurukulam.
+          </p>
         </div>
 
         <div className="mandala-bg mx-auto mt-16 max-w-3xl rounded-lg border border-border p-8 text-center shadow-soft">
@@ -97,12 +143,12 @@ function DonatePage() {
             </div>
             <div className="flex justify-between">
               <span className="text-muted-foreground">UPI ID:</span>
-              <span className="font-semibold text-foreground">vedashramam@upi (Placeholder)</span>
+              <span className="font-semibold text-foreground">vedashramam@upi</span>
             </div>
           </div>
 
           <p className="mt-6 text-sm leading-relaxed text-foreground/80">
-            For online gateway contributions or specific sponsorship inquiries (Vidyadanam / Annadanam), please write to us directly. Tax receipts under Section 80G will be issued upon verification.
+            For online gateway contributions, specific sponsorship inquiries (Vidyadanam / Annadanam), or Ubhayam sankalpams, please reach out to us directly. Tax receipts under Section 80G will be issued upon receipt.
           </p>
           <div className="mt-7 flex flex-wrap justify-center gap-4">
             <Link
