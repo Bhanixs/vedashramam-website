@@ -10,7 +10,7 @@ export const Route = createFileRoute("/sabha-patrons-trustees")({
       {
         name: "description",
         content:
-          "Founder & Managing Trustee Veda Samrat Brahmashri Raja Sastrigal, Managing Trustee Smt. Kalyani, Trustees, and Vedic Teachers & Scholars.",
+          "Founder & Managing Trustee G Arunachalam, Managing Trustee Smt. Kalyani, Trustees, and Vedic Teachers & Scholars.",
       },
       { property: "og:title", content: "Patrons & Trustees — Vedashramam" },
       {
@@ -29,12 +29,12 @@ const TEACHERS = [
   { name: "Chidambaram Sena Sastrigal", role: "Prayoga Teacher" },
 ];
 
-export function SabhaPatronsTrusteesPage() {
+function SabhaPatronsTrusteesPage() {
   return (
     <PageShell transparentHeader>
       <PageBanner
         title="Patrons & Trustees"
-        subtitle="Veda Ashrama Gurukulam & Sri Sai Shankara Bhakta Sabha Trust"
+        subtitle="Veda Ashrama Gurukulam & Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust"
         image={heroTemple}
       />
 
@@ -51,22 +51,21 @@ export function SabhaPatronsTrusteesPage() {
           {/* Founder & Managing Trustee */}
           <div className="surface-card rounded-2xl border-2 border-border/80 p-8 shadow-sm">
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Founder &amp; Managing Trustee</span>
-            <h3 className="mt-2 font-display text-3xl text-maroon">Veda Samrat Brahmashri Raja Sastrigal</h3>
+            <h3 className="mt-2 font-display text-3xl text-maroon">Sri G Arunachalam</h3>
             <p className="mt-1 text-sm font-semibold text-primary">Founder – Veda Ashrama Gurukulam, Puducherry</p>
             <p className="mt-4 text-sm leading-relaxed text-foreground/85">
-              Veda Samrat Brahmashri Raja Sastrigal is the founder of Veda Ashrama Gurukulam and Sri Sai Shankara Bhakta Sabha
-              Educational and Go Samrakshana Seva Trust. Based in Karuvadikuppam, Puducherry, he is dedicated to the
-              preservation and development of Vedic knowledge, Sanātana Dharma, Agama traditions, Go Samrakshana and
-              traditional education.
+              G Arunachalam is the founder of Veda Ashrama Gurukulam and Sri Sai Sankara Bhaktha Sabha
+              Gomarsakshana Educational Seva Trust. Based in Puducherry, he is dedicated to the preservation and development of
+              Vedic knowledge, Sanātana Dharma, Agama traditions, Go Samrakshana and traditional education.
             </p>
           </div>
 
           {/* Managing Trustee */}
           <div className="surface-card rounded-2xl border border-border p-8 shadow-sm">
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Managing Trustee</span>
-            <h3 className="mt-2 font-display text-2xl text-maroon">Smt. Kalyani</h3>
+            <h3 className="mt-2 font-display text-2xl text-maroon">Smt. Subulakshmi</h3>
             <p className="mt-3 text-sm leading-relaxed text-foreground/85">
-              Smt. Kalyani serves as a Managing Trustee and works alongside Brahmashri Raja Sastrigal in guiding and
+              Smt. Subulakshmi serves as a Managing Trustee and works alongside Sri G Arunachalam in guiding and
               developing the Gurukulam's educational, spiritual and service-oriented activities.
             </p>
           </div>
@@ -76,12 +75,12 @@ export function SabhaPatronsTrusteesPage() {
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Trustees</span>
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
               <div className="rounded-xl border border-border/60 bg-muted/30 p-5">
-                <h4 className="font-display text-xl text-maroon">Sri Arunachalam</h4>
+                <h4 className="font-display text-xl text-maroon">Brahmashri Raja Sastrigal</h4>
                 <p className="text-xs font-semibold uppercase tracking-wider text-primary">Trustee</p>
               </div>
 
               <div className="rounded-xl border border-border/60 bg-muted/30 p-5">
-                <h4 className="font-display text-xl text-maroon">Smt. Subbulakshmi</h4>
+                <h4 className="font-display text-xl text-maroon">Smt. Kalyani</h4>
                 <p className="text-xs font-semibold uppercase tracking-wider text-primary">Trustee</p>
               </div>
             </div>

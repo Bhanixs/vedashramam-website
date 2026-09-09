@@ -22,7 +22,7 @@ export const Route = createFileRoute("/why-veda-samrakshanam")({
   component: WhyVedaSamrakshanamPage,
 });
 
-export function WhyVedaSamrakshanamPage() {
+function WhyVedaSamrakshanamPage() {
   return (
     <PageShell transparentHeader>
       <PageBanner

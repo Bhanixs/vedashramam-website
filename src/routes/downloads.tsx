@@ -57,7 +57,7 @@ const DOWNLOAD_ITEMS = [
   },
 ];
 
-export function DownloadsPage() {
+function DownloadsPage() {
   return (
     <PageShell transparentHeader>
       <PageBanner

@@ -55,7 +55,7 @@ const CURRICULUM_AREAS = [
   },
 ];
 
-export function PatasalaDetailsPage() {
+function PatasalaDetailsPage() {
   return (
     <PageShell transparentHeader>
       <PageBanner

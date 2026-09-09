@@ -33,7 +33,7 @@ const NAV: NavItem[] = [
     label: "Veda Patasala",
     children: [
       { label: "Why Veda Samrakshanam", to: "/why-veda-samrakshanam" },
-      { label: "About Patasala", to: "/about-patasala" },
+      { label: "Raja Sastrigal", to: "/rajasastrigal" },
       { label: "Our Vision", to: "/our-vision" },
       { label: "Patasala Management", to: "/patasala-management" },
       { label: "Patasala Details", to: "/patasala-details" },

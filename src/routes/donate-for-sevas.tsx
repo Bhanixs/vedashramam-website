@@ -22,7 +22,7 @@ export const Route = createFileRoute("/donate-for-sevas")({
   component: DonateForSevasPage,
 });
 
-export function DonateForSevasPage() {
+function DonateForSevasPage() {
   return (
     <PageShell transparentHeader>
       <PageBanner
@@ -107,9 +107,12 @@ export function DonateForSevasPage() {
             </div>
             <p className="mt-3 text-sm leading-relaxed text-foreground/75">
               Cheques or Demand Drafts drawn in favor of{" "}
-              <strong className="text-maroon">Veda Ashrama Gurukulam</strong> or{" "}
-              <strong className="text-maroon">Sri Sai Shankara Bhakta Sabha Trust</strong> may be sent to our
-              Karuvadikuppam, Puducherry ashram address.
+              <strong className="text-maroon">Sri sai Sankara baktha sabha</strong> or{" "}
+              <strong className="text-maroon">Veda Ashrama Gurukulam</strong> may be sent to our registered address:{" "}
+              <strong>151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008</strong>.
+              For direct bank transfer: <strong>Indian Overseas Bank, Lawspet Branch</strong>, A/c:{" "}
+              <strong>212101000031000</strong>, IFSC: <strong>IOBA0002121</strong>, UPI:{" "}
+              <strong>9842327791@IOB</strong>.
             </p>
           </div>
 
@@ -159,8 +162,10 @@ export function DonateForSevasPage() {
             <li className="flex gap-2">
               <span className="text-gold font-bold">•</span>
               <span>
-                <strong>Tax Exemption U/S 80G:</strong> Donations above Rs. 2,000/- must be made through non-cash modes
-                (Online, Cheque, DD, NEFT/RTGS) to qualify for 80G deduction. Donors should provide PAN card number.
+                <strong>80G Tax Exemption &amp; PAN:</strong> Income tax exemption is available under 80G Unique Registration
+                No.: <strong>AAMTS6931LF20221</strong> (PAN: <strong>AAMTS6931L</strong>) for{" "}
+                <strong>Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust</strong>. Donations above ₹2,000/- must
+                be made in non-cash modes to qualify.
               </span>
             </li>
           </ul>

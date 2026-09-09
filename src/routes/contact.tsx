@@ -37,14 +37,26 @@ function ContactPage() {
       <PageBanner title="Contact Us" subtitle="We would be glad to hear from you" image={heroHomam} />
 
       <section className="container-page py-20">
-        <SectionHeading title="Get in Touch" eyebrow="Karuvadikuppam, Puducherry" />
+        <SectionHeading title="Get in Touch" eyebrow="Lawspet / Karuvadikuppam, Puducherry" />
 
         <div className="mt-14 grid gap-10 lg:grid-cols-[1fr_1.2fr]">
           <div className="space-y-4">
             {[
-              { icon: MapPin, label: "Address", value: "Veda Ashrama Gurukulam, Karuvadikuppam, Puducherry" },
-              { icon: Phone, label: "Phone", value: "To be published" },
-              { icon: Mail, label: "Email", value: "To be published" },
+              {
+                icon: MapPin,
+                label: "Registered Address",
+                value: "151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008",
+              },
+              {
+                icon: Phone,
+                label: "Phone / UPI",
+                value: "+91 98423 27791 (UPI: 9842327791@IOB)",
+              },
+              {
+                icon: Mail,
+                label: "Email",
+                value: "info@vedaashramam.example (Official contact)",
+              },
             ].map((c) => (
               <div key={c.label} className="surface-card flex gap-4 p-6">
                 <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-accent">

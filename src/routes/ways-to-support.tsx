@@ -24,7 +24,7 @@ export const Route = createFileRoute("/ways-to-support")({
   component: WaysToSupportPage,
 });
 
-export function WaysToSupportPage() {
+function WaysToSupportPage() {
   const [openSection, setOpenSection] = useState<string | null>("corpus");
 
   const toggle = (id: string) => {
@@ -224,16 +224,34 @@ export function WaysToSupportPage() {
             </button>
             {openSection === "cheques" && (
               <div className="border-t border-border/70 bg-muted/20 p-6 text-sm leading-relaxed text-foreground/85">
-                <p>If Donors wish to make contributions by Cheques/DD, please draw in favour of:</p>
-                <div className="mt-3 rounded-lg border border-border bg-card p-4">
-                  <div className="font-bold text-maroon">VEDA ASHRAMA GURUKULAM</div>
-                  <p className="mt-1 text-xs text-foreground/80">
-                    The Managing Trustee,
-                    <br />
-                    Veda Ashrama Gurukulam,
-                    <br />
-                    Karuvadikuppam, Puducherry.
-                  </p>
+                <p>If Donors wish to make contributions by Cheques/DD or direct bank transfer, please find the verified details below:</p>
+                <div className="mt-3 space-y-2 rounded-lg border border-border bg-card p-4 text-xs">
+                  <div>
+                    <span className="text-muted-foreground">Account Name: </span>
+                    <strong className="text-maroon">Sri sai Sankara baktha sabha</strong>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Bank: </span>
+                    <strong className="text-foreground">Indian Overseas Bank, Lawspet Branch, Puducherry - 605 008</strong>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">Account Number: </span>
+                    <span className="font-mono font-bold text-foreground">212101000031000</span>
+                    <span className="ml-3 text-muted-foreground">Branch Code: </span>
+                    <span className="font-mono font-semibold text-foreground">2121</span>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground">IFSC Code: </span>
+                    <span className="font-mono font-bold text-foreground">IOBA0002121</span>
+                    <span className="ml-3 text-muted-foreground">UPI ID: </span>
+                    <span className="font-mono font-bold text-primary">9842327791@IOB</span>
+                  </div>
+                  <div className="border-t border-border/60 pt-2">
+                    <span className="text-muted-foreground">Postal Address for Cheques / DD: </span>
+                    <span className="font-medium text-foreground">
+                      The Managing Trustee, 151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008
+                    </span>
+                  </div>
                 </div>
               </div>
             )}
@@ -340,9 +358,10 @@ export function WaysToSupportPage() {
             <li className="flex gap-2">
               <span className="text-gold font-bold">•</span>
               <span>
-                <strong>80-G Tax Exemption:</strong> Income tax exemption under Section 80-G is available vide Unique
-                Regn. No. <strong>AAATS7438NF19923</strong> Dt. 23-09-2021 for the Period AY 2022-23 to AY 2026-27.
-                Donations above ₹2,000/- must be made in non-cash modes to qualify.
+                <strong>80G Tax Exemption &amp; PAN:</strong> Income tax exemption under Section 80G is available under
+                80G Unique Registration No.: <strong>AAMTS6931LF20221</strong> (PAN: <strong>AAMTS6931L</strong>),
+                provisional approval date 03-08-2022 for the period 03-08-2022 to AY 2025-2026. Trust:{" "}
+                <strong>Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust</strong>. Donations above ₹2,000/- must be made in non-cash modes to qualify.
               </span>
             </li>
           </ul>

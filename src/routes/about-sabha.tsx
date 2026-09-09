@@ -9,7 +9,7 @@ export const Route = createFileRoute("/about-sabha")({
       {
         name: "description",
         content:
-          "Veda Ashrama Gurukulam and Sri Sai Shankara Bhakta Sabha Educational and Go Samrakshana Seva Trust in Karuvadikuppam, Puducherry.",
+          "Veda Ashrama Gurukulam and Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust in Karuvadikuppam, Puducherry.",
       },
       { property: "og:title", content: "About Sabha — Vedashramam" },
       {
@@ -29,12 +29,12 @@ const OBJECTIVES = [
   "Aid financially (Samskara Sahayam) for the Scheme for the cremation/last rites of those who die as orphans in the Hospitals and streets.",
 ];
 
-export function AboutSabhaPage() {
+function AboutSabhaPage() {
   return (
     <PageShell transparentHeader>
       <PageBanner
         title="About Sabha"
-        subtitle="Sri Sai Shankara Bhakta Sabha Educational and Go Samrakshana Seva Trust"
+        subtitle="Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust"
         image={heroTemple}
       />
 
@@ -48,7 +48,7 @@ export function AboutSabhaPage() {
         <SectionHeading title="About the Sabha" eyebrow="The Trust & Mission" />
         <div className="mx-auto mt-12 max-w-3xl space-y-6 text-[0.95rem] leading-relaxed text-foreground/85">
           <p>
-            Veda Ashrama Gurukulam and Sri Sai Shankara Bhakta Sabha Educational and Go Samrakshana Seva Trust is a
+            Veda Ashrama Gurukulam and Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust is a
             charitable initiative based in Karuvadikuppam, Puducherry. Founded under the guidance and leadership of
             Veda Samrat Brahmashri Raja Sastrigal, the institution is dedicated to the preservation and development
             of Vedic knowledge, Sanātana Dharma, Agama traditions, Go Samrakshana and traditional education.

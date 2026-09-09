@@ -21,7 +21,7 @@ export const Route = createFileRoute("/veda-ashramam")({
   component: VedaAshramamPage,
 });
 
-export function VedaAshramamPage() {
+function VedaAshramamPage() {
   return (
     <PageShell transparentHeader>
       <PageBanner

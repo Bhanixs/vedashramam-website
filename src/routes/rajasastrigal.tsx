@@ -3,7 +3,7 @@ import { PageShell, PageBanner, SectionHeading, Sloka } from "@/components/site/
 import heroRecitation from "@/assets/hero-recitation.jpg";
 import { GraduationCap, Users, HeartHandshake, ShieldCheck } from "lucide-react";
 
-export const Route = createFileRoute("/about-patasala")({
+export const Route = createFileRoute("/rajasastrigal")({
   head: () => ({
     meta: [
       { title: "About Patasala — Veda Ashrama Gurukulam, Puducherry" },
@@ -29,11 +29,11 @@ const TEACHERS = [
   { name: "Chidambaram Sena Sastrigal", role: "Prayoga Teacher" },
 ];
 
-export function AboutPatasalaPage() {
+function AboutPatasalaPage() {
   return (
     <PageShell transparentHeader>
       <PageBanner
-        title="About Patasala"
+        title="Brahmashri Raja Sastrigal"
         subtitle="Veda Ashrama Gurukulam — Karuvadikuppam, Puducherry"
         image={heroRecitation}
       />
@@ -60,8 +60,8 @@ export function AboutPatasalaPage() {
               Samrakshana and traditional education.
             </p>
             <p>
-              He is the founder of Veda Ashrama Gurukulam and Sri Sai Shankara Bhakta Sabha Educational and Go
-              Samrakshana Seva Trust. His parents, Sri Arunachalam and Smt. Subbulakshmi, have also played an important
+              He is the founder of Veda Ashrama Gurukulam and Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational
+              Seva Trust. His parents, Sri Arunachalam and Smt. Subbulakshmi, have also played an important
               role as trustees in supporting the Vedic institution and its educational mission. Brahmashri Raja
               Sastrigal and Smt. Kalyani serve as managing trustees and continue to guide and develop these meaningful
               activities.
@@ -70,8 +70,7 @@ export function AboutPatasalaPage() {
         </div>
 
         {/* Student & Teaching Strength */}
-        <div className="mx-auto mt-14 max-w-4xl grid gap-8 md:grid-cols-2">
-          <div className="surface-card rounded-2xl border border-border p-8 shadow-sm">
+          <div className="mx-auto mt-12 max-w-3xl rounded-2xl border border-border bg-card p-8 shadow-sm">
             <div className="flex items-center gap-3">
               <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold/15 text-maroon">
                 <GraduationCap className="h-6 w-6" />
@@ -88,63 +87,6 @@ export function AboutPatasalaPage() {
               receiving contemporary education.
             </p>
           </div>
-
-          <div className="surface-card rounded-2xl border border-border p-8 shadow-sm">
-            <div className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-gold/15 text-maroon">
-                <Users className="h-6 w-6" />
-              </div>
-              <div>
-                <span className="text-xs font-semibold uppercase tracking-wider text-gold">Dedicated Faculty</span>
-                <h4 className="font-display text-2xl text-maroon">Learned Adhyapakas</h4>
-              </div>
-            </div>
-            <div className="mt-4 space-y-2.5">
-              {TEACHERS.map((t) => (
-                <div key={t.name} className="flex items-center justify-between rounded-lg border border-border/50 bg-muted/40 px-3.5 py-2 text-xs">
-                  <span className="font-semibold text-foreground">{t.name}</span>
-                  <span className="text-muted-foreground">{t.role}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Preserving a living tradition */}
-        <div className="mx-auto mt-14 max-w-3xl space-y-6 text-[0.95rem] leading-relaxed text-foreground/85">
-          <p>
-            Their collective service is not simply about teaching scriptures. It is about preserving a living tradition
-            and passing Vedic wisdom, discipline, values, culture and spiritual knowledge to the next generation.
-          </p>
-          <p>
-            The work of Veda Ashrama Gurukulam represents a beautiful commitment to Sanātana Dharma, traditional
-            education, cultural preservation and service to society. Supporting and protecting such institutions is
-            essential for ensuring that India’s ancient knowledge systems continue to live and guide future generations.
-          </p>
-        </div>
-
-        {/* Closing Banner */}
-        <div className="mandala-bg mx-auto mt-14 max-w-3xl rounded-2xl border border-border p-8 text-center">
-          <h4 className="font-display text-2xl text-maroon">Preserve the Veda. Protect the Dharma.</h4>
-          <p className="mt-3 text-sm leading-relaxed text-foreground/80">
-            Educate the next generation. Serve all beings. May the dedicated service of Veda Samrat Brahmashri Raja
-            Sastrigal, his family, teachers and students continue to grow and inspire many more generations.
-          </p>
-          <div className="mt-8 flex justify-center gap-4">
-            <Link
-              to="/ways-to-support"
-              className="rounded-md bg-primary px-6 py-3 text-xs font-semibold uppercase tracking-wider text-primary-foreground transition-colors hover:bg-maroon"
-            >
-              Support Gurukulam
-            </Link>
-            <Link
-              to="/patasala-details"
-              className="rounded-md border border-border px-6 py-3 text-xs font-semibold uppercase tracking-wider text-foreground transition-colors hover:bg-accent"
-            >
-              Curriculum Details
-            </Link>
-          </div>
-        </div>
       </section>
     </PageShell>
   );

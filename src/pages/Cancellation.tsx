@@ -37,7 +37,7 @@ export function CancellationPage() {
             </div>
             <div className="mt-6 space-y-4 text-[0.95rem] leading-relaxed text-foreground/85">
               <p>
-                All financial offerings, donations, and sponsorships made to <strong>Vedashramam Sabha</strong> (including <em>Vidyadanam</em>, <em>Annadanam</em>, and <em>General Corpus Funds</em>) are voluntary charitable contributions given in support of Sanatana Dharma Prachara and the residential Veda Patasala.
+                All financial offerings, donations, and sponsorships made to <strong>Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust</strong> (operating the residential Veda Ashrama Gurukulam in Puducherry, including <em>Vidyadanam</em>, <em>Annadanam</em>, and <em>General Corpus Funds</em>) are voluntary charitable contributions given in support of Sanatana Dharma Prachara and traditional Vedic education.
               </p>
               <p>
                 As charitable donations are immediately committed to student welfare, acharya support, and ritual observances, regular donations are non-refundable once processed.
@@ -114,8 +114,9 @@ export function CancellationPage() {
                 For any queries regarding donations, transaction verification, or cancellation requests, please contact our trust administration:
               </p>
               <div className="mandala-bg rounded-lg border border-border p-6 text-center space-y-3">
-                <p className="font-display text-lg text-maroon">Vedashramam Sabha Trust Support</p>
-                <p className="text-sm text-foreground/80">Puducherry (Pondicherry), India</p>
+                <p className="font-display text-lg text-maroon">Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust</p>
+                <p className="text-sm text-foreground/80">151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008</p>
+                <p className="text-xs text-muted-foreground">Contact / UPI: +91 98423 27791 (UPI: 9842327791@IOB)</p>
                 <div className="pt-2">
                   <Link
                     to="/contact"

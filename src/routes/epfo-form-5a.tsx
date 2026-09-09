@@ -15,14 +15,14 @@ export const Route = createFileRoute("/epfo-form-5a")({
       { property: "og:title", content: "EPFO Form 5A Extract — Vedashramam" },
       {
         property: "og:description",
-        content: "Statutory compliance and establishment particulars for Sri Sai Shankara Bhakta Sabha Trust.",
+        content: "Statutory compliance and establishment particulars for Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust.",
       },
     ],
   }),
   component: EpfoForm5aPage,
 });
 
-export function EpfoForm5aPage() {
+function EpfoForm5aPage() {
   return (
     <PageShell transparentHeader>
       <PageBanner
@@ -40,7 +40,7 @@ export function EpfoForm5aPage() {
             official return of ownership and particulars of the establishment and its branches/departments.
           </p>
           <p>
-            Sri Sai Shankara Bhakta Sabha Educational and Go Samrakshana Seva Trust and Veda Ashrama Gurukulam uphold
+            Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust and Veda Ashrama Gurukulam uphold
             uncompromising standards of institutional transparency, statutory filing, and compliance with Central and
             State regulatory frameworks.
           </p>
@@ -55,22 +55,32 @@ export function EpfoForm5aPage() {
 
           <div className="mt-6 divide-y divide-border/80 text-sm">
             <div className="flex flex-col py-3 sm:flex-row sm:justify-between">
-              <span className="font-medium text-foreground/70">Name of the Establishment:</span>
-              <span className="font-semibold text-foreground">
-                Sri Sai Shankara Bhakta Sabha Educational and Go Samrakshana Seva Trust
+              <span className="font-medium text-foreground/70">Name of the Establishment / Trust:</span>
+              <span className="font-semibold text-foreground text-right sm:max-w-md">
+                Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust
               </span>
             </div>
             <div className="flex flex-col py-3 sm:flex-row sm:justify-between">
+              <span className="text-muted-foreground">Permanent Account Number (PAN):</span>
+              <span className="font-mono font-bold text-foreground">AAMTS6931L</span>
+            </div>
+            <div className="flex flex-col py-3 sm:flex-row sm:justify-between">
               <span className="font-medium text-foreground/70">Registered Address:</span>
-              <span className="font-semibold text-foreground">Karuvadikuppam, Puducherry</span>
+              <span className="font-semibold text-foreground text-right sm:max-w-xs">
+                151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008
+              </span>
             </div>
             <div className="flex flex-col py-3 sm:flex-row sm:justify-between">
               <span className="font-medium text-foreground/70">Statutory Constitution:</span>
               <span className="font-semibold text-foreground">Public Charitable Religious &amp; Educational Trust</span>
             </div>
             <div className="flex flex-col py-3 sm:flex-row sm:justify-between">
-              <span className="font-medium text-foreground/70">80-G Unique Registration No:</span>
-              <span className="font-semibold text-primary">AAATS7438NF19923 (AY 2022-23 to AY 2026-27)</span>
+              <span className="font-medium text-foreground/70">80G Unique Registration No.:</span>
+              <span className="font-mono font-bold text-primary">AAMTS6931LF20221</span>
+            </div>
+            <div className="flex flex-col py-3 sm:flex-row sm:justify-between">
+              <span className="font-medium text-foreground/70">80G Approval Period:</span>
+              <span className="font-semibold text-foreground">03-08-2022 to AY 2025-2026 (Provisional: 03-08-2022)</span>
             </div>
             <div className="flex flex-col py-3 sm:flex-row sm:justify-between">
               <span className="font-medium text-foreground/70">Form 5A Ownership Filing Status:</span>

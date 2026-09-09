@@ -22,7 +22,7 @@ export const Route = createFileRoute("/sources-of-sustenance")({
   component: SourcesOfSustenancePage,
 });
 
-export function SourcesOfSustenancePage() {
+function SourcesOfSustenancePage() {
   return (
     <PageShell transparentHeader>
       <PageBanner
@@ -128,9 +128,11 @@ export function SourcesOfSustenancePage() {
             <h4 className="font-display text-lg text-maroon">Income Tax Exemption U/S 80G</h4>
           </div>
           <p className="mt-3 text-xs leading-relaxed text-foreground/80">
-            All donations made to the Trust are eligible for tax deduction under Section 80G of the Indian Income Tax
-            Act. Donations above Rs. 2,000/- should be made in non-cash modes to qualify. Donors should kindly provide
-            their PAN details along with their remittance.
+            All donations made to <strong>Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust</strong> are eligible
+            for tax deduction under Section 80G of the Indian Income Tax Act (80G Unique Registration No.:{" "}
+            <strong>AAMTS6931LF20221</strong>, PAN: <strong>AAMTS6931L</strong>, approval period 03-08-2022 to AY 2025-2026).
+            Donations above Rs. 2,000/- should be made in non-cash modes to qualify. Donors should kindly provide their PAN details
+            along with their remittance.
           </p>
 
           <div className="mt-8 flex flex-col items-center justify-between gap-4 sm:flex-row">

@@ -36,7 +36,7 @@ export function PrivacyPage() {
             </div>
             <div className="mt-6 space-y-4 text-[0.95rem] leading-relaxed text-foreground/85">
               <p>
-                Vedashramam collects personal information submitted voluntarily by donors, prospective students, guardians, and visitors through our online forms, donation channels, and admission applications.
+                Vedashramam (Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust) collects personal information submitted voluntarily by donors, prospective students, guardians, and visitors through our online forms, donation channels, and admission applications.
               </p>
               <ul className="grid gap-3 pt-2 sm:grid-cols-2">
                 <li className="rounded-md border border-border/80 bg-card p-4 text-sm">
@@ -68,7 +68,7 @@ export function PrivacyPage() {
               </p>
               <ul className="space-y-2.5 pl-4 text-sm text-foreground/85">
                 <li className="list-disc">
-                  Issuing official charitable donation receipts and 80G tax exemption certificates.
+                  Issuing official charitable donation receipts and 80G tax exemption certificates under 80G Unique Registration No. <strong>AAMTS6931LF20221</strong> (PAN: <strong>AAMTS6931L</strong>).
                 </li>
                 <li className="list-disc">
                   Communicating updates on Patasala activities, annual celebrations (Navarathri, Ramanavami, Acharya Jayanthi), and trust news.

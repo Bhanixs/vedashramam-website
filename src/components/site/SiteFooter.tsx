@@ -12,8 +12,8 @@ export function SiteFooter() {
             <span className="font-display text-2xl">Vedashramam</span>
           </div>
           <p className="mt-4 text-xs leading-relaxed text-maroon-foreground/75">
-            Veda Ashrama Gurukulam and Sri Sai Shankara Bhakta Sabha Educational and Go Samrakshana Seva Trust —
-            Karuvadikuppam, Puducherry. Dedicated to Vedic education, Agama, Prayoga and Go Samrakshanam.
+            Veda Ashrama Gurukulam and Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust —
+            Puducherry. Dedicated to Vedic education, Agama, Prayoga and Go Samrakshanam.
           </p>
           <p className="mt-5 font-display text-sm text-gold">
             लोकाः समस्ताः सुखिनो भवन्तु
@@ -70,11 +70,11 @@ export function SiteFooter() {
           <ul className="mt-4 space-y-3 text-xs text-maroon-foreground/80">
             <li className="flex gap-2.5">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-              <span>Veda Ashrama Gurukulam, Karuvadikuppam, Puducherry</span>
+              <span>151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry - 605008</span>
             </li>
             <li className="flex gap-2.5">
               <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-              <span>Contact details to be published</span>
+              <span>+91 98423 27791 (UPI: 9842327791@IOB)</span>
             </li>
             <li className="flex gap-2.5">
               <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
@@ -95,7 +95,12 @@ export function SiteFooter() {
 
       <div className="border-t border-maroon-foreground/15">
         <div className="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-maroon-foreground/65 sm:flex-row">
-          <p>© {new Date().getFullYear()} Vedashramam. All rights reserved.</p>
+          <div>
+            <p>© {new Date().getFullYear()} Vedashramam. All rights reserved.</p>
+            <p className="mt-0.5 text-[0.7rem] text-gold/80">
+              PAN: AAMTS6931L | 80G Unique Regn No: AAMTS6931LF20221 (03-08-2022 to AY 2025-2026)
+            </p>
+          </div>
           <div className="flex gap-5">
             <Link to="/terms" className="hover:text-gold">
               Terms &amp; Conditions

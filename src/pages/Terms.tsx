@@ -36,7 +36,7 @@ export function TermsPage() {
             </div>
             <div className="mt-6 space-y-4 text-[0.95rem] leading-relaxed text-foreground/85">
               <p>
-                By accessing, browsing, or using the website of <strong>Vedashramam</strong> (operating the Vedashramam Sabha charitable trust and residential Veda Patasala in Pondicherry), you acknowledge that you have read, understood, and agreed to be bound by these Terms & Conditions.
+                By accessing, browsing, or using the website of <strong>Vedashramam</strong> (operating the Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust and residential Veda Ashrama Gurukulam in Puducherry), you acknowledge that you have read, understood, and agreed to be bound by these Terms & Conditions.
               </p>
               <p className="rounded-lg bg-muted/50 p-4 text-sm text-foreground/80 italic">
                 வேதாஶ்ரமம் இணையதளத்தை அணுகுவதன் மூலம் மற்றும் பயன்படுத்துவதன் மூலம், இந்த விதிகளையும் நிபந்தனைகளையும் முழுமையாகப் படித்து, புரிந்து கொண்டு, ஏற்றுக்கொள்கிறீர்கள் என்பதை உறுதிப்படுத்துகிறீர்கள்.
@@ -59,7 +59,7 @@ export function TermsPage() {
             </div>
             <div className="mt-6 space-y-4 text-[0.95rem] leading-relaxed text-foreground/85">
               <p>
-                Vedashramam Sabha is a registered non-profit charitable trust established for the promotion of Sanatana Dharma, support of religious and spiritual activities, and preservation of oral Vedic recitation in the traditional <em>Guru-Shishya Parampara</em>.
+                <strong>Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust</strong> is a registered non-profit public charitable trust (PAN: <strong>AAMTS6931L</strong>, 80G Unique Registration No.: <strong>AAMTS6931LF20221</strong>, Registered Address: 151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008) established for the promotion of Sanatana Dharma, support of religious and spiritual activities, and preservation of oral Vedic recitation in the traditional <em>Guru-Shishya Parampara</em>.
               </p>
               <ul className="grid gap-3 pt-2 sm:grid-cols-2">
                 <li className="flex items-start gap-3 rounded-md border border-border/80 bg-card p-4 text-sm">
@@ -89,10 +89,10 @@ export function TermsPage() {
             </div>
             <div className="mt-6 space-y-4 text-[0.95rem] leading-relaxed text-foreground/85">
               <p>
-                All financial contributions received through <em>Vidyadanam</em>, <em>Annadanam</em>, or <em>General Corpus</em> are voluntary donations made to support the charitable goals of Vedashramam Sabha.
+                All financial contributions received through <em>Vidyadanam</em>, <em>Annadanam</em>, or <em>General Corpus</em> are voluntary donations made to support the charitable goals of Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust.
               </p>
               <p>
-                Donations are utilized solely for the maintenance of the Gurukulam, student welfare, acharya honorariums, ritual observances, and trust administrative upkeep. Tax exemption receipts (under Section 80G as applicable) are issued upon verification of donor details and PAN information.
+                Donations are utilized solely for the maintenance of the Gurukulam, student welfare, acharya honorariums, ritual observances, and trust administrative upkeep. Tax exemption receipts under Section 80G (80G Unique Registration No.: <strong>AAMTS6931LF20221</strong>, PAN: <strong>AAMTS6931L</strong>, approval period 03-08-2022 to AY 2025-2026) are issued upon verification of donor details and PAN information.
               </p>
             </div>
           </div>

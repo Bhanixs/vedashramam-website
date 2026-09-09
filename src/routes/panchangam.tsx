@@ -23,7 +23,7 @@ export const Route = createFileRoute("/panchangam")({
   component: PanchangamPage,
 });
 
-export function PanchangamPage() {
+function PanchangamPage() {
   const today = new Date().toISOString().split("T")[0];
   const [selectedDate, setSelectedDate] = useState(today);
 

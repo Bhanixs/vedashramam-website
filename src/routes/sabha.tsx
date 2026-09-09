@@ -50,7 +50,7 @@ function SabhaPage() {
         <SectionHeading title="About the Sabha" eyebrow="The Trust" />
         <div className="mx-auto mt-12 max-w-3xl space-y-5 text-[0.95rem] leading-relaxed text-foreground/85">
           <p>
-            Veda Ashrama Gurukulam and Sri Sai Shankara Bhakta Sabha Educational and Go Samrakshana Seva Trust is a
+            Veda Ashrama Gurukulam and Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust is a
             charitable initiative based in Karuvadikuppam, Puducherry. Founded under the guidance and leadership of
             Veda Samrat Brahmashri Raja Sastrigal, the institution is dedicated to the preservation and development
             of Vedic knowledge, Sanātana Dharma, Agama traditions, Go Samrakshana and traditional education.

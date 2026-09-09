@@ -63,7 +63,7 @@ const DONATION_STREAMS: DonationStream[] = [
   },
 ];
 
-export function DonatePage() {
+function DonatePage() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPurpose, setSelectedPurpose] = useState<string>("Sankara Jayanthi & Nithya Sevas");
   const [amount, setAmount] = useState<string>("5000");
@@ -154,22 +154,54 @@ export function DonatePage() {
 
           <div className="mt-6 divide-y divide-border/70 rounded-xl border border-border bg-card p-6 text-sm">
             <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
-              <span className="text-muted-foreground">Account Name / Cheque in favour of:</span>
-              <span className="font-bold text-maroon">VEDA ASHRAMA GURUKULAM</span>
-            </div>
-            <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
-              <span className="text-muted-foreground">Postal / Ashram Address:</span>
-              <span className="font-semibold text-foreground">
-                The Managing Trustee, Karuvadikuppam, Puducherry
+              <span className="text-muted-foreground">Trust / Establishment Name:</span>
+              <span className="font-semibold text-foreground text-right sm:max-w-md">
+                Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust
               </span>
             </div>
             <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
-              <span className="text-muted-foreground">PAN Number:</span>
-              <span className="font-mono font-bold text-foreground">To be verified prior to publication</span>
+              <span className="text-muted-foreground">Account Name / In favour of:</span>
+              <span className="font-bold text-maroon">Sri sai Sankara baktha sabha</span>
             </div>
             <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
-              <span className="text-muted-foreground">80-G Registration:</span>
-              <span className="font-mono font-bold text-primary">AAATS7438NF19923 (AY 2022-23 to AY 2026-27)</span>
+              <span className="text-muted-foreground">Bank &amp; Branch:</span>
+              <span className="font-semibold text-foreground">
+                Indian Overseas Bank, Lawspet Branch, Puducherry - 605 008
+              </span>
+            </div>
+            <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
+              <span className="text-muted-foreground">Account Number:</span>
+              <span className="font-mono font-bold text-foreground">212101000031000</span>
+            </div>
+            <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
+              <span className="text-muted-foreground">Branch Code:</span>
+              <span className="font-mono font-semibold text-foreground">2121</span>
+            </div>
+            <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
+              <span className="text-muted-foreground">IFSC Code:</span>
+              <span className="font-mono font-bold text-foreground">IOBA0002121</span>
+            </div>
+            <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
+              <span className="text-muted-foreground">UPI ID:</span>
+              <span className="font-mono font-bold text-primary">9842327791@IOB</span>
+            </div>
+            <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
+              <span className="text-muted-foreground">PAN:</span>
+              <span className="font-mono font-bold text-foreground">AAMTS6931L</span>
+            </div>
+            <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
+              <span className="text-muted-foreground">80G Unique Registration No.:</span>
+              <span className="font-mono font-bold text-primary">AAMTS6931LF20221</span>
+            </div>
+            <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
+              <span className="text-muted-foreground">80G Approval Period:</span>
+              <span className="font-semibold text-foreground">03-08-2022 to AY 2025-2026 (Provisional: 03-08-2022)</span>
+            </div>
+            <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
+              <span className="text-muted-foreground">Registered Address:</span>
+              <span className="font-semibold text-foreground text-right sm:max-w-xs">
+                151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008
+              </span>
             </div>
           </div>
 

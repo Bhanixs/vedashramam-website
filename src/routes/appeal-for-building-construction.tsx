@@ -52,7 +52,7 @@ const SPONSORSHIP_SLABS = [
   { desc: "Temple / Prayer Hall / Auditorium", amount: "₹ 2,62,84,333 /-" },
 ];
 
-export function AppealBuildingConstructionPage() {
+function AppealBuildingConstructionPage() {
   return (
     <PageShell transparentHeader>
       <PageBanner
@@ -179,10 +179,9 @@ export function AppealBuildingConstructionPage() {
         {/* Note to Donors */}
         <div className="mx-auto mt-16 max-w-3xl rounded-xl border border-border bg-muted/40 p-6 text-center text-xs text-foreground/80 leading-relaxed">
           <p>
-            Contributions may be made by Cheque/DD in favour of{" "}
-            <strong className="text-maroon">Sri Sankara Gurukula Veda Patasala</strong> or{" "}
-            <strong className="text-maroon">Veda Ashrama Gurukulam</strong>. 80-G tax exemption certificates will be
-            promptly issued. Foreign Donors may kindly contact us for authorized FCRA remittance details.
+            Contributions may be made by Cheque/DD or direct bank transfer in favour of{" "}
+            <strong className="text-maroon">Sri sai Sankara baktha sabha</strong> or{" "}
+            <strong className="text-maroon">Veda Ashrama Gurukulam</strong> (Bank: <strong>Indian Overseas Bank, Lawspet Branch</strong>, A/c: <strong>212101000031000</strong>, IFSC: <strong>IOBA0002121</strong>, UPI: <strong>9842327791@IOB</strong>). Registered Address: <strong>151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008</strong>. 80G tax exemption certificates (80G Unique Registration No.: <strong>AAMTS6931LF20221</strong>, PAN: <strong>AAMTS6931L</strong>) will be promptly issued.
           </p>
         </div>
       </section>

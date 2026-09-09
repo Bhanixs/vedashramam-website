@@ -56,7 +56,7 @@ const VISION_PILLARS = [
   },
 ];
 
-export function OurVisionPage() {
+function OurVisionPage() {
   return (
     <PageShell transparentHeader>
       <PageBanner

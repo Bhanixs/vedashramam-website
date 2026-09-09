@@ -49,7 +49,7 @@ const ACHIEVEMENTS = [
   },
 ];
 
-export function OurAchievementsPage() {
+function OurAchievementsPage() {
   return (
     <PageShell transparentHeader>
       <PageBanner
