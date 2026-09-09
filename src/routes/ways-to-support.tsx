@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { PageShell, PageBanner, SectionHeading, Sloka } from "@/components/site/PageShell";
 import heroTemple from "@/assets/hero-temple.jpg";
-import { ChevronDown, CreditCard, ShieldCheck, Heart, Building, Check, Gift, Mail, Phone } from "lucide-react";
+import { ChevronDown, CreditCard, ShieldCheck, Heart, Building, Check, Gift, Mail, Phone, FileText, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/ways-to-support")({
@@ -308,7 +308,45 @@ function WaysToSupportPage() {
                   Foreign Donors are requested to kindly contact the Trust prior to remitting overseas funds to confirm
                   FCRA eligibility guidelines and authorized bank correspondent account details.
                 </p>
-                <div className="mt-3 flex flex-wrap gap-4 text-xs font-medium">
+
+                {/* Statutory Audit & Compliance Documents */}
+                <div className="mt-5 rounded-lg border border-border bg-card p-4">
+                  <h6 className="text-xs font-semibold uppercase tracking-wider text-gold">
+                    Statutory &amp; Audit Compliance Documents
+                  </h6>
+                  <p className="mt-1 text-xs text-muted-foreground">
+                    Verified institutional audit certifications and financial reports for foreign and domestic contributors:
+                  </p>
+                  <div className="mt-3 grid gap-3 sm:grid-cols-2">
+                    <a
+                      href="#ca-certificate-fy-2025-26"
+                      className="group flex items-center justify-between rounded-md border border-border/80 bg-muted/40 p-3 text-xs font-medium text-foreground transition-colors hover:border-primary hover:bg-accent/40"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <FileText className="h-4 w-4 text-primary group-hover:text-maroon" />
+                        <span className="group-hover:text-primary">CA Certificate FY 2025-26</span>
+                      </div>
+                      <span className="flex items-center gap-1 rounded bg-muted px-2 py-0.5 text-[11px] font-semibold text-muted-foreground group-hover:bg-primary group-hover:text-primary-foreground">
+                        PDF <ExternalLink className="ml-1 h-3 w-3" />
+                      </span>
+                    </a>
+
+                    <a
+                      href="#auditors-report"
+                      className="group flex items-center justify-between rounded-md border border-border/80 bg-muted/40 p-3 text-xs font-medium text-foreground transition-colors hover:border-primary hover:bg-accent/40"
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <FileText className="h-4 w-4 text-primary group-hover:text-maroon" />
+                        <span className="group-hover:text-primary">Auditor's Report</span>
+                      </div>
+                      <span className="flex items-center gap-1 rounded bg-muted px-2 py-0.5 text-[11px] font-semibold text-muted-foreground group-hover:bg-primary group-hover:text-primary-foreground">
+                        PDF <ExternalLink className="ml-1 h-3 w-3" />
+                      </span>
+                    </a>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-4 text-xs font-medium">
                   <span className="flex items-center gap-1.5 text-maroon">
                     <Mail className="h-3.5 w-3.5 text-gold" /> Contact: Trustees Office
                   </span>

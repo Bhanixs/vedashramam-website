@@ -24,32 +24,6 @@ export const Route = createFileRoute("/downloads")({
 
 const DOWNLOAD_ITEMS = [
   {
-    title: "Sri Ganesa Pancharatnam",
-    category: "Stotra & Chanting",
-    desc: "Composed by Sri Adi Shankaracharya. Complete text in multiple scripts with authentic Vedic intonation audio.",
-    formats: [
-      { label: "MP3 Audio", icon: Music, type: "audio" },
-      { label: "Sanskrit PDF", icon: FileText, type: "pdf" },
-      { label: "Tamil PDF", icon: FileText, type: "pdf" },
-      { label: "Telugu PDF", icon: FileText, type: "pdf" },
-    ],
-  },
-  {
-    title: "Vrata Pooja Vidhanam",
-    category: "Ritual Guide",
-    desc: "Step-by-step procedures for domestic vratas including Vinayaka Chaturthi, Varalakshmi Vratam, and Upakarma.",
-    formats: [{ label: "Upcoming Release", icon: BookOpen, type: "status" }],
-  },
-  {
-    title: "Sri Rudram & Chamakam Chanting Guide",
-    category: "Veda Recitation",
-    desc: "Text with authentic Swara markers for Krishna Yajur Veda Taittiriya Samhita Namakam and Chamakam.",
-    formats: [
-      { label: "Text with Swaras", icon: FileText, type: "pdf" },
-      { label: "Adhyayanam Audio", icon: Music, type: "audio" },
-    ],
-  },
-  {
     title: "Building Construction Appeal Brochure",
     category: "Patasala Appeal",
     desc: "Comprehensive 8-page brochure detailing the expansion of Veda Ashrama Gurukulam, building architectural plans, and sponsorship slabs.",

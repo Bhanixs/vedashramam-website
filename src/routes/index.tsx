@@ -30,13 +30,13 @@ const SLIDES = [
     image: heroRecitation,
     title: "Vinayaka Chaturthi Vrata Puja Vidhanam",
     subtitle: "Mp3 Audio & Complete Guide for Vinayaka Chaturthi Puja Vidhanam",
-    cta: { label: "Read More", to: "/veda-vani" },
+    cta: { label: "Read More", to: "/" },
   },
   {
     image: heroTemple,
     title: "Why Veda Samrakshanam",
     subtitle: "Vedas — The Eternal Glory of Our Sacred Tradition",
-    cta: { label: "Read More", to: "/veda-patasala" },
+    cta: { label: "Read More", to: "/why-veda-samrakshanam" },
   },
   {
     image: heroHomam,
@@ -54,7 +54,7 @@ const SLIDES = [
     image: heroRecitation,
     title: "Samaveda & Yajur Upakarma",
     subtitle: "Upakarma (Avani Avittam) procedure, audio recitation & guidance",
-    cta: { label: "Learn More", to: "/veda-vani" },
+    cta: { label: "Learn More", to: "/" },
   },
 ] as const;
 
@@ -138,20 +138,14 @@ const PILLARS = [
   {
     icon: Flame,
     title: "Vedashramam Sabha",
-    to: "/sabha",
+    to: "/about-sabha",
     body: "A registered non-profitable charitable trust established for rendering yeoman service in religious and spiritual activities, and preserving the oral recitation of Vedas under the Guru-Sishya parampara.",
   },
   {
     icon: BookOpen,
     title: "Gurukula Veda Patasala",
-    to: "/veda-patasala",
+    to: "/patasala-details",
     body: "A traditional Gurukula system training Vidyarthis in oral chanting, hearing, repeating and committing the sacred Vedas to memory under experienced Acharyas.",
-  },
-  {
-    icon: Newspaper,
-    title: "Veda Vani",
-    to: "/veda-vani",
-    body: "Follow our journal for the latest on activities, articles and stotrams on Sanatana Dharma, puja vidhanams, and festival guides.",
   },
 ];
 
@@ -193,7 +187,7 @@ function Home() {
       <section className="container-page py-20">
         <SectionHeading title="Welcome to Vedashramam" eyebrow="Sanatana Dharma Prachara · Veda Patasala · Spiritual Centre" />
 
-        <div className="mt-14 grid gap-6 md:grid-cols-3">
+        <div className="mt-14 grid gap-6 md:grid-cols-2">
           {PILLARS.map((p) => (
             <Link
               key={p.title}
@@ -224,7 +218,7 @@ function Home() {
             support and facility upkeep.
           </p>
           <Link
-            to="/veda-patasala"
+            to="/patasala-details"
             className="inline-flex rounded-md border border-primary px-7 py-3 text-xs font-semibold uppercase tracking-[0.14em] text-primary transition-colors hover:bg-primary hover:text-primary-foreground"
           >
             Know more about the Veda Patasala
@@ -255,14 +249,6 @@ function Home() {
                 </div>
               </article>
             ))}
-          </div>
-          <div className="mt-12 text-center">
-            <Link
-              to="/veda-vani"
-              className="inline-flex rounded-md bg-primary px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground transition-colors hover:bg-maroon"
-            >
-              Visit Veda Vani
-            </Link>
           </div>
         </div>
       </section>
