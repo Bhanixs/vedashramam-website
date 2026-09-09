@@ -1,128 +1,132 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageBanner, SectionHeading, Sloka } from "@/components/site/PageShell";
 import heroTemple from "@/assets/hero-temple.jpg";
+import { GraduationCap } from "lucide-react";
 
 export const Route = createFileRoute("/sabha-patrons-trustees")({
   head: () => ({
     meta: [
-      { title: "Sabha Patrons & Trustees — Vedashramam" },
+      { title: "Patrons & Trustees — Veda Ashrama Gurukulam & Sabha" },
       {
         name: "description",
         content:
-          "Leadership, Guru Parampara, Trustees and Patrons of Sri Sai Shankara Bhakta Sabha Educational and Go Samrakshana Seva Trust.",
+          "Founder & Managing Trustee Veda Samrat Brahmashri Raja Sastrigal, Managing Trustee Smt. Kalyani, Trustees, and Vedic Teachers & Scholars.",
       },
-      { property: "og:title", content: "Sabha Patrons & Trustees — Vedashramam" },
+      { property: "og:title", content: "Patrons & Trustees — Vedashramam" },
       {
         property: "og:description",
-        content: "Our Guru, Managing Trustees, Trustees, Patrons and Auditors guiding our sacred mission.",
+        content: "Our Founder, Managing Trustees, Trustees, and dedicated Vedic Teachers & Scholars.",
       },
     ],
   }),
   component: SabhaPatronsTrusteesPage,
 });
 
+const TEACHERS = [
+  { name: "Guru Prasad Bhatt", role: "Vedic Teacher" },
+  { name: "Gouri Shankara Sharma", role: "Agama Teacher" },
+  { name: "Mehta Sastrigal", role: "Prayoga Teacher" },
+  { name: "Chidambaram Sena Sastrigal", role: "Prayoga Teacher" },
+];
+
 export function SabhaPatronsTrusteesPage() {
   return (
     <PageShell transparentHeader>
       <PageBanner
-        title="Sabha Patrons & Trustees"
-        subtitle="Leadership & Guidance of Sri Sai Shankara Bhakta Sabha"
+        title="Patrons & Trustees"
+        subtitle="Veda Ashrama Gurukulam & Sri Sai Shankara Bhakta Sabha Trust"
         image={heroTemple}
       />
 
       <Sloka
-        devanagari="गुरुर्ब्रह्मा गुरुर्विष्णुः गुरुर्देवो महेश्वरः। गुरुः साक्षात् परं ब्रह्म तस्मै श्रीगुरवे नमः॥"
-        transliteration="Gurur Brahma Gurur Vishnuh Gurur Devo Maheshwarah, Guruh Sakshat Param Brahma Tasmai Shri Gurave Namah."
-        meaning="The Guru is Brahma, Vishnu, and Shiva; the Guru is the Supreme Reality incarnate. Salutations to the Holy Guru."
+        devanagari="लोकाः समस्ताः सुखिनो भवन्तु।"
+        transliteration="Loka Samastha Sukhino Bhavantu."
+        meaning="“May all beings in the world be happy and peaceful.”"
       />
 
       <section className="container-page py-20">
-        <SectionHeading title="Guiding Presence & Leadership" eyebrow="Patrons & Trustees" />
+        <SectionHeading title="Patrons & Trustees" eyebrow="Leadership & Governance" />
 
         <div className="mx-auto mt-14 max-w-4xl space-y-10">
-          {/* Mentor & Guru */}
-          <div className="surface-card rounded-xl border border-border p-8 shadow-sm">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Our Mentor & Guru</span>
-            <h3 className="mt-2 font-display text-2xl text-maroon">
-              Late Bhashya Ratna Sri R. Venkatraman, Salakshana Ghanapati
-            </h3>
-            <p className="mt-3 text-sm leading-relaxed text-foreground/80">
-              Revered mentor, scholar, and stalwart of Vedic recitation whose lifelong devotion and scholarly mastery
-              remain an eternal beacon for the Sabha and Gurukulam.
+          {/* Founder & Managing Trustee */}
+          <div className="surface-card rounded-2xl border-2 border-border/80 p-8 shadow-sm">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Founder &amp; Managing Trustee</span>
+            <h3 className="mt-2 font-display text-3xl text-maroon">Veda Samrat Brahmashri Raja Sastrigal</h3>
+            <p className="mt-1 text-sm font-semibold text-primary">Founder – Veda Ashrama Gurukulam, Puducherry</p>
+            <p className="mt-4 text-sm leading-relaxed text-foreground/85">
+              Veda Samrat Brahmashri Raja Sastrigal is the founder of Veda Ashrama Gurukulam and Sri Sai Shankara Bhakta Sabha
+              Educational and Go Samrakshana Seva Trust. Based in Karuvadikuppam, Puducherry, he is dedicated to the
+              preservation and development of Vedic knowledge, Sanātana Dharma, Agama traditions, Go Samrakshana and
+              traditional education.
             </p>
           </div>
 
-          {/* Managing Trustees */}
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="surface-card rounded-xl border border-border p-8 shadow-sm">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Founder & Managing Trustee</span>
-              <h3 className="mt-2 font-display text-2xl text-maroon">Veda Samrat Brahmashri Raja Sastrigal</h3>
-              <p className="mt-2 text-sm text-primary font-medium">Managing Trustee: Smt. Kalyani</p>
-              <p className="mt-3 text-sm leading-relaxed text-foreground/80">
-                Founder of Veda Ashrama Gurukulam and Sri Sai Shankara Bhakta Sabha. Leading the daily spiritual activities,
-                Vedic preservation, Agama traditions, and Go Samrakshanam in Karuvadikuppam, Puducherry.
-              </p>
-            </div>
-
-            <div className="surface-card rounded-xl border border-border p-8 shadow-sm">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Managing Trustee</span>
-              <h3 className="mt-2 font-display text-2xl text-maroon">Brahma Sri G. Rama Ghanapatigal</h3>
-              <p className="mt-3 text-sm leading-relaxed text-foreground/80">
-                Eminent Salakshana Ghanapati and spiritual guide steering the educational curriculum, traditional Vedic
-                disciplines, and administrative duties of the Trust.
-              </p>
-            </div>
+          {/* Managing Trustee */}
+          <div className="surface-card rounded-2xl border border-border p-8 shadow-sm">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Managing Trustee</span>
+            <h3 className="mt-2 font-display text-2xl text-maroon">Smt. Kalyani</h3>
+            <p className="mt-3 text-sm leading-relaxed text-foreground/85">
+              Smt. Kalyani serves as a Managing Trustee and works alongside Brahmashri Raja Sastrigal in guiding and
+              developing the Gurukulam's educational, spiritual and service-oriented activities.
+            </p>
           </div>
 
           {/* Trustees */}
-          <div className="surface-card rounded-xl border border-border p-8 shadow-sm">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Board of Trustees</span>
-            <h3 className="mt-2 font-display text-xl text-maroon">Trustees</h3>
-            <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                "Sri M. Swaminatha Sarma",
-                "Sri V. Sriram Ghanapatigal",
-                "Sri N. S. Sugavanam",
-                "Sri J. Balasubramanian",
-                "Sri P. K. Rajaraman",
-                "Sri Arunachalam (Trustee)",
-                "Smt. Subbulakshmi (Trustee)",
-              ].map((name) => (
-                <div key={name} className="flex items-center gap-3 rounded-lg border border-border/60 bg-muted/40 p-4">
-                  <span className="h-2 w-2 shrink-0 rotate-45 bg-gold" />
-                  <span className="text-sm font-medium text-foreground">{name}</span>
+          <div className="surface-card rounded-2xl border border-border p-8 shadow-sm">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Trustees</span>
+            <div className="mt-6 grid gap-6 sm:grid-cols-2">
+              <div className="rounded-xl border border-border/60 bg-muted/30 p-5">
+                <h4 className="font-display text-xl text-maroon">Sri Arunachalam</h4>
+                <p className="text-xs font-semibold uppercase tracking-wider text-primary">Trustee</p>
+              </div>
+
+              <div className="rounded-xl border border-border/60 bg-muted/30 p-5">
+                <h4 className="font-display text-xl text-maroon">Smt. Subbulakshmi</h4>
+                <p className="text-xs font-semibold uppercase tracking-wider text-primary">Trustee</p>
+              </div>
+            </div>
+            <p className="mt-6 text-sm leading-relaxed text-foreground/85">
+              Sri Arunachalam and Smt. Subbulakshmi have played an important role in supporting the Vedic institution and its
+              educational mission.
+            </p>
+          </div>
+
+          {/* Vedic Teachers & Scholars */}
+          <div className="surface-card rounded-2xl border border-border p-8 shadow-sm">
+            <div className="flex items-center gap-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gold/15 text-maroon">
+                <GraduationCap className="h-5 w-5" />
+              </div>
+              <div>
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Scholars &amp; Adhyapakas</span>
+                <h3 className="font-display text-2xl text-maroon">Vedic Teachers &amp; Scholars</h3>
+              </div>
+            </div>
+
+            <p className="mt-4 text-sm leading-relaxed text-foreground/85">
+              The Gurukulam is supported by dedicated teachers and scholars who contribute to the traditional education
+              and training of its students:
+            </p>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+              {TEACHERS.map((t) => (
+                <div key={t.name} className="flex items-center justify-between rounded-xl border border-border/60 bg-card p-4 shadow-2xs">
+                  <span className="font-semibold text-foreground">{t.name}</span>
+                  <span className="text-xs font-medium text-primary">{t.role}</span>
                 </div>
               ))}
             </div>
+
+            <p className="mt-6 text-sm leading-relaxed text-foreground/85">
+              Together, the trustees, teachers and scholars work towards preserving a living Vedic tradition and passing
+              Vedic wisdom, discipline, values, culture and spiritual knowledge to the next generation.
+            </p>
           </div>
 
-          {/* Patrons & Auditors */}
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="surface-card rounded-xl border border-border p-8 shadow-sm">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Patrons</span>
-              <h3 className="mt-2 font-display text-xl text-maroon">Distinguished Patrons</h3>
-              <ul className="mt-4 space-y-3 text-sm text-foreground/85">
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-                  <span className="font-semibold text-foreground">Sri N. Panchapakesan FCA</span>
-                </li>
-                <li className="flex items-center gap-2">
-                  <span className="h-1.5 w-1.5 rounded-full bg-gold" />
-                  <span className="font-semibold text-foreground">Sri K. R. Paramahamsa I.A.S (Retd.)</span>
-                </li>
-              </ul>
-            </div>
-
-            <div className="surface-card rounded-xl border border-border p-8 shadow-sm">
-              <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Auditors</span>
-              <h3 className="mt-2 font-display text-xl text-maroon">Statutory Auditors</h3>
-              <p className="mt-4 text-sm font-medium text-foreground">
-                Sri Venkatraman, Mahalingam Associates &amp; Co.
-              </p>
-              <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-                Chartered Accountants ensuring financial transparency, legal compliance, and regular auditing.
-              </p>
-            </div>
+          {/* Closing Universal Prayer */}
+          <div className="mandala-bg rounded-2xl border border-border p-8 text-center">
+            <h4 className="font-display text-2xl font-bold text-maroon">Loka Samastha Sukhino Bhavantu</h4>
+            <p className="mt-2 text-sm italic text-foreground/80">May all beings in the world be happy and peaceful.</p>
           </div>
         </div>
       </section>

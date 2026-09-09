@@ -32,6 +32,7 @@ import { Route as SabhaRouteImport } from './routes/sabha'
 import { Route as SabhaPatronsTrusteesRouteImport } from './routes/sabha-patrons-trustees'
 import { Route as SourcesOfSustenanceRouteImport } from './routes/sources-of-sustenance'
 import { Route as TermsRouteImport } from './routes/terms'
+import { Route as VedaAshramamRouteImport } from './routes/veda-ashramam'
 import { Route as VedaPatasalaRouteImport } from './routes/veda-patasala'
 import { Route as VedaVaniRouteImport } from './routes/veda-vani'
 import { Route as VedabhavanRouteImport } from './routes/vedabhavan'
@@ -154,6 +155,11 @@ const TermsRoute = TermsRouteImport.update({
   path: '/terms',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VedaAshramamRoute = VedaAshramamRouteImport.update({
+  id: '/veda-ashramam',
+  path: '/veda-ashramam',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const VedaPatasalaRoute = VedaPatasalaRouteImport.update({
   id: '/veda-patasala',
   path: '/veda-patasala',
@@ -204,6 +210,7 @@ export interface FileRoutesByFullPath {
   '/sabha-patrons-trustees': typeof SabhaPatronsTrusteesRoute
   '/sources-of-sustenance': typeof SourcesOfSustenanceRoute
   '/terms': typeof TermsRoute
+  '/veda-ashramam': typeof VedaAshramamRoute
   '/veda-patasala': typeof VedaPatasalaRoute
   '/veda-vani': typeof VedaVaniRoute
   '/vedabhavan': typeof VedabhavanRoute
@@ -234,6 +241,7 @@ export interface FileRoutesByTo {
   '/sabha-patrons-trustees': typeof SabhaPatronsTrusteesRoute
   '/sources-of-sustenance': typeof SourcesOfSustenanceRoute
   '/terms': typeof TermsRoute
+  '/veda-ashramam': typeof VedaAshramamRoute
   '/veda-patasala': typeof VedaPatasalaRoute
   '/veda-vani': typeof VedaVaniRoute
   '/vedabhavan': typeof VedabhavanRoute
@@ -265,6 +273,7 @@ export interface FileRoutesById {
   '/sabha-patrons-trustees': typeof SabhaPatronsTrusteesRoute
   '/sources-of-sustenance': typeof SourcesOfSustenanceRoute
   '/terms': typeof TermsRoute
+  '/veda-ashramam': typeof VedaAshramamRoute
   '/veda-patasala': typeof VedaPatasalaRoute
   '/veda-vani': typeof VedaVaniRoute
   '/vedabhavan': typeof VedabhavanRoute
@@ -297,6 +306,7 @@ export interface FileRouteTypes {
     | '/sabha-patrons-trustees'
     | '/sources-of-sustenance'
     | '/terms'
+    | '/veda-ashramam'
     | '/veda-patasala'
     | '/veda-vani'
     | '/vedabhavan'
@@ -327,6 +337,7 @@ export interface FileRouteTypes {
     | '/sabha-patrons-trustees'
     | '/sources-of-sustenance'
     | '/terms'
+    | '/veda-ashramam'
     | '/veda-patasala'
     | '/veda-vani'
     | '/vedabhavan'
@@ -357,6 +368,7 @@ export interface FileRouteTypes {
     | '/sabha-patrons-trustees'
     | '/sources-of-sustenance'
     | '/terms'
+    | '/veda-ashramam'
     | '/veda-patasala'
     | '/veda-vani'
     | '/vedabhavan'
@@ -388,6 +400,7 @@ export interface RootRouteChildren {
   SabhaPatronsTrusteesRoute: typeof SabhaPatronsTrusteesRoute
   SourcesOfSustenanceRoute: typeof SourcesOfSustenanceRoute
   TermsRoute: typeof TermsRoute
+  VedaAshramamRoute: typeof VedaAshramamRoute
   VedaPatasalaRoute: typeof VedaPatasalaRoute
   VedaVaniRoute: typeof VedaVaniRoute
   VedabhavanRoute: typeof VedabhavanRoute
@@ -558,6 +571,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TermsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/veda-ashramam': {
+      id: '/veda-ashramam'
+      path: '/veda-ashramam'
+      fullPath: '/veda-ashramam'
+      preLoaderRoute: typeof VedaAshramamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/veda-patasala': {
       id: '/veda-patasala'
       path: '/veda-patasala'
@@ -620,6 +640,7 @@ const rootRouteChildren: RootRouteChildren = {
   SabhaPatronsTrusteesRoute: SabhaPatronsTrusteesRoute,
   SourcesOfSustenanceRoute: SourcesOfSustenanceRoute,
   TermsRoute: TermsRoute,
+  VedaAshramamRoute: VedaAshramamRoute,
   VedaPatasalaRoute: VedaPatasalaRoute,
   VedaVaniRoute: VedaVaniRoute,
   VedabhavanRoute: VedabhavanRoute,

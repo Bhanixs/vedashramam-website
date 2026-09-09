@@ -26,7 +26,7 @@ export function SiteFooter() {
             {[
               { label: "About Sabha", to: "/about-sabha" },
               { label: "Sabha Patrons & Trustees", to: "/sabha-patrons-trustees" },
-              { label: "Vedabhavan", to: "/vedabhavan" },
+              { label: "Veda Ashramam", to: "/veda-ashramam" },
               { label: "Activities & Events", to: "/activities" },
               { label: "Donate for Sevas/Annadanam", to: "/donate-for-sevas" },
               { label: "Panchangam", to: "/panchangam" },
