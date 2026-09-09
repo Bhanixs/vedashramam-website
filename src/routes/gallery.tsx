@@ -71,8 +71,56 @@ const GALLERY_IMAGES = [
   img23,
 ];
 
+const GALLERY_MAP: Record<string, string> = {
+  "/src/assets/Gallery/image01.jpg": img01,
+  "/src/assets/Gallery/image02.jpg": img02,
+  "/src/assets/Gallery/image03.jpg": img03,
+  "/src/assets/Gallery/image04.jpg": img04,
+  "/src/assets/Gallery/image05.jpg": img05,
+  "/src/assets/Gallery/image06.jpg": img06,
+  "/src/assets/Gallery/image07.jpg": img07,
+  "/src/assets/Gallery/image08.jpg": img08,
+  "/src/assets/Gallery/image09.jpg": img09,
+  "/src/assets/Gallery/image10.jpg": img10,
+  "/src/assets/Gallery/image11.jpg": img11,
+  "/src/assets/Gallery/image12.jpg": img12,
+  "/src/assets/Gallery/image13.jpg": img13,
+  "/src/assets/Gallery/image14.jpg": img14,
+  "/src/assets/Gallery/image15.jpg": img15,
+  "/src/assets/Gallery/image16.jpg": img16,
+  "/src/assets/Gallery/image17.jpg": img17,
+  "/src/assets/Gallery/image18.jpg": img18,
+  "/src/assets/Gallery/image19.jpg": img19,
+  "/src/assets/Gallery/image20.jpg": img20,
+  "/src/assets/Gallery/image21.jpg": img21,
+  "/src/assets/Gallery/image22.jpg": img22,
+  "/src/assets/Gallery/image23.jpg": img23,
+};
+
+function resolveGalleryUrl(url: string): string {
+  if (!url) return "";
+  return GALLERY_MAP[url] || url;
+}
+
 function GalleryPage() {
   const [lightboxIndex, setLightboxIndex] = useState<number | null>(null);
+  const [allImages, setAllImages] = useState<string[]>(GALLERY_IMAGES);
+
+  useEffect(() => {
+    fetch("/api/admin?action=gallery")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          const mapped = data
+            .filter((item: any) => item.is_published !== false && Boolean(item.image_url))
+            .map((item: any) => resolveGalleryUrl(item.image_url));
+          if (mapped.length > 0) {
+            setAllImages(mapped);
+          }
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   // Keyboard navigation for lightbox
   useEffect(() => {
@@ -80,9 +128,9 @@ function GalleryPage() {
 
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft") {
-        setLightboxIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : GALLERY_IMAGES.length - 1));
+        setLightboxIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : allImages.length - 1));
       } else if (e.key === "ArrowRight") {
-        setLightboxIndex((prev) => (prev !== null && prev < GALLERY_IMAGES.length - 1 ? prev + 1 : 0));
+        setLightboxIndex((prev) => (prev !== null && prev < allImages.length - 1 ? prev + 1 : 0));
       } else if (e.key === "Escape") {
         setLightboxIndex(null);
       }
@@ -90,7 +138,7 @@ function GalleryPage() {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [lightboxIndex]);
+  }, [lightboxIndex, allImages.length]);
 
   // Lock background scroll when lightbox is active
   useEffect(() => {
@@ -116,7 +164,7 @@ function GalleryPage() {
         <SectionHeading title="Moments at Vedashramam" eyebrow="Photo Gallery" />
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {GALLERY_IMAGES.map((img, i) => (
+          {allImages.map((img, i) => (
             <div
               key={i}
               onClick={() => setLightboxIndex(i)}
@@ -159,14 +207,14 @@ function GalleryPage() {
 
             {/* Counter */}
             <div className="absolute -top-10 left-0 text-xs font-semibold text-white/80">
-              {lightboxIndex + 1} / {GALLERY_IMAGES.length}
+              {lightboxIndex + 1} / {allImages.length}
             </div>
 
             {/* Previous button */}
             <button
               type="button"
               onClick={() =>
-                setLightboxIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : GALLERY_IMAGES.length - 1))
+                setLightboxIndex((prev) => (prev !== null && prev > 0 ? prev - 1 : allImages.length - 1))
               }
               className="absolute left-2 sm:-left-14 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2.5 text-white backdrop-blur-md transition-all hover:bg-primary hover:scale-110"
               aria-label="Previous photo"
@@ -176,7 +224,7 @@ function GalleryPage() {
 
             {/* Lightbox Image */}
             <img
-              src={GALLERY_IMAGES[lightboxIndex]}
+              src={allImages[lightboxIndex]}
               alt={`Vedashramam photo ${lightboxIndex + 1}`}
               className="max-h-[82vh] max-w-full rounded-lg object-contain shadow-2xl"
             />
@@ -185,7 +233,7 @@ function GalleryPage() {
             <button
               type="button"
               onClick={() =>
-                setLightboxIndex((prev) => (prev !== null && prev < GALLERY_IMAGES.length - 1 ? prev + 1 : 0))
+                setLightboxIndex((prev) => (prev !== null && prev < allImages.length - 1 ? prev + 1 : 0))
               }
               className="absolute right-2 sm:-right-14 top-1/2 -translate-y-1/2 rounded-full bg-black/60 p-2.5 text-white backdrop-blur-md transition-all hover:bg-primary hover:scale-110"
               aria-label="Next photo"

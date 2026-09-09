@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageBanner, SectionHeading, Sloka } from "@/components/site/PageShell";
 import heroTemple from "@/assets/hero-temple.jpg";
 import { Building2, Trees, Sun, HeartHandshake, CheckCircle2, ShieldCheck, Download, Sparkles } from "lucide-react";
+import { useTrustSettings } from "@/lib/use-trust-settings";
 
 export const Route = createFileRoute("/appeal-for-building-construction")({
   head: () => ({
@@ -53,6 +54,8 @@ const SPONSORSHIP_SLABS = [
 ];
 
 function AppealBuildingConstructionPage() {
+  const trust = useTrustSettings();
+
   return (
     <PageShell transparentHeader>
       <PageBanner
@@ -180,8 +183,7 @@ function AppealBuildingConstructionPage() {
         <div className="mx-auto mt-16 max-w-3xl rounded-xl border border-border bg-muted/40 p-6 text-center text-xs text-foreground/80 leading-relaxed">
           <p>
             Contributions may be made by Cheque/DD or direct bank transfer in favour of{" "}
-            <strong className="text-maroon">Sri sai Sankara baktha sabha</strong> or{" "}
-            <strong className="text-maroon">Veda Ashrama Gurukulam</strong> (Bank: <strong>Indian Overseas Bank, Lawspet Branch</strong>, A/c: <strong>212101000031000</strong>, IFSC: <strong>IOBA0002121</strong>, UPI: <strong>9842327791@IOB</strong>). Registered Address: <strong>151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008</strong>. 80G tax exemption certificates (80G Unique Registration No.: <strong>AAMTS6931LF20221</strong>, PAN: <strong>AAMTS6931L</strong>) will be promptly issued.
+            <strong className="text-maroon">{trust.trustName}</strong> (Bank: <strong>{trust.bankName}, {trust.bankBranch}</strong>, A/c: <strong>{trust.accountNumber}</strong>, IFSC: <strong>{trust.ifscCode}</strong>, UPI: <strong>{trust.upiId}</strong>). Registered Address: <strong>{trust.address}</strong>. 80G tax exemption certificates (80G Unique Registration No.: <strong>{trust.reg80g}</strong>, PAN: <strong>{trust.pan}</strong>) will be promptly issued.
           </p>
         </div>
       </section>

@@ -4,6 +4,7 @@ import { PageShell, PageBanner, SectionHeading, Sloka } from "@/components/site/
 import heroTemple from "@/assets/hero-temple.jpg";
 import { ChevronDown, CreditCard, ShieldCheck, Heart, Building, Check, Gift, Mail, Phone, FileText, ExternalLink } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useTrustSettings } from "@/lib/use-trust-settings";
 
 export const Route = createFileRoute("/ways-to-support")({
   head: () => ({
@@ -25,6 +26,7 @@ export const Route = createFileRoute("/ways-to-support")({
 });
 
 function WaysToSupportPage() {
+  const trust = useTrustSettings();
   const [openSection, setOpenSection] = useState<string | null>("corpus");
 
   const toggle = (id: string) => {
@@ -228,28 +230,28 @@ function WaysToSupportPage() {
                 <div className="mt-3 space-y-2 rounded-lg border border-border bg-card p-4 text-xs">
                   <div>
                     <span className="text-muted-foreground">Account Name: </span>
-                    <strong className="text-maroon">Sri sai Sankara baktha sabha</strong>
+                    <strong className="text-maroon">{trust.trustName}</strong>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Bank: </span>
-                    <strong className="text-foreground">Indian Overseas Bank, Lawspet Branch, Puducherry - 605 008</strong>
+                    <strong className="text-foreground">{trust.bankName}, {trust.bankBranch}</strong>
                   </div>
                   <div>
                     <span className="text-muted-foreground">Account Number: </span>
-                    <span className="font-mono font-bold text-foreground">212101000031000</span>
+                    <span className="font-mono font-bold text-foreground">{trust.accountNumber}</span>
                     <span className="ml-3 text-muted-foreground">Branch Code: </span>
                     <span className="font-mono font-semibold text-foreground">2121</span>
                   </div>
                   <div>
                     <span className="text-muted-foreground">IFSC Code: </span>
-                    <span className="font-mono font-bold text-foreground">IOBA0002121</span>
+                    <span className="font-mono font-bold text-foreground">{trust.ifscCode}</span>
                     <span className="ml-3 text-muted-foreground">UPI ID: </span>
-                    <span className="font-mono font-bold text-primary">9842327791@IOB</span>
+                    <span className="font-mono font-bold text-primary">{trust.upiId}</span>
                   </div>
                   <div className="border-t border-border/60 pt-2">
                     <span className="text-muted-foreground">Postal Address for Cheques / DD: </span>
                     <span className="font-medium text-foreground">
-                      The Managing Trustee, 151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008
+                      The Managing Trustee, {trust.address}
                     </span>
                   </div>
                 </div>
@@ -397,9 +399,9 @@ function WaysToSupportPage() {
               <span className="text-gold font-bold">•</span>
               <span>
                 <strong>80G Tax Exemption &amp; PAN:</strong> Income tax exemption under Section 80G is available under
-                80G Unique Registration No.: <strong>AAMTS6931LF20221</strong> (PAN: <strong>AAMTS6931L</strong>),
+                80G Unique Registration No.: <strong>{trust.reg80g}</strong> (PAN: <strong>{trust.pan}</strong>),
                 provisional approval date 03-08-2022 for the period 03-08-2022 to AY 2025-2026. Trust:{" "}
-                <strong>Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust</strong>. Donations above ₹2,000/- must be made in non-cash modes to qualify.
+                <strong>{trust.trustName}</strong>. Donations above ₹2,000/- must be made in non-cash modes to qualify.
               </span>
             </li>
           </ul>

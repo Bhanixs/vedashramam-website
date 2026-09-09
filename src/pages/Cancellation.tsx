@@ -2,8 +2,10 @@ import { PageShell, PageBanner, SectionHeading, Sloka } from "@/components/site/
 import heroHomam from "@/assets/hero-homam.jpg";
 import { Heart, RefreshCw, Clock, LifeBuoy } from "lucide-react";
 import { Link } from "@tanstack/react-router";
+import { useTrustSettings } from "@/lib/use-trust-settings";
 
 export function CancellationPage() {
+  const trust = useTrustSettings();
   return (
     <PageShell transparentHeader>
       <PageBanner
@@ -114,9 +116,9 @@ export function CancellationPage() {
                 For any queries regarding donations, transaction verification, or cancellation requests, please contact our trust administration:
               </p>
               <div className="mandala-bg rounded-lg border border-border p-6 text-center space-y-3">
-                <p className="font-display text-lg text-maroon">Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust</p>
-                <p className="text-sm text-foreground/80">151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008</p>
-                <p className="text-xs text-muted-foreground">Contact / UPI: +91 98423 27791 (UPI: 9842327791@IOB)</p>
+                <p className="font-display text-lg text-maroon">{trust.trustName}</p>
+                <p className="text-sm text-foreground/80">{trust.address}</p>
+                <p className="text-xs text-muted-foreground">Contact / UPI: {trust.phone} (UPI: {trust.upiId})</p>
                 <div className="pt-2">
                   <Link
                     to="/contact"

@@ -174,27 +174,106 @@ const EVENTS: EventItem[] = [
   },
 ];
 
+const ASSET_MAP: Record<string, string> = {
+  "/src/assets/Sankara Jayanthi/sankara_jayanthi01.jpeg": sankara01,
+  "/src/assets/Sankara Jayanthi/sankara_jayanthi02.jpeg": sankara02,
+  "/src/assets/Sankara Jayanthi/sankara_jayanthi03.jpeg": sankara03,
+  "/src/assets/Sankara Jayanthi/sankara_jayanthi04.jpeg": sankara04,
+  "/src/assets/Sankara Jayanthi/sankara_jayanthi05.jpeg": sankara05,
+  "/src/assets/Sankara Jayanthi/sankara_jayanthi06.jpeg": sankara06,
+  "/src/assets/Sankara Jayanthi/sankara_jayanthi07.jpeg": sankara07,
+  "/src/assets/Sankara Jayanthi/sankara_jayanthi08.jpeg": sankara08,
+  "/src/assets/Sankara Jayanthi/sankara_jayanthi_video.mp4": sankaraVideo,
+
+  "/src/assets/Sankaranti/sankaranti01.jpg": sankaranti01,
+  "/src/assets/Sankaranti/sankaranti02.jpg": sankaranti02,
+  "/src/assets/Sankaranti/sankaranti03.jpg": sankaranti03,
+  "/src/assets/Sankaranti/sankaranti04.jpg": sankaranti04,
+  "/src/assets/Sankaranti/sankaranti05.jpg": sankaranti05,
+  "/src/assets/Sankaranti/sankaranti06.jpg": sankaranti06,
+  "/src/assets/Sankaranti/sankaranti07.jpg": sankaranti07,
+  "/src/assets/Sankaranti/sankaranti08.jpg": sankaranti08,
+  "/src/assets/Sankaranti/sankaranti09.jpg": sankaranti09,
+
+  "/src/assets/Krishna_Jayanthi/krishna_jayanthi01.jpeg": krishna01,
+  "/src/assets/Krishna_Jayanthi/krishna_jayanthi02.jpeg": krishna02,
+  "/src/assets/Krishna_Jayanthi/krishna_jayanthi03.jpeg": krishna03,
+
+  "/src/assets/Annadanam/annadanam01.jpeg": annadanam01,
+  "/src/assets/Annadanam/annadanam02.jpeg": annadanam02,
+  "/src/assets/Annadanam/annadanam03.jpeg": annadanam03,
+
+  "/src/assets/Ammavasai Tharpanam/ammavasai_tharpanam01.jpeg": ammavasai01,
+
+  "/src/assets/Singeri Madam Swamigal/singeri_swamigal01.jpeg": singeriThumb,
+  "/src/assets/Singeri Madam Swamigal/Singeri Swamigal video01.mp4": singeriVideo,
+};
+
+function resolveMediaUrl(url: string): string {
+  if (!url) return "";
+  return ASSET_MAP[url] || url;
+}
+
 function ActivitiesPage() {
   const [selectedEvent, setSelectedEvent] = useState<EventItem | null>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  // Keyboard navigation for the carousel modal
+  // Dynamic activities from API/admin, falling back to static EVENTS
+  const [allEvents, setAllEvents] = useState<EventItem[]>(EVENTS);
+
   useEffect(() => {
-    if (!selectedEvent) return;
+    fetch("/api/admin?action=activities")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => {
+        if (Array.isArray(data) && data.length > 0) {
+          const mapped: EventItem[] = data
+            .filter((d: any) => d.is_published !== false)
+            .map((d: any) => {
+              const defaultEvent = EVENTS.find(
+                (e) => e.id === d.id || e.title.toLowerCase() === d.title.toLowerCase()
+              );
+              const photos: string[] = Array.isArray(d.photos) ? d.photos : [];
+              const videos: string[] = Array.isArray(d.videos) ? d.videos : [];
 
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft") {
-        setCurrentIndex((prev) => (prev > 0 ? prev - 1 : selectedEvent.media.length - 1));
-      } else if (e.key === "ArrowRight") {
-        setCurrentIndex((prev) => (prev < selectedEvent.media.length - 1 ? prev + 1 : 0));
-      } else if (e.key === "Escape") {
-        setSelectedEvent(null);
-      }
-    };
+              let mediaList: MediaItem[] = [
+                ...photos.map((p, idx) => ({
+                  type: "image" as const,
+                  url: resolveMediaUrl(p),
+                  title: `${d.title} Photo ${idx + 1}`,
+                })),
+                ...videos.map((v, idx) => ({
+                  type: "video" as const,
+                  url: resolveMediaUrl(v),
+                  title: `${d.title} Video ${idx + 1}`,
+                  poster: photos[0] ? resolveMediaUrl(photos[0]) : defaultEvent?.cover,
+                })),
+              ];
 
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedEvent]);
+              if (mediaList.length === 0 && defaultEvent) {
+                mediaList = defaultEvent.media;
+              }
+
+              const cover = photos[0]
+                ? resolveMediaUrl(photos[0])
+                : (defaultEvent?.cover || heroHomam);
+
+              return {
+                id: d.id,
+                title: d.title,
+                cover,
+                body: d.description || defaultEvent?.body || "",
+                note: d.event_date || d.category || defaultEvent?.note || "",
+                media: mediaList,
+              };
+            });
+
+          if (mapped.length > 0) {
+            setAllEvents(mapped);
+          }
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   // Prevent background scroll when modal is open
   useEffect(() => {
@@ -231,7 +310,7 @@ function ActivitiesPage() {
 
         {/* Celebrations Grid */}
         <div className="mt-12 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {EVENTS.map((e) => {
+          {allEvents.map((e) => {
             const photoCount = e.media.filter((m) => m.type === "image").length;
             const videoCount = e.media.filter((m) => m.type === "video").length;
 

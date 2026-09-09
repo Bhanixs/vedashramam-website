@@ -3,6 +3,8 @@ import { useState } from "react";
 import { PageShell, PageBanner, SectionHeading, Sloka } from "@/components/site/PageShell";
 import heroTemple from "@/assets/hero-temple.jpg";
 import { CreditCard, ArrowRight, ShieldCheck, Heart, Building2, CheckCircle2, X } from "lucide-react";
+import { useTrustSettings } from "@/lib/use-trust-settings";
+import { TRUST_DETAILS } from "@/lib/trust-details";
 
 export const Route = createFileRoute("/donate")({
   head: () => ({
@@ -64,6 +66,7 @@ const DONATION_STREAMS: DonationStream[] = [
 ];
 
 function DonatePage() {
+  const trust = useTrustSettings();
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedPurpose, setSelectedPurpose] = useState<string>("Sankara Jayanthi & Nithya Sevas");
   const [amount, setAmount] = useState<string>("5000");
@@ -72,15 +75,36 @@ function DonatePage() {
   const [donorPan, setDonorPan] = useState<string>("");
   const [submitted, setSubmitted] = useState(false);
 
+  const [submitting, setSubmitting] = useState(false);
+
   const openDonateModal = (purpose: string) => {
     setSelectedPurpose(purpose);
     setSubmitted(false);
     setModalOpen(true);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    try {
+      await fetch("/api/admin?action=donate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          donor_name: donorName,
+          donor_phone: donorPhone,
+          donor_pan: donorPan,
+          amount: Number(amount) || 0,
+          purpose: selectedPurpose,
+          payment_method: "Bank Transfer / UPI",
+        }),
+      });
+    } catch {
+      // Continue to show confirmation message even if offline
+    } finally {
+      setSubmitting(false);
+      setSubmitted(true);
+    }
   };
 
   return (
@@ -156,22 +180,22 @@ function DonatePage() {
             <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
               <span className="text-muted-foreground">Trust / Establishment Name:</span>
               <span className="font-semibold text-foreground text-right sm:max-w-md">
-                Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust
+                {trust.trustName}
               </span>
             </div>
             <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
               <span className="text-muted-foreground">Account Name / In favour of:</span>
-              <span className="font-bold text-maroon">Sri sai Sankara baktha sabha</span>
+              <span className="font-bold text-maroon">{TRUST_DETAILS.banking.accountName}</span>
             </div>
             <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
               <span className="text-muted-foreground">Bank &amp; Branch:</span>
               <span className="font-semibold text-foreground">
-                Indian Overseas Bank, Lawspet Branch, Puducherry - 605 008
+                {trust.bankName}, {trust.bankBranch}
               </span>
             </div>
             <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
               <span className="text-muted-foreground">Account Number:</span>
-              <span className="font-mono font-bold text-foreground">212101000031000</span>
+              <span className="font-mono font-bold text-foreground">{trust.accountNumber}</span>
             </div>
             <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
               <span className="text-muted-foreground">Branch Code:</span>
@@ -179,19 +203,19 @@ function DonatePage() {
             </div>
             <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
               <span className="text-muted-foreground">IFSC Code:</span>
-              <span className="font-mono font-bold text-foreground">IOBA0002121</span>
+              <span className="font-mono font-bold text-foreground">{trust.ifscCode}</span>
             </div>
             <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
               <span className="text-muted-foreground">UPI ID:</span>
-              <span className="font-mono font-bold text-primary">9842327791@IOB</span>
+              <span className="font-mono font-bold text-primary">{trust.upiId}</span>
             </div>
             <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
               <span className="text-muted-foreground">PAN:</span>
-              <span className="font-mono font-bold text-foreground">AAMTS6931L</span>
+              <span className="font-mono font-bold text-foreground">{trust.pan}</span>
             </div>
             <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
               <span className="text-muted-foreground">80G Unique Registration No.:</span>
-              <span className="font-mono font-bold text-primary">AAMTS6931LF20221</span>
+              <span className="font-mono font-bold text-primary">{trust.reg80g}</span>
             </div>
             <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
               <span className="text-muted-foreground">80G Approval Period:</span>
@@ -200,7 +224,7 @@ function DonatePage() {
             <div className="flex flex-col py-2.5 sm:flex-row sm:justify-between">
               <span className="text-muted-foreground">Registered Address:</span>
               <span className="font-semibold text-foreground text-right sm:max-w-xs">
-                151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008
+                {trust.address}
               </span>
             </div>
           </div>
@@ -331,9 +355,10 @@ function DonatePage() {
                 <div className="pt-2">
                   <button
                     type="submit"
-                    className="w-full rounded-md bg-primary py-3 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow transition-colors hover:bg-maroon"
+                    disabled={submitting}
+                    className="w-full rounded-md bg-primary py-3 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow transition-colors hover:bg-maroon disabled:opacity-60"
                   >
-                    Proceed with ₹{amount}
+                    {submitting ? "Registering..." : `Proceed with ₹${amount}`}
                   </button>
                 </div>
               </form>

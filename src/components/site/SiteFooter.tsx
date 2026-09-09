@@ -2,7 +2,12 @@ import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone } from "lucide-react";
 import logoMark from "@/assets/logo-mark.png";
 
+import { useTrustSettings } from "@/lib/use-trust-settings";
+import { TRUST_DETAILS } from "@/lib/trust-details";
+
 export function SiteFooter() {
+  const trust = useTrustSettings();
+
   return (
     <footer className="bg-maroon text-maroon-foreground">
       <div className="container-page grid gap-10 py-16 sm:grid-cols-2 lg:grid-cols-4">
@@ -12,8 +17,7 @@ export function SiteFooter() {
             <span className="font-display text-2xl">Vedashramam</span>
           </div>
           <p className="mt-4 text-xs leading-relaxed text-maroon-foreground/75">
-            Veda Ashrama Gurukulam and Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust —
-            Puducherry. Dedicated to Vedic education, Agama, Prayoga and Go Samrakshanam.
+            {trust.trustName} — Puducherry. Dedicated to Vedic education, Agama, Prayoga and Go Samrakshanam.
           </p>
           <p className="mt-5 font-display text-sm text-gold">
             लोकाः समस्ताः सुखिनो भवन्तु
@@ -69,15 +73,15 @@ export function SiteFooter() {
           <ul className="mt-4 space-y-3 text-xs text-maroon-foreground/80">
             <li className="flex gap-2.5">
               <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-              <span>151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry - 605008</span>
+              <span>{trust.address}</span>
             </li>
             <li className="flex gap-2.5">
               <Phone className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-              <span>+91 98423 27791 (UPI: 9842327791@IOB)</span>
+              <span>{trust.phone} (UPI: {trust.upiId})</span>
             </li>
             <li className="flex gap-2.5">
               <Mail className="mt-0.5 h-4 w-4 shrink-0 text-gold" />
-              <span>info@vedaashramam.example</span>
+              <span>{trust.email}</span>
             </li>
           </ul>
 
@@ -97,7 +101,7 @@ export function SiteFooter() {
           <div>
             <p>© {new Date().getFullYear()} Vedashramam. All rights reserved.</p>
             <p className="mt-0.5 text-[0.7rem] text-gold/80">
-              PAN: AAMTS6931L | 80G Unique Regn No: AAMTS6931LF20221 (03-08-2022 to AY 2025-2026)
+              PAN: {trust.pan} | 80G Unique Regn No: {trust.reg80g} ({TRUST_DETAILS.approval80G.validityPeriod})
             </p>
           </div>
           <div className="flex gap-5">

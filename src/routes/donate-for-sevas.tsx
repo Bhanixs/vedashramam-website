@@ -2,6 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageBanner, SectionHeading, Sloka } from "@/components/site/PageShell";
 import heroTemple from "@/assets/hero-temple.jpg";
 import { HeartHandshake, CheckCircle2, ShieldCheck, CreditCard, Gift, Building } from "lucide-react";
+import { useTrustSettings } from "@/lib/use-trust-settings";
 
 export const Route = createFileRoute("/donate-for-sevas")({
   head: () => ({
@@ -23,6 +24,8 @@ export const Route = createFileRoute("/donate-for-sevas")({
 });
 
 function DonateForSevasPage() {
+  const trust = useTrustSettings();
+
   return (
     <PageShell transparentHeader>
       <PageBanner
@@ -107,12 +110,12 @@ function DonateForSevasPage() {
             </div>
             <p className="mt-3 text-sm leading-relaxed text-foreground/75">
               Cheques or Demand Drafts drawn in favor of{" "}
-              <strong className="text-maroon">Sri sai Sankara baktha sabha</strong> or{" "}
+              <strong className="text-maroon">{trust.trustName}</strong> or{" "}
               <strong className="text-maroon">Veda Ashrama Gurukulam</strong> may be sent to our registered address:{" "}
-              <strong>151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008</strong>.
-              For direct bank transfer: <strong>Indian Overseas Bank, Lawspet Branch</strong>, A/c:{" "}
-              <strong>212101000031000</strong>, IFSC: <strong>IOBA0002121</strong>, UPI:{" "}
-              <strong>9842327791@IOB</strong>.
+              <strong>{trust.address}</strong>.
+              For direct bank transfer: <strong>{trust.bankName}, {trust.bankBranch}</strong>, A/c:{" "}
+              <strong>{trust.accountNumber}</strong>, IFSC: <strong>{trust.ifscCode}</strong>, UPI:{" "}
+              <strong>{trust.upiId}</strong>.
             </p>
           </div>
 
@@ -130,8 +133,8 @@ function DonateForSevasPage() {
           </div>
         </div>
 
-        {/* Note to Donors & 80G Info */}
-        <div className="mx-auto mt-14 max-w-3xl rounded-xl border border-border bg-muted/30 p-8">
+        {/* Important Note to Donors / Statutory Info */}
+        <div className="surface-card mt-12 rounded-2xl border-2 border-gold/40 p-8 shadow-md">
           <div className="flex items-center gap-2 text-maroon">
             <ShieldCheck className="h-5 w-5 text-gold" />
             <h4 className="font-display text-xl">Important Note to Donors</h4>
@@ -163,8 +166,8 @@ function DonateForSevasPage() {
               <span className="text-gold font-bold">•</span>
               <span>
                 <strong>80G Tax Exemption &amp; PAN:</strong> Income tax exemption is available under 80G Unique Registration
-                No.: <strong>AAMTS6931LF20221</strong> (PAN: <strong>AAMTS6931L</strong>) for{" "}
-                <strong>Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust</strong>. Donations above ₹2,000/- must
+                No.: <strong>{trust.reg80g}</strong> (PAN: <strong>{trust.pan}</strong>) for{" "}
+                <strong>{trust.trustName}</strong>. Donations above ₹2,000/- must
                 be made in non-cash modes to qualify.
               </span>
             </li>

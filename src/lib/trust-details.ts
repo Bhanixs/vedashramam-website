@@ -5,6 +5,7 @@
 
 export const TRUST_DETAILS = {
   trustName: "Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust",
+  name: "Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust",
   shortName: "Veda Ashrama Gurukulam & Sabha",
   
   // Tax & Legal Disclosures (Form No. 10AC)
@@ -12,8 +13,14 @@ export const TRUST_DETAILS = {
   registration80G: "AAMTS6931LF20221",
   approvalDate80G: "03-08-2022",
   approvalPeriod80G: "03-08-2022 to AY 2025-2026",
+  approval80G: {
+    uniqueRegistrationNumber: "AAMTS6931LF20221",
+    approvalDate: "03-08-2022",
+    validityPeriod: "03-08-2022 to AY 2025-2026",
+  },
   
   // Official Registered Address (Form No. 10AC)
+  registeredAddress: "151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008",
   address: {
     street: "151, Edayanchavadi Road, OM Sakthi Nagar",
     locality: "Lawspet S.O",
@@ -24,6 +31,15 @@ export const TRUST_DETAILS = {
   },
   
   // Verified Banking Particulars
+  banking: {
+    accountName: "Sri sai Sankara baktha sabha",
+    bankName: "Indian Overseas Bank",
+    branch: "Lawspet Branch, Puducherry - 605 008",
+    branchCode: "2121",
+    accountNumber: "212101000031000",
+    ifscCode: "IOBA0002121",
+    upiId: "9842327791@IOB",
+  },
   bank: {
     accountName: "Sri sai Sankara baktha sabha",
     bankName: "Indian Overseas Bank",
@@ -39,8 +55,10 @@ export const TRUST_DETAILS = {
     phone: "+91 98423 27791",
   },
   
+  officialPhone: "+91 98423 27790",
+  officialEmail: "info@vedaashramam.org",
   contact: {
-    phone: "+91 98423 27791",
-    email: "info@vedaashramam.example", // Marked placeholder until custom domain mailbox configured
+    phone: "+91 98423 27790",
+    email: "info@vedaashramam.org",
   },
 } as const;

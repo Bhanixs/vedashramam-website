@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { PageShell, PageBanner, SectionHeading } from "@/components/site/PageShell";
 import heroHomam from "@/assets/hero-homam.jpg";
+import { useTrustSettings } from "@/lib/use-trust-settings";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -30,7 +31,39 @@ const INTERESTS = [
 import { toast } from "sonner";
 
 function ContactPage() {
+  const [name, setName] = useState("");
+  const [contact, setContact] = useState("");
+  const [interest, setInterest] = useState("General Enquiry");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
   const [sent, setSent] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const res = await fetch("/api/admin?action=contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, contact, interest, message }),
+      });
+      if (res.ok) {
+        setSent(true);
+        setName("");
+        setContact("");
+        setMessage("");
+        toast.success("நன்றி! உங்கள் செய்தி பெறப்பட்டது / Thank you! Your enquiry has been received.");
+      } else {
+        toast.error("Failed to submit enquiry. Please try calling directly.");
+      }
+    } catch {
+      toast.error("Network error. Please try again or reach out via phone.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const trust = useTrustSettings();
 
   return (
     <PageShell transparentHeader>
@@ -45,17 +78,17 @@ function ContactPage() {
               {
                 icon: MapPin,
                 label: "Registered Address",
-                value: "151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008",
+                value: trust.address,
               },
               {
                 icon: Phone,
                 label: "Phone / UPI",
-                value: "+91 98423 27791 (UPI: 9842327791@IOB)",
+                value: `${trust.phone} (UPI: ${trust.upiId})`,
               },
               {
                 icon: Mail,
                 label: "Email",
-                value: "info@vedaashramam.example (Official contact)",
+                value: `${trust.email} (Official contact)`,
               },
             ].map((c) => (
               <div key={c.label} className="surface-card flex gap-4 p-6">
@@ -70,14 +103,7 @@ function ContactPage() {
             ))}
           </div>
 
-          <form
-            className="surface-card space-y-5 p-8"
-            onSubmit={(e) => {
-              e.preventDefault();
-              setSent(true);
-              toast.success("நன்றி! உங்கள் செய்தி பெறப்பட்டது / Thank you! Your enquiry has been received.");
-            }}
-          >
+          <form className="surface-card space-y-5 p-8" onSubmit={handleSubmit}>
             <div>
               <label htmlFor="name" className="text-xs uppercase tracking-[0.14em] text-muted-foreground">
                 Name
@@ -85,6 +111,9 @@ function ContactPage() {
               <input
                 id="name"
                 required
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Your full name"
                 className="mt-2 w-full rounded-md border border-input bg-background px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30"
               />
             </div>
@@ -95,6 +124,9 @@ function ContactPage() {
               <input
                 id="contact"
                 required
+                value={contact}
+                onChange={(e) => setContact(e.target.value)}
+                placeholder="Mobile number or email address"
                 className="mt-2 w-full rounded-md border border-input bg-background px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30"
               />
             </div>
@@ -104,10 +136,14 @@ function ContactPage() {
               </label>
               <select
                 id="interest"
+                value={interest}
+                onChange={(e) => setInterest(e.target.value)}
                 className="mt-2 w-full rounded-md border border-input bg-background px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30"
               >
                 {INTERESTS.map((o) => (
-                  <option key={o}>{o}</option>
+                  <option key={o} value={o}>
+                    {o}
+                  </option>
                 ))}
               </select>
             </div>
@@ -118,18 +154,23 @@ function ContactPage() {
               <textarea
                 id="message"
                 rows={5}
+                required
+                value={message}
+                onChange={(e) => setMessage(e.target.value)}
+                placeholder="Tell us about your enquiry or requirement..."
                 className="mt-2 w-full rounded-md border border-input bg-background px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-ring/30"
               />
             </div>
             <button
               type="submit"
-              className="w-full rounded-md bg-primary px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground transition-colors hover:bg-maroon"
+              disabled={loading}
+              className="w-full rounded-md bg-primary px-6 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground transition-colors hover:bg-maroon disabled:opacity-50"
             >
-              Send Enquiry
+              {loading ? "Sending..." : "Send Enquiry"}
             </button>
             {sent && (
               <p className="text-center text-sm text-primary">
-                Thank you — your enquiry has been noted. We will respond shortly.
+                Thank you — your enquiry has been saved and registered. Our Trustees will connect with you soon.
               </p>
             )}
           </form>

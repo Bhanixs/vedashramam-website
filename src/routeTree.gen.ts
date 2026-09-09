@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutSabhaRouteImport } from './routes/about-sabha'
 import { Route as ActivitiesRouteImport } from './routes/activities'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as AppealForBuildingConstructionRouteImport } from './routes/appeal-for-building-construction'
 import { Route as CancellationRouteImport } from './routes/cancellation'
 import { Route as ContactRouteImport } from './routes/contact'
@@ -49,6 +50,11 @@ const AboutSabhaRoute = AboutSabhaRouteImport.update({
 const ActivitiesRoute = ActivitiesRouteImport.update({
   id: '/activities',
   path: '/activities',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AppealForBuildingConstructionRoute =
@@ -172,6 +178,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about-sabha': typeof AboutSabhaRoute
   '/activities': typeof ActivitiesRoute
+  '/admin': typeof AdminRoute
   '/appeal-for-building-construction': typeof AppealForBuildingConstructionRoute
   '/cancellation': typeof CancellationRoute
   '/contact': typeof ContactRoute
@@ -200,6 +207,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about-sabha': typeof AboutSabhaRoute
   '/activities': typeof ActivitiesRoute
+  '/admin': typeof AdminRoute
   '/appeal-for-building-construction': typeof AppealForBuildingConstructionRoute
   '/cancellation': typeof CancellationRoute
   '/contact': typeof ContactRoute
@@ -229,6 +237,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about-sabha': typeof AboutSabhaRoute
   '/activities': typeof ActivitiesRoute
+  '/admin': typeof AdminRoute
   '/appeal-for-building-construction': typeof AppealForBuildingConstructionRoute
   '/cancellation': typeof CancellationRoute
   '/contact': typeof ContactRoute
@@ -259,6 +268,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about-sabha'
     | '/activities'
+    | '/admin'
     | '/appeal-for-building-construction'
     | '/cancellation'
     | '/contact'
@@ -287,6 +297,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about-sabha'
     | '/activities'
+    | '/admin'
     | '/appeal-for-building-construction'
     | '/cancellation'
     | '/contact'
@@ -315,6 +326,7 @@ export interface FileRouteTypes {
     | '/'
     | '/about-sabha'
     | '/activities'
+    | '/admin'
     | '/appeal-for-building-construction'
     | '/cancellation'
     | '/contact'
@@ -344,6 +356,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutSabhaRoute: typeof AboutSabhaRoute
   ActivitiesRoute: typeof ActivitiesRoute
+  AdminRoute: typeof AdminRoute
   AppealForBuildingConstructionRoute: typeof AppealForBuildingConstructionRoute
   CancellationRoute: typeof CancellationRoute
   ContactRoute: typeof ContactRoute
@@ -390,6 +403,13 @@ declare module '@tanstack/react-router' {
       path: '/activities'
       fullPath: '/activities'
       preLoaderRoute: typeof ActivitiesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/appeal-for-building-construction': {
@@ -560,6 +580,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutSabhaRoute: AboutSabhaRoute,
   ActivitiesRoute: ActivitiesRoute,
+  AdminRoute: AdminRoute,
   AppealForBuildingConstructionRoute: AppealForBuildingConstructionRoute,
   CancellationRoute: CancellationRoute,
   ContactRoute: ContactRoute,
