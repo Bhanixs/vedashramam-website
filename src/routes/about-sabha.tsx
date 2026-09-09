@@ -50,7 +50,7 @@ function AboutSabhaPage() {
           <p>
             Veda Ashrama Gurukulam and Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust is a
             charitable initiative based in Karuvadikuppam, Puducherry. Founded under the guidance and leadership of
-            Veda Samrat Brahmashri Raja Sastrigal, the institution is dedicated to the preservation and development
+            Sri G Arunachalam, the institution is dedicated to the preservation and development
             of Vedic knowledge, Sanātana Dharma, Agama traditions, Go Samrakshana and traditional education.
           </p>
           <p>
