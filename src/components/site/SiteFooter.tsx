@@ -46,9 +46,8 @@ export function SiteFooter() {
           <ul className="mt-4 space-y-2 text-xs text-maroon-foreground/80">
             {[
               { label: "Why Veda Samrakshanam", to: "/why-veda-samrakshanam" },
-              { label: "About Patasala", to: "/about-patasala" },
+              { label: "Raja Sastrigal", to: "/rajasastrigal"},
               { label: "Our Vision", to: "/our-vision" },
-              { label: "Patasala Management", to: "/patasala-management" },
               { label: "Patasala Details", to: "/patasala-details" },
               { label: "Our Achievements", to: "/our-achievements" },
               { label: "Sources of Sustenance", to: "/sources-of-sustenance" },

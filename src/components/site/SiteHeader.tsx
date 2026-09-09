@@ -35,7 +35,6 @@ const NAV: NavItem[] = [
       { label: "Why Veda Samrakshanam", to: "/why-veda-samrakshanam" },
       { label: "Raja Sastrigal", to: "/rajasastrigal" },
       { label: "Our Vision", to: "/our-vision" },
-      { label: "Patasala Management", to: "/patasala-management" },
       { label: "Patasala Details", to: "/patasala-details" },
       { label: "Our Achievements", to: "/our-achievements" },
       { label: "Sources of Sustenance", to: "/sources-of-sustenance" },
