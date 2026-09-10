@@ -23,6 +23,7 @@ import {
   AlertCircle,
   Save,
   Users,
+  RefreshCw,
 } from "lucide-react";
 import { toast } from "sonner";
 import { TRUST_DETAILS } from "@/lib/trust-details";
@@ -169,46 +170,68 @@ function AdminPortalPage() {
     setIsReady(true);
   }, []);
 
-  useEffect(() => {
-    if (token) {
-      fetchAllData();
-    }
-  }, [token]);
-
   const apiFetch = async (endpoint: string, options: RequestInit = {}) => {
     const headers = new Headers(options.headers || {});
     headers.set("Content-Type", "application/json");
     if (token) {
       headers.set("Authorization", `Bearer ${token}`);
     }
-    return fetch(endpoint, { ...options, headers });
+    const res = await fetch(endpoint, { ...options, headers });
+    if (res.status === 401) {
+      sessionStorage.removeItem(STORAGE_KEY);
+      setToken(null);
+      toast.error("Session expired. Please log in again.");
+    }
+    return res;
   };
 
-  const fetchAllData = async () => {
+  const fetchAllData = async (silent = false) => {
     if (!token) return;
-    setLoadingData(true);
+    if (!silent) setLoadingData(true);
     try {
       const [resStats, resDonations, resContacts, resActs, resGal, resSettings] = await Promise.all([
-        apiFetch("/api/admin?action=stats").then((r) => r.json()).catch(() => null),
-        apiFetch("/api/admin?action=donations").then((r) => r.json()).catch(() => []),
-        apiFetch("/api/admin?action=contacts").then((r) => r.json()).catch(() => []),
-        apiFetch("/api/admin?action=activities").then((r) => r.json()).catch(() => []),
-        apiFetch("/api/admin?action=gallery").then((r) => r.json()).catch(() => []),
-        apiFetch("/api/admin?action=settings").then((r) => r.json()).catch(() => null),
+        apiFetch("/api/admin?action=stats").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+        apiFetch("/api/admin?action=donations").then((r) => (r.ok ? r.json() : [])).catch(() => []),
+        apiFetch("/api/admin?action=contacts").then((r) => (r.ok ? r.json() : [])).catch(() => []),
+        apiFetch("/api/admin?action=activities").then((r) => (r.ok ? r.json() : [])).catch(() => []),
+        apiFetch("/api/admin?action=gallery").then((r) => (r.ok ? r.json() : [])).catch(() => []),
+        apiFetch("/api/admin?action=settings").then((r) => (r.ok ? r.json() : null)).catch(() => null),
       ]);
 
-      if (resStats) setStats(resStats);
+      if (resStats && !resStats.error) setStats(resStats);
       if (Array.isArray(resDonations)) setDonations(resDonations);
       if (Array.isArray(resContacts)) setContacts(resContacts);
       if (Array.isArray(resActs)) setActivities(resActs);
       if (Array.isArray(resGal)) setGallery(resGal);
       if (resSettings && resSettings.trust_name) setSettings(resSettings);
-    } catch (e) {
-      toast.error("Failed to load some dashboard data");
+    } catch {
+      if (!silent) toast.error("Failed to load some dashboard data");
     } finally {
-      setLoadingData(false);
+      if (!silent) setLoadingData(false);
     }
   };
+
+  useEffect(() => {
+    if (!token) return;
+
+    fetchAllData();
+
+    // Auto-refresh when switching back to this tab
+    const onFocus = () => {
+      fetchAllData(true);
+    };
+    window.addEventListener("focus", onFocus);
+
+    // Periodic poll every 15s so new submissions appear in real-time
+    const interval = setInterval(() => {
+      fetchAllData(true);
+    }, 15000);
+
+    return () => {
+      window.removeEventListener("focus", onFocus);
+      clearInterval(interval);
+    };
+  }, [token]);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -598,6 +621,16 @@ function AdminPortalPage() {
         </div>
 
         <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => fetchAllData()}
+            disabled={loadingData}
+            title="Refresh dashboard data"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-stone-300 bg-white px-3 py-1.5 text-xs font-medium text-stone-700 hover:bg-stone-50 disabled:opacity-50 transition"
+          >
+            <RefreshCw className={`h-3.5 w-3.5 ${loadingData ? "animate-spin text-amber-800" : ""}`} />
+            <span>Refresh</span>
+          </button>
           <a
             href="/"
             target="_blank"

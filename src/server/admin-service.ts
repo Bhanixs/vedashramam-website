@@ -22,13 +22,46 @@ function isSupabaseConfigured() {
   return Boolean(sbUrl() && (sbService() || sbAnon()));
 }
 
-// In-memory token registry
+// Persistent signed token registry
 const activeTokens = new Set<string>([STATIC_FALLBACK_TOKEN]);
+const TOKEN_SECRET = process.env.ADMIN_TOKEN_SECRET || "vedabhavan_hmac_secret_2026";
+
+export function generateAdminToken(email: string): string {
+  const timestamp = Date.now().toString();
+  const signature = crypto
+    .createHmac("sha256", TOKEN_SECRET)
+    .update(`${email}:${timestamp}:${ADMIN_PASSWORD}`)
+    .digest("hex");
+  const token = `vedatoken.${timestamp}.${signature}`;
+  activeTokens.add(token);
+  return token;
+}
 
 export function verifyAdminToken(authHeader: string | null | undefined): boolean {
   if (!authHeader) return false;
   const token = authHeader.replace(/^Bearer\s+/i, "").trim();
-  return activeTokens.has(token);
+  if (token === STATIC_FALLBACK_TOKEN) return true;
+  if (activeTokens.has(token)) return true;
+
+  // Verify HMAC signature across server restarts
+  const parts = token.split(".");
+  if (parts.length === 3 && parts[0] === "vedatoken") {
+    const [, timestamp, signature] = parts;
+    const expected = crypto
+      .createHmac("sha256", TOKEN_SECRET)
+      .update(`${ADMIN_EMAIL}:${timestamp}:${ADMIN_PASSWORD}`)
+      .digest("hex");
+    if (signature === expected) {
+      const ageMs = Date.now() - Number(timestamp);
+      // Valid for 7 days
+      if (ageMs > 0 && ageMs < 7 * 24 * 60 * 60 * 1000) {
+        activeTokens.add(token);
+        return true;
+      }
+    }
+  }
+
+  return false;
 }
 
 // ── LOCAL JSON FALLBACK STORE ────────────────────────────────
@@ -334,8 +367,7 @@ export async function handleAdminApi(request: Request): Promise<Response> {
         password?: string;
       };
       if (body.email === ADMIN_EMAIL && body.password === ADMIN_PASSWORD) {
-        const token = crypto.randomBytes(32).toString("hex");
-        activeTokens.add(token);
+        const token = generateAdminToken(ADMIN_EMAIL);
         return jsonResponse({ token, email: ADMIN_EMAIL, success: true });
       }
       return errorResponse("Invalid email or password", 401);
@@ -363,18 +395,20 @@ export async function handleAdminApi(request: Request): Promise<Response> {
         created_at: new Date().toISOString(),
       };
 
-      if (isSupabaseConfigured()) {
-        try {
-          await sbFetch("vedabhavan_contacts", "POST", newRecord);
-          return jsonResponse({ success: true, id: newRecord.id });
-        } catch (e) {
-          console.warn("Supabase contact write failed, using local store:", e);
-        }
-      }
-
+      // Always save to local store
       const store = readLocalStore();
       store.contacts.unshift(newRecord);
       writeLocalStore(store);
+
+      // Also persist to Supabase if configured
+      if (isSupabaseConfigured()) {
+        try {
+          await sbFetch("vedabhavan_contacts", "POST", newRecord);
+        } catch (e) {
+          console.warn("Supabase contact write failed, cached in local store:", e);
+        }
+      }
+
       return jsonResponse({ success: true, id: newRecord.id });
     }
 
@@ -407,18 +441,20 @@ export async function handleAdminApi(request: Request): Promise<Response> {
         created_at: new Date().toISOString(),
       };
 
-      if (isSupabaseConfigured()) {
-        try {
-          await sbFetch("vedabhavan_donations", "POST", newRecord);
-          return jsonResponse({ success: true, id: newRecord.id });
-        } catch (e) {
-          console.warn("Supabase donation write failed, using local store:", e);
-        }
-      }
-
+      // Always save to local store
       const store = readLocalStore();
       store.donations.unshift(newRecord);
       writeLocalStore(store);
+
+      // Also persist to Supabase if configured
+      if (isSupabaseConfigured()) {
+        try {
+          await sbFetch("vedabhavan_donations", "POST", newRecord);
+        } catch (e) {
+          console.warn("Supabase donation write failed, cached in local store:", e);
+        }
+      }
+
       return jsonResponse({ success: true, id: newRecord.id });
     }
 
@@ -487,12 +523,28 @@ export async function handleAdminApi(request: Request): Promise<Response> {
 
     // 8. CONTACTS MANAGEMENT (Authenticated GET, PATCH, DELETE)
     if (action === "contacts") {
-      const store = readLocalStore();
       if (method === "GET") {
+        if (isSupabaseConfigured()) {
+          try {
+            const res = await sbFetch("vedabhavan_contacts", "GET", null, "order=created_at.desc");
+            if (Array.isArray(res)) return jsonResponse(res);
+          } catch (e) {
+            console.warn("Supabase contacts fetch failed, using local store:", e);
+          }
+        }
+        const store = readLocalStore();
         return jsonResponse(store.contacts);
       }
       if (method === "PATCH") {
         const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
+        if (isSupabaseConfigured()) {
+          try {
+            await sbFetch("vedabhavan_contacts", "PATCH", body, `id=eq.${id}`);
+          } catch (e) {
+            console.warn("Supabase contact patch failed:", e);
+          }
+        }
+        const store = readLocalStore();
         const target = store.contacts.find((c) => c.id === id);
         if (!target) return errorResponse("Contact entry not found", 404);
         Object.assign(target, body);
@@ -500,6 +552,14 @@ export async function handleAdminApi(request: Request): Promise<Response> {
         return jsonResponse(target);
       }
       if (method === "DELETE") {
+        if (isSupabaseConfigured()) {
+          try {
+            await sbFetch("vedabhavan_contacts", "DELETE", null, `id=eq.${id}`);
+          } catch (e) {
+            console.warn("Supabase contact delete failed:", e);
+          }
+        }
+        const store = readLocalStore();
         store.contacts = store.contacts.filter((c) => c.id !== id);
         writeLocalStore(store);
         return jsonResponse({ success: true });
@@ -508,12 +568,28 @@ export async function handleAdminApi(request: Request): Promise<Response> {
 
     // 9. DONATIONS MANAGEMENT (Authenticated GET, PATCH, DELETE)
     if (action === "donations") {
-      const store = readLocalStore();
       if (method === "GET") {
+        if (isSupabaseConfigured()) {
+          try {
+            const res = await sbFetch("vedabhavan_donations", "GET", null, "order=created_at.desc");
+            if (Array.isArray(res)) return jsonResponse(res);
+          } catch (e) {
+            console.warn("Supabase donations fetch failed, using local store:", e);
+          }
+        }
+        const store = readLocalStore();
         return jsonResponse(store.donations);
       }
       if (method === "PATCH") {
         const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
+        if (isSupabaseConfigured()) {
+          try {
+            await sbFetch("vedabhavan_donations", "PATCH", body, `id=eq.${id}`);
+          } catch (e) {
+            console.warn("Supabase donation patch failed:", e);
+          }
+        }
+        const store = readLocalStore();
         const target = store.donations.find((d) => d.id === id);
         if (!target) return errorResponse("Donation entry not found", 404);
         Object.assign(target, body);
@@ -521,6 +597,14 @@ export async function handleAdminApi(request: Request): Promise<Response> {
         return jsonResponse(target);
       }
       if (method === "DELETE") {
+        if (isSupabaseConfigured()) {
+          try {
+            await sbFetch("vedabhavan_donations", "DELETE", null, `id=eq.${id}`);
+          } catch (e) {
+            console.warn("Supabase donation delete failed:", e);
+          }
+        }
+        const store = readLocalStore();
         store.donations = store.donations.filter((d) => d.id !== id);
         writeLocalStore(store);
         return jsonResponse({ success: true });
