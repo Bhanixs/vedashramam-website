@@ -166,6 +166,7 @@ function AdminPortalPage() {
   const [newVideoUrl, setNewVideoUrl] = useState("");
 
   const [galleryModalOpen, setGalleryModalOpen] = useState(false);
+  const [editingGallery, setEditingGallery] = useState<GalleryItem | null>(null);
   const [newGalUrl, setNewGalUrl] = useState("");
   const [newGalTitle, setNewGalTitle] = useState("");
   const [newGalCategory, setNewGalCategory] = useState("Veda Patasala");
@@ -545,6 +546,22 @@ function AdminPortalPage() {
   };
 
   // Gallery CRUD
+  const openAddGalleryModal = () => {
+    setEditingGallery(null);
+    setNewGalUrl("");
+    setNewGalTitle("");
+    setNewGalCategory("Veda Patasala");
+    setGalleryModalOpen(true);
+  };
+
+  const openEditGalleryModal = (g: GalleryItem) => {
+    setEditingGallery(g);
+    setNewGalUrl(g.image_url);
+    setNewGalTitle(g.title || "");
+    setNewGalCategory(g.category || "General");
+    setGalleryModalOpen(true);
+  };
+
   const saveGalleryPhoto = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!newGalUrl.trim()) {
@@ -555,26 +572,45 @@ function AdminPortalPage() {
       toast.error("WhatsApp blob URLs cannot be saved. Please save the picture to your device and click 'Upload Image from Device'.");
       return;
     }
+
+    const payload = {
+      image_url: newGalUrl.trim(),
+      title: newGalTitle.trim(),
+      category: newGalCategory.trim(),
+      is_published: true,
+    };
+
     try {
-      const res = await apiFetch("/api/admin?action=gallery", {
-        method: "POST",
-        body: JSON.stringify({
-          image_url: newGalUrl.trim(),
-          title: newGalTitle.trim(),
-          category: newGalCategory.trim(),
-          is_published: true,
-        }),
-      });
-      if (res.ok) {
-        const item = await res.json();
-        setGallery((prev) => [...prev, item]);
-        toast.success("Gallery photo added");
-        setGalleryModalOpen(false);
-        setNewGalUrl("");
-        setNewGalTitle("");
+      if (editingGallery) {
+        const res = await apiFetch(`/api/admin?action=gallery&id=${encodeURIComponent(editingGallery.id)}`, {
+          method: "PATCH",
+          body: JSON.stringify(payload),
+        });
+        if (res.ok) {
+          const updated = await res.json();
+          setGallery((prev) => prev.map((g) => (g.id === editingGallery.id ? updated : g)));
+          toast.success("Gallery photo updated successfully");
+          setGalleryModalOpen(false);
+          setEditingGallery(null);
+          setNewGalUrl("");
+          setNewGalTitle("");
+        }
+      } else {
+        const res = await apiFetch("/api/admin?action=gallery", {
+          method: "POST",
+          body: JSON.stringify(payload),
+        });
+        if (res.ok) {
+          const item = await res.json();
+          setGallery((prev) => [...prev, item]);
+          toast.success("Gallery photo added");
+          setGalleryModalOpen(false);
+          setNewGalUrl("");
+          setNewGalTitle("");
+        }
       }
     } catch {
-      toast.error("Failed to add gallery photo");
+      toast.error("Failed to save gallery photo");
     }
   };
 
@@ -1325,7 +1361,7 @@ function AdminPortalPage() {
                   <p className="text-sm text-stone-500">Manage photographs shown in the public Gallery section</p>
                 </div>
                 <button
-                  onClick={() => setGalleryModalOpen(true)}
+                  onClick={openAddGalleryModal}
                   className="inline-flex items-center gap-2 rounded-xl bg-amber-900 px-4 py-2.5 text-xs font-semibold text-white shadow hover:bg-amber-950"
                 >
                   <Plus className="h-4 w-4" /> Add Photo
@@ -1341,38 +1377,85 @@ function AdminPortalPage() {
                   </p>
                 </div>
               ) : (
-                <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
+                <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
                   {gallery.map((g) => {
                     const isBlob = isTemporaryBlobUrl(g.image_url);
                     const resolved = resolveMediaUrl(g.image_url);
                     return (
-                      <div key={g.id} className="group relative aspect-square overflow-hidden rounded-2xl border border-stone-200 bg-stone-100">
-                        {isBlob ? (
-                          <div className="flex h-full w-full flex-col items-center justify-center p-3 text-center bg-amber-50">
-                            <AlertTriangle className="h-6 w-6 text-amber-600 mb-1" />
-                            <span className="text-xs font-semibold text-amber-800">Temporary Link Expired</span>
-                            <span className="text-[10px] text-stone-500 mt-1">WhatsApp blob URL</span>
-                          </div>
-                        ) : (
-                          <img
-                            src={resolved || g.image_url}
-                            alt={g.title}
-                            className="h-full w-full object-cover"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).src = "/favicon.png";
-                            }}
-                          />
-                        )}
-                        <div className="absolute inset-0 bg-black/50 opacity-0 transition group-hover:opacity-100 flex flex-col justify-between p-3 text-white">
-                          <span className="text-xs font-semibold">{g.category}</span>
-                          <div className="flex items-center justify-between">
-                            <span className="text-xs truncate max-w-[120px]">{g.title || "Untitled"}</span>
+                      <div
+                        key={g.id}
+                        className="group relative flex flex-col overflow-hidden rounded-2xl border border-stone-200 bg-white shadow-sm transition hover:shadow-md"
+                      >
+                        {/* Photo Display Container */}
+                        <div className="relative aspect-square w-full overflow-hidden bg-stone-100">
+                          {isBlob ? (
+                            <div className="flex h-full w-full flex-col items-center justify-center p-3 text-center bg-amber-50">
+                              <AlertTriangle className="h-6 w-6 text-amber-600 mb-1" />
+                              <span className="text-xs font-semibold text-amber-800">Temporary Link Expired</span>
+                              <span className="text-[10px] text-stone-500 mt-1">WhatsApp blob URL</span>
+                            </div>
+                          ) : (
+                            <img
+                              src={resolved || g.image_url}
+                              alt={g.title}
+                              className="h-full w-full object-cover"
+                              onError={(e) => {
+                                (e.target as HTMLImageElement).src = "/favicon.png";
+                              }}
+                            />
+                          )}
+
+                          {/* Category badge overlay */}
+                          <span className="absolute top-2.5 left-2.5 rounded-full bg-black/65 backdrop-blur-md px-2.5 py-0.5 text-[10px] font-semibold text-white shadow-sm">
+                            {g.category || "General"}
+                          </span>
+
+                          {/* Floating quick actions on image: visible on mobile & touch, reveals on hover on desktop */}
+                          <div className="absolute top-2.5 right-2.5 flex items-center gap-1.5 opacity-100 md:opacity-0 md:group-hover:opacity-100 transition-opacity">
+                            <button
+                              onClick={() => openEditGalleryModal(g)}
+                              className="flex h-8 w-8 items-center justify-center rounded-xl bg-white/95 text-stone-800 shadow-md backdrop-blur hover:bg-amber-900 hover:text-white transition active:scale-95"
+                              title="Edit photo details"
+                            >
+                              <Edit2 className="h-3.5 w-3.5" />
+                            </button>
                             <button
                               onClick={() => deleteGalleryPhoto(g.id)}
-                              className="rounded-lg bg-red-600 p-1.5 text-white hover:bg-red-700"
+                              className="flex h-8 w-8 items-center justify-center rounded-xl bg-red-600/95 text-white shadow-md backdrop-blur hover:bg-red-700 transition active:scale-95"
                               title="Delete photo"
                             >
                               <Trash2 className="h-3.5 w-3.5" />
+                            </button>
+                          </div>
+                        </div>
+
+                        {/* Card metadata & mobile action footer */}
+                        <div className="flex flex-1 flex-col justify-between p-3.5">
+                          <div className="min-w-0">
+                            <h4 className="text-xs font-semibold text-stone-900 truncate" title={g.title || "Untitled Photo"}>
+                              {g.title || "Untitled Photo"}
+                            </h4>
+                            <p className="mt-0.5 text-[11px] text-stone-500 truncate">
+                              {g.category || "General Gallery"}
+                            </p>
+                          </div>
+
+                          {/* Action Buttons: fully visible and touch-accessible on mobile without needing hover */}
+                          <div className="mt-3 flex items-center gap-2 border-t border-stone-100 pt-2.5">
+                            <button
+                              onClick={() => openEditGalleryModal(g)}
+                              className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-xl border border-stone-200 bg-stone-50 px-3 py-2 text-xs font-semibold text-stone-700 hover:bg-stone-100 hover:text-amber-950 active:bg-stone-200 transition"
+                            >
+                              <Edit2 className="h-3.5 w-3.5 text-stone-600" />
+                              <span>Edit</span>
+                            </button>
+                            <button
+                              onClick={() => deleteGalleryPhoto(g.id)}
+                              className="inline-flex items-center justify-center gap-1.5 rounded-xl border border-red-200 bg-red-50 px-3 py-2 text-xs font-semibold text-red-600 hover:bg-red-100 active:bg-red-200 transition"
+                              title="Delete photo"
+                            >
+                              <Trash2 className="h-3.5 w-3.5 text-red-600" />
+                              <span>Delete</span>
                             </button>
                           </div>
                         </div>
@@ -1857,9 +1940,19 @@ function AdminPortalPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4">
           <div className="w-full max-w-md rounded-3xl bg-white p-6 sm:p-8 shadow-2xl">
             <div className="flex items-center justify-between border-b border-stone-100 pb-4">
-              <h3 className="font-display text-xl font-bold text-stone-900">Add Photo to Gallery</h3>
+              <div>
+                <h3 className="font-display text-xl font-bold text-stone-900">
+                  {editingGallery ? "Edit Gallery Photo" : "Add Photo to Gallery"}
+                </h3>
+                <p className="text-xs text-stone-500 mt-0.5">
+                  {editingGallery ? "Update caption, category, or replace photo image" : "Upload or link an image to showcase in the public gallery"}
+                </p>
+              </div>
               <button
-                onClick={() => setGalleryModalOpen(false)}
+                onClick={() => {
+                  setGalleryModalOpen(false);
+                  setEditingGallery(null);
+                }}
                 className="rounded-full p-1.5 text-stone-400 hover:bg-stone-100"
               >
                 <X className="h-5 w-5" />
@@ -1990,16 +2083,19 @@ function AdminPortalPage() {
               <div className="pt-4 flex justify-end gap-3 border-t border-stone-100">
                 <button
                   type="button"
-                  onClick={() => setGalleryModalOpen(false)}
-                  className="rounded-xl border border-stone-300 px-4 py-2 text-xs font-semibold text-stone-700"
+                  onClick={() => {
+                    setGalleryModalOpen(false);
+                    setEditingGallery(null);
+                  }}
+                  className="rounded-xl border border-stone-300 px-4 py-2 text-xs font-semibold text-stone-700 hover:bg-stone-50 transition"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
-                  className="rounded-xl bg-amber-900 px-5 py-2 text-xs font-semibold text-white shadow"
+                  className="rounded-xl bg-amber-900 px-5 py-2 text-xs font-semibold text-white shadow hover:bg-amber-950 transition"
                 >
-                  Add Photo
+                  {editingGallery ? "Update Photo" : "Add Photo"}
                 </button>
               </div>
             </form>

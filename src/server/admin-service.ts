@@ -801,9 +801,25 @@ export async function handleAdminApi(request: Request): Promise<Response> {
       }
     }
 
-    // 11. GALLERY CRUD (Authenticated POST, DELETE)
+    // 11. GALLERY CRUD (Authenticated POST, PATCH, DELETE)
     if (action === "gallery") {
       const store = readLocalStore();
+      if (method === "PATCH" || method === "PUT") {
+        const body = (await request.json().catch(() => ({}))) as Partial<DbStore["gallery"][number]>;
+        if (!id) return errorResponse("Gallery photo ID is required", 400);
+        if (isSupabaseConfigured()) {
+          try {
+            await sbFetch("vedashramam_gallery", "PATCH", body, `id=eq.${id}`);
+          } catch (e) {
+            console.warn("Supabase gallery patch failed:", e);
+          }
+        }
+        const target = store.gallery.find((g) => g.id === id);
+        if (!target) return errorResponse("Gallery photo not found", 404);
+        Object.assign(target, body);
+        writeLocalStore(store);
+        return jsonResponse(target);
+      }
       if (method === "POST") {
         const body = (await request.json().catch(() => ({}))) as {
           title?: string;
