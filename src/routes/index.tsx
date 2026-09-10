@@ -47,12 +47,6 @@ const SLIDES = [
     cta: { label: "Support Us", to: "/donate" },
   },
   {
-    image: heroTemple,
-    title: "Subscribe to Nithya Poojas Sankalpam",
-    subtitle: "Loka Samastha Sukhino Bhavantu — Daily & Monthly Sevas",
-    cta: { label: "View Sevas", to: "/donate" },
-  },
-  {
     image: sankarantiCover,
     title: "Makara Sankranti & Go Pooja",
     subtitle: "Surya Namaskara Mantram, Pongal Samaradhana & Goshala Seva",
@@ -83,7 +77,7 @@ function Hero() {
             className="h-full w-full object-cover object-[center_35%] sm:object-center"
             loading={idx === 0 ? "eager" : "lazy"}
           />
-          {/* Subtle gradient veil for enhanced readability without drowning the photo */}
+          {/* Subtle gradient veil for enhanced readability without dZhe photo */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/35" />
         </div>
       ))}
