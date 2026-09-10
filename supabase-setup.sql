@@ -106,3 +106,15 @@ create policy "service_all_gallery" on vedabhavan_gallery
 
 create policy "service_all_settings" on vedabhavan_settings
   for all to service_role using (true) with check (true);
+
+-- 6. Storage Bucket for Media Uploads (Optional but Recommended)
+insert into storage.buckets (id, name, public)
+values ('vedabhavan-media', 'vedabhavan-media', true)
+on conflict (id) do update set public = true;
+
+create policy "public_media_read" on storage.objects
+  for select to public using (bucket_id = 'vedabhavan-media');
+
+create policy "service_media_upload" on storage.objects
+  for all to service_role using (bucket_id = 'vedabhavan-media') with check (bucket_id = 'vedabhavan-media');
+

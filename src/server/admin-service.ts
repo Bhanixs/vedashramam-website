@@ -821,7 +821,38 @@ export async function handleAdminApi(request: Request): Promise<Response> {
       if (!body.filename || !body.data) {
         return errorResponse("Missing filename or base64 data");
       }
-      // Return data URI or saved URL
+
+      // Try uploading to Supabase Storage if configured
+      if (isSupabaseConfigured()) {
+        try {
+          const cleanBase64 = body.data.replace(/^data:[^;]+;base64,/, "");
+          const fileBuffer = Buffer.from(cleanBase64, "base64");
+          const ext = (body.filename.split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "");
+          const filePath = `uploads/${Date.now()}-${crypto.randomUUID().slice(0, 8)}.${ext || "jpg"}`;
+          const mimeType = body.type || "image/jpeg";
+
+          const sbStorageUrl = `${sbUrl()}/storage/v1/object/vedabhavan-media/${filePath}`;
+          const uploadRes = await fetch(sbStorageUrl, {
+            method: "POST",
+            headers: {
+              apikey: sbAnon(),
+              authorization: `Bearer ${sbService() || sbAnon()}`,
+              "content-type": mimeType,
+              "x-upsert": "true",
+            },
+            body: fileBuffer,
+          });
+
+          if (uploadRes.ok) {
+            const publicUrl = `${sbUrl()}/storage/v1/object/public/vedabhavan-media/${filePath}`;
+            return jsonResponse({ url: publicUrl, filename: body.filename, success: true });
+          }
+        } catch (e) {
+          console.warn("Supabase storage upload failed, using optimized data URI fallback:", e);
+        }
+      }
+
+      // Return data URI as guaranteed fallback
       const dataUri = body.data.startsWith("data:")
         ? body.data
         : `data:${body.type || "image/jpeg"};base64,${body.data}`;
