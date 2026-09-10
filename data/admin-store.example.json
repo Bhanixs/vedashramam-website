@@ -1,0 +1,349 @@
+{
+    "contacts":  [
+
+                 ],
+    "donations":  [
+
+                  ],
+    "activities":  [
+                       {
+                           "id":  "act-sankara-jayanthi",
+                           "title":  "Sankara Jayanthi",
+                           "category":  "Veda Parayanam \u0026 Sadas",
+                           "description":  "Grand celebrations dedicated to Jagadguru Sri Adi Shankaracharya with multi-day Veda Parayanam, Shankara Bhashya Pathanam, Mahanyasa Purvaka Rudrabhishekam, and Deeparadhana by resident vidyarthis and learned acharyas.",
+                           "event_date":  "Annual Vaisakha Masam",
+                           "photos":  [
+                                          "/src/assets/Sankara Jayanthi/sankara_jayanthi01.jpeg",
+                                          "/src/assets/Sankara Jayanthi/sankara_jayanthi02.jpeg",
+                                          "/src/assets/Sankara Jayanthi/sankara_jayanthi03.jpeg",
+                                          "/src/assets/Sankara Jayanthi/sankara_jayanthi04.jpeg",
+                                          "/src/assets/Sankara Jayanthi/sankara_jayanthi05.jpeg",
+                                          "/src/assets/Sankara Jayanthi/sankara_jayanthi06.jpeg",
+                                          "/src/assets/Sankara Jayanthi/sankara_jayanthi07.jpeg",
+                                          "/src/assets/Sankara Jayanthi/sankara_jayanthi08.jpeg"
+                                      ],
+                           "videos":  [
+                                          "/src/assets/Sankara Jayanthi/sankara_jayanthi_video.mp4"
+                                      ],
+                           "is_published":  true,
+                           "sort_order":  1,
+                           "created_at":  "2026-09-09T14:24:18.996Z"
+                       },
+                       {
+                           "id":  "act-sankaranti",
+                           "title":  "Sankaranti",
+                           "category":  "Festival \u0026 Go Pooja",
+                           "description":  "Auspicious Makara Sankranti and Pongal festival celebrated with Surya Namaskara mantram recitation, traditional Pongal naivedyam, special Veda Parayanam, and Go Pooja at the Gurukulam Goshala.",
+                           "event_date":  "Makara Sankranti / Thai Pongal",
+                           "photos":  [
+                                          "/src/assets/Sankaranti/sankaranti01.jpg",
+                                          "/src/assets/Sankaranti/sankaranti02.jpg",
+                                          "/src/assets/Sankaranti/sankaranti03.jpg",
+                                          "/src/assets/Sankaranti/sankaranti04.jpg",
+                                          "/src/assets/Sankaranti/sankaranti05.jpg",
+                                          "/src/assets/Sankaranti/sankaranti06.jpg",
+                                          "/src/assets/Sankaranti/sankaranti07.jpg",
+                                          "/src/assets/Sankaranti/sankaranti08.jpg",
+                                          "/src/assets/Sankaranti/sankaranti09.jpg"
+                                      ],
+                           "videos":  [
+
+                                      ],
+                           "is_published":  true,
+                           "sort_order":  2,
+                           "created_at":  "2026-09-09T14:24:18.996Z"
+                       },
+                       {
+                           "id":  "act-krishna-jayanthi",
+                           "title":  "Krishna Jayanthi",
+                           "category":  "Utsavam \u0026 Parayanam",
+                           "description":  "Sri Krishna Jayanthi (Gokulashtami) celebrations featuring Srimad Bhagavatam recital, floral alankaram, midnight Sri Krishna Janma Pooja, special aradhana, and devotional chanting by our Vidyarthis.",
+                           "event_date":  "Gokulashtami / Rohini",
+                           "photos":  [
+                                          "/src/assets/Krishna_Jayanthi/krishna_jayanthi01.jpeg",
+                                          "/src/assets/Krishna_Jayanthi/krishna_jayanthi02.jpeg",
+                                          "/src/assets/Krishna_Jayanthi/krishna_jayanthi03.jpeg"
+                                      ],
+                           "videos":  [
+
+                                      ],
+                           "is_published":  true,
+                           "sort_order":  3,
+                           "created_at":  "2026-09-09T14:24:18.996Z"
+                       },
+                       {
+                           "id":  "act-annadanam",
+                           "title":  "Annadanam",
+                           "category":  "Daily Seva",
+                           "description":  "The sacred practice of Nithya Annadanam, offering wholesome satvik meals daily to resident Vidyarthis, adhyapakas, visiting sadhus, and devotees across all festivals, ceremonies, and Samaradhana occasions.",
+                           "event_date":  "Nithya Annadanam / Daily",
+                           "photos":  [
+                                          "/src/assets/Annadanam/annadanam01.jpeg",
+                                          "/src/assets/Annadanam/annadanam02.jpeg",
+                                          "/src/assets/Annadanam/annadanam03.jpeg"
+                                      ],
+                           "videos":  [
+
+                                      ],
+                           "is_published":  true,
+                           "sort_order":  4,
+                           "created_at":  "2026-09-09T14:24:18.996Z"
+                       },
+                       {
+                           "id":  "act-ammavasai-tharpanam",
+                           "title":  "Ammavasai Tharpanam",
+                           "category":  "Monthly Anushtanam",
+                           "description":  "Monthly Amavasya sacred rituals, Pitru Tharpanam guidance, and Tila Homam conducted by Patasala Sastrigals for pitru preethi and ancestral blessings for devotees and their families.",
+                           "event_date":  "Every Amavasya (New Moon Day)",
+                           "photos":  [
+                                          "/src/assets/Ammavasai Tharpanam/ammavasai_tharpanam01.jpeg"
+                                      ],
+                           "videos":  [
+
+                                      ],
+                           "is_published":  true,
+                           "sort_order":  5,
+                           "created_at":  "2026-09-09T14:24:18.996Z"
+                       },
+                       {
+                           "id":  "act-singeri-madam-swamigal",
+                           "title":  "Singeri Madam Swamigal",
+                           "category":  "Guru Krupa \u0026 Anugraha Bhashanam",
+                           "description":  "Reverent observances, Paduka Poojas, and benedictions associated with the Jagadgurus of Dakshinamnaya Sri Sringeri Sharada Peetham, inspiring the students through sacred Anugraha Bhashanam and spiritual guidance.",
+                           "event_date":  "Sacred Guru Darshanam \u0026 Vijaya Yatra",
+                           "photos":  [
+                                          "/src/assets/Singeri Madam Swamigal/singeri_swamigal01.jpeg"
+                                      ],
+                           "videos":  [
+                                          "/src/assets/Singeri Madam Swamigal/Singeri Swamigal video01.mp4"
+                                      ],
+                           "is_published":  true,
+                           "sort_order":  6,
+                           "created_at":  "2026-09-09T14:24:18.996Z"
+                       }
+                   ],
+    "gallery":  [
+                    {
+                        "id":  "gal-01",
+                        "title":  "Patasala \u0026 Sabha Photo 1",
+                        "image_url":  "/src/assets/Gallery/image01.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  1,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-02",
+                        "title":  "Patasala \u0026 Sabha Photo 2",
+                        "image_url":  "/src/assets/Gallery/image02.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  2,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-03",
+                        "title":  "Patasala \u0026 Sabha Photo 3",
+                        "image_url":  "/src/assets/Gallery/image03.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  3,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-04",
+                        "title":  "Patasala \u0026 Sabha Photo 4",
+                        "image_url":  "/src/assets/Gallery/image04.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  4,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-05",
+                        "title":  "Patasala \u0026 Sabha Photo 5",
+                        "image_url":  "/src/assets/Gallery/image05.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  5,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-06",
+                        "title":  "Patasala \u0026 Sabha Photo 6",
+                        "image_url":  "/src/assets/Gallery/image06.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  6,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-07",
+                        "title":  "Patasala \u0026 Sabha Photo 7",
+                        "image_url":  "/src/assets/Gallery/image07.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  7,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-08",
+                        "title":  "Patasala \u0026 Sabha Photo 8",
+                        "image_url":  "/src/assets/Gallery/image08.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  8,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-09",
+                        "title":  "Patasala \u0026 Sabha Photo 9",
+                        "image_url":  "/src/assets/Gallery/image09.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  9,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-10",
+                        "title":  "Patasala \u0026 Sabha Photo 10",
+                        "image_url":  "/src/assets/Gallery/image10.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  10,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-11",
+                        "title":  "Patasala \u0026 Sabha Photo 11",
+                        "image_url":  "/src/assets/Gallery/image11.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  11,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-12",
+                        "title":  "Patasala \u0026 Sabha Photo 12",
+                        "image_url":  "/src/assets/Gallery/image12.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  12,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-13",
+                        "title":  "Patasala \u0026 Sabha Photo 13",
+                        "image_url":  "/src/assets/Gallery/image13.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  13,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-14",
+                        "title":  "Patasala \u0026 Sabha Photo 14",
+                        "image_url":  "/src/assets/Gallery/image14.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  14,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-15",
+                        "title":  "Patasala \u0026 Sabha Photo 15",
+                        "image_url":  "/src/assets/Gallery/image15.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  15,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-16",
+                        "title":  "Patasala \u0026 Sabha Photo 16",
+                        "image_url":  "/src/assets/Gallery/image16.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  16,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-17",
+                        "title":  "Patasala \u0026 Sabha Photo 17",
+                        "image_url":  "/src/assets/Gallery/image17.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  17,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-18",
+                        "title":  "Patasala \u0026 Sabha Photo 18",
+                        "image_url":  "/src/assets/Gallery/image18.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  18,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-19",
+                        "title":  "Patasala \u0026 Sabha Photo 19",
+                        "image_url":  "/src/assets/Gallery/image19.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  19,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-20",
+                        "title":  "Patasala \u0026 Sabha Photo 20",
+                        "image_url":  "/src/assets/Gallery/image20.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  20,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-21",
+                        "title":  "Patasala \u0026 Sabha Photo 21",
+                        "image_url":  "/src/assets/Gallery/image21.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  21,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-22",
+                        "title":  "Patasala \u0026 Sabha Photo 22",
+                        "image_url":  "/src/assets/Gallery/image22.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  22,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    },
+                    {
+                        "id":  "gal-23",
+                        "title":  "Patasala \u0026 Sabha Photo 23",
+                        "image_url":  "/src/assets/Gallery/image23.jpg",
+                        "category":  "Gurukulam Life",
+                        "sort_order":  23,
+                        "is_published":  true,
+                        "created_at":  "2026-09-09T14:24:18.996Z"
+                    }
+                ],
+    "settings":  {
+                     "id":  "general",
+                     "trust_name":  "Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust",
+                     "phone":  "+91 98423 27791",
+                     "email":  "info@vedaashramam.org",
+                     "address":  "151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008",
+                     "upi_id":  "9842327791@IOB",
+                     "bank_name":  "Indian Overseas Bank",
+                     "bank_branch":  "Lawspet Branch, Puducherry - 605 008",
+                     "bank_account":  "212101000031000",
+                     "bank_ifsc":  "IOBA0002121",
+                     "pan":  "AAMTS6931L",
+                     "reg_80g":  "AAMTS6931LF20221",
+                     "updated_at":  "2026-09-09T14:29:46.094Z"
+                 }
+}
