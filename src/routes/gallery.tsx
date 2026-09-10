@@ -33,13 +33,13 @@ import img23 from "@/assets/Gallery/image23.jpg";
 export const Route = createFileRoute("/gallery")({
   head: () => ({
     meta: [
-      { title: "Gallery — Vedashramam" },
+      { title: "Gallery — Vedashrama Gurukulam" },
       {
         name: "description",
         content:
-          "Photographs of celebrations, daily Patasala life, homams and community events at Vedashramam, Pondicherry.",
+          "Photographs of celebrations, daily Patasala life, homams and community events at Vedashrama Gurukulam, Pondicherry.",
       },
-      { property: "og:title", content: "Gallery — Vedashramam" },
+      { property: "og:title", content: "Gallery — Vedashrama Gurukulam" },
       { property: "og:description", content: "Celebrations, daily Patasala life, homams and community events." },
     ],
   }),
@@ -162,7 +162,7 @@ function GalleryPage() {
       />
 
       <section className="container-page py-20">
-        <SectionHeading title="Moments at Vedashramam" eyebrow="Photo Gallery" />
+        <SectionHeading title="Moments at Vedashrama Gurukulam" eyebrow="Photo Gallery" />
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {allImages.map((img, i) => (
@@ -174,7 +174,7 @@ function GalleryPage() {
               <div className="aspect-[4/3] w-full overflow-hidden bg-muted">
                 <img
                   src={img}
-                  alt={`Vedashramam photo ${i + 1}`}
+                  alt={`Vedashrama Gurukulam photo ${i + 1}`}
                   loading="lazy"
                   className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
@@ -226,7 +226,7 @@ function GalleryPage() {
             {/* Lightbox Image */}
             <img
               src={allImages[lightboxIndex]}
-              alt={`Vedashramam photo ${lightboxIndex + 1}`}
+              alt={`Vedashrama Gurukulam photo ${lightboxIndex + 1}`}
               className="max-h-[82vh] max-w-full rounded-lg object-contain shadow-2xl"
             />
 

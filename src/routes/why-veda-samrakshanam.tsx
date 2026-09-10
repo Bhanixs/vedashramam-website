@@ -6,13 +6,13 @@ import { Quote, Sparkles, BookOpen } from "lucide-react";
 export const Route = createFileRoute("/why-veda-samrakshanam")({
   head: () => ({
     meta: [
-      { title: "Why Veda Samrakshanam — Vedashramam" },
+      { title: "Why Veda Samrakshanam — Vedashrama Gurukulam" },
       {
         name: "description",
         content:
           "The eternal glory of the Vedas and the imperative duty of Veda Samrakshanam, guided by the Anugraha Bhashanams of Sringeri and Kanchi Acharyas.",
       },
-      { property: "og:title", content: "Why Veda Samrakshanam — Vedashramam" },
+      { property: "og:title", content: "Why Veda Samrakshanam — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Understanding the cosmic significance of Vedic vibrations and protecting our sacred heritage.",

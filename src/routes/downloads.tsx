@@ -6,13 +6,13 @@ import { FileText, Music, Download, BookOpen, ExternalLink } from "lucide-react"
 export const Route = createFileRoute("/downloads")({
   head: () => ({
     meta: [
-      { title: "Downloads & Publications — Vedashramam" },
+      { title: "Downloads & Publications — Vedashrama Gurukulam" },
       {
         name: "description",
         content:
-          "Download sacred Stotras, Puja Vidhanams, MP3 chanting, and publications produced by Vedashramam for devotees.",
+          "Download sacred Stotras, Puja Vidhanams, MP3 chanting, and publications produced by Vedashrama Gurukulam for devotees.",
       },
-      { property: "og:title", content: "Downloads & Publications — Vedashramam" },
+      { property: "og:title", content: "Downloads & Publications — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Stotras, Puja Vidhanams, and educational publications for chanting and daily worship.",

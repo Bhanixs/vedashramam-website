@@ -36,7 +36,7 @@ export function PrivacyPage() {
             </div>
             <div className="mt-6 space-y-4 text-[0.95rem] leading-relaxed text-foreground/85">
               <p>
-                Vedashramam (Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust) collects personal information submitted voluntarily by donors, prospective students, guardians, and visitors through our online forms, donation channels, and admission applications.
+                Vedashrama Gurukulam (Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust) collects personal information submitted voluntarily by donors, prospective students, guardians, and visitors through our online forms, donation channels, and admission applications.
               </p>
               <ul className="grid gap-3 pt-2 sm:grid-cols-2">
                 <li className="rounded-md border border-border/80 bg-card p-4 text-sm">
@@ -98,7 +98,7 @@ export function PrivacyPage() {
             </div>
             <div className="mt-6 space-y-4 text-[0.95rem] leading-relaxed text-foreground/85">
               <p>
-                Vedashramam is committed to ensuring the security of your data. We do not sell, rent, lease, trade, or share personal information with any third party for commercial or marketing purposes.
+                Vedashrama Gurukulam is committed to ensuring the security of your data. We do not sell, rent, lease, trade, or share personal information with any third party for commercial or marketing purposes.
               </p>
               <p className="rounded-lg bg-muted/50 p-4 text-sm text-foreground/80 italic">
                 உங்கள் தனிப்பட்ட தகவல்கள் எக்காரணத்தைக் கொண்டும் விளம்பரத்திற்கோ அல்லது வணிக நோக்கங்களுக்காகவோ மூன்றாம் தரப்பினருக்குப் பகிரப்படாது.
@@ -124,7 +124,7 @@ export function PrivacyPage() {
                 Online contributions are processed through RBI-compliant, PCI-DSS certified secure payment gateways operating with 256-bit SSL encryption.
               </p>
               <p>
-                Vedashramam does <strong>not</strong> record, collect, or store any sensitive payment credentials, credit/debit card numbers, CVVs, or Net Banking passwords on our website servers. All transactions are securely handled directly by authorized banking partners.
+                Vedashrama Gurukulam does <strong>not</strong> record, collect, or store any sensitive payment credentials, credit/debit card numbers, CVVs, or Net Banking passwords on our website servers. All transactions are securely handled directly by authorized banking partners.
               </p>
             </div>
           </div>

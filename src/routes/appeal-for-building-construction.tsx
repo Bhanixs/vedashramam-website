@@ -7,13 +7,13 @@ import { useTrustSettings } from "@/lib/use-trust-settings";
 export const Route = createFileRoute("/appeal-for-building-construction")({
   head: () => ({
     meta: [
-      { title: "Appeal for Building Construction — Vedashramam" },
+      { title: "Appeal for Building Construction — Vedashrama Gurukulam" },
       {
         name: "description",
         content:
           "Help us build a state-of-the-art residential Veda Gurukulam & Gaushala on 3+ acres. Sponsor construction per sq ft or major project blocks.",
       },
-      { property: "og:title", content: "Appeal for Building Construction — Vedashramam" },
+      { property: "og:title", content: "Appeal for Building Construction — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Expansion project to accommodate 300 students with Gaushala, solar energy, and Vedic research facilities.",

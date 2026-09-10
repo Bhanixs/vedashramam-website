@@ -12,7 +12,7 @@ export const Route = createFileRoute("/our-achievements")({
         content:
           "Milestones, examinations, and academic progress of our Vedic students in Krishna Yajur Veda, Agama, and Sastras.",
       },
-      { property: "og:title", content: "Our Achievements — Vedashramam" },
+      { property: "og:title", content: "Our Achievements — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Celebrating the dedication and accomplishments of our Vidyarthis and Adhyapakas.",

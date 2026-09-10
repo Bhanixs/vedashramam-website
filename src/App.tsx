@@ -5,7 +5,7 @@ import CancellationPage from "@/pages/Cancellation";
 export { TermsPage as Terms, PrivacyPage as Privacy, CancellationPage as Cancellation };
 
 /**
- * Vedashramam Route Registry Reference:
+ * Vedashrama Gurukulam Route Registry Reference:
  * - /terms -> <Terms />
  * - /privacy -> <Privacy />
  * - /cancellation -> <Cancellation />

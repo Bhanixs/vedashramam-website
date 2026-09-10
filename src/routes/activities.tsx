@@ -47,13 +47,13 @@ import singeriVideo from "@/assets/Singeri Madam Swamigal/Singeri Swamigal video
 export const Route = createFileRoute("/activities")({
   head: () => ({
     meta: [
-      { title: "Activities & Events — Vedashramam" },
+      { title: "Activities & Events — Vedashrama Gurukulam" },
       {
         name: "description",
         content:
-          "Named celebrations and activities at Vedashramam: Sankara Jayanthi, Sankaranti, Krishna Jayanthi, Annadanam, Ammavasai Tharpanam, and Guru Sevas.",
+          "Named celebrations and activities at Vedashrama Gurukulam: Sankara Jayanthi, Sankaranti, Krishna Jayanthi, Annadanam, Ammavasai Tharpanam, and Guru Sevas.",
       },
-      { property: "og:title", content: "Activities & Events — Vedashramam" },
+      { property: "og:title", content: "Activities & Events — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Veda Parayanam, homams, Navavarana Pooja, Deeparadhana, Annadanam and festival observances.",
@@ -292,7 +292,7 @@ function ActivitiesPage() {
     <PageShell transparentHeader>
       <PageBanner
         title="Activities & Events"
-        subtitle="Celebrations observed at Vedashramam through the year"
+        subtitle="Celebrations observed at Vedashrama Gurukulam through the year"
         image={heroHomam}
       />
 

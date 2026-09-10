@@ -9,13 +9,13 @@ import { useTrustSettings } from "@/lib/use-trust-settings";
 export const Route = createFileRoute("/ways-to-support")({
   head: () => ({
     meta: [
-      { title: "Ways to Support – Donate Now — Vedashramam" },
+      { title: "Ways to Support – Donate Now — Vedashrama Gurukulam" },
       {
         name: "description",
         content:
           "Sponsorship schemes, Corpus endowments, Samaradhana, Building fund, and donation methods for Veda Ashrama Gurukulam.",
       },
-      { property: "og:title", content: "Ways to Support – Donate Now — Vedashramam" },
+      { property: "og:title", content: "Ways to Support – Donate Now — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Explore corpus endowments, monthly samaradhana, and building fund sponsorship tiers.",

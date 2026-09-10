@@ -12,7 +12,7 @@ export const Route = createFileRoute("/sabha-patrons-trustees")({
         content:
           "Founder & Managing Trustee G Arunachalam, Managing Trustee Smt. Kalyani, Trustees, and Vedic Teachers & Scholars.",
       },
-      { property: "og:title", content: "Patrons & Trustees — Vedashramam" },
+      { property: "og:title", content: "Patrons & Trustees — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Our Founder, Managing Trustees, Trustees, and dedicated Vedic Teachers & Scholars.",

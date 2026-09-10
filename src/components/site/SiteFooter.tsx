@@ -14,7 +14,7 @@ export function SiteFooter() {
         <div>
           <div className="flex items-center gap-3">
             <img src={logoMark} alt="" width={40} height={40} className="h-10 w-10" loading="lazy" />
-            <span className="font-display text-2xl">Vedashramam</span>
+            <span className="font-display text-xl sm:text-2xl">Vedashrama Gurukulam</span>
           </div>
           <p className="mt-4 text-xs leading-relaxed text-maroon-foreground/75">
             {trust.trustName} — Puducherry. Dedicated to Vedic education, Agama, Prayoga and Go Samrakshanam.
@@ -99,7 +99,7 @@ export function SiteFooter() {
       <div className="border-t border-maroon-foreground/15">
         <div className="container-page flex flex-col items-center justify-between gap-3 py-6 text-xs text-maroon-foreground/65 sm:flex-row">
           <div>
-            <p>© {new Date().getFullYear()} Vedashramam. All rights reserved.</p>
+            <p>© {new Date().getFullYear()} Vedashrama Gurukulam. All rights reserved.</p>
             <p className="mt-0.5 text-[0.7rem] text-gold/80">
               PAN: {trust.pan} | 80G Unique Regn No: {trust.reg80g} ({TRUST_DETAILS.approval80G.validityPeriod})
             </p>

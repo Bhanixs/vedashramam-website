@@ -8,13 +8,13 @@ import { useTrustSettings } from "@/lib/use-trust-settings";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact Us — Vedashramam, Pondicherry" },
+      { title: "Contact Us — Vedashrama Gurukulam, Pondicherry" },
       {
         name: "description",
         content:
-          "Get in touch with Vedashramam, Pondicherry for Sabha activities, Veda Patasala admissions, donations or general enquiries.",
+          "Get in touch with Vedashrama Gurukulam, Pondicherry for Sabha activities, Veda Patasala admissions, donations or general enquiries.",
       },
-      { property: "og:title", content: "Contact Us — Vedashramam" },
+      { property: "og:title", content: "Contact Us — Vedashrama Gurukulam" },
       { property: "og:description", content: "Sabha activities, Patasala admissions, donations and enquiries." },
     ],
   }),

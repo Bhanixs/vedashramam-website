@@ -12,7 +12,7 @@ export const Route = createFileRoute("/sources-of-sustenance")({
         content:
           "Financial sustenance, monthly operating budget, and public appeals for Veda Ashrama Gurukulam and Patasala.",
       },
-      { property: "og:title", content: "Sources of Sustenance — Vedashramam" },
+      { property: "og:title", content: "Sources of Sustenance — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "How public donations and corpus funds sustain our 55+ students, teachers, and boarding facilities.",

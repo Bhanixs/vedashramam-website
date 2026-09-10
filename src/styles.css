@@ -5,7 +5,7 @@
 @custom-variant dark (&:is(.dark *));
 
 /*
- * Vedashramam design system.
+ * Vedashrama Gurukulam design system.
  * Palette: temple saffron / deep maroon / antique gold on warm cream.
  * All colors are oklch semantic tokens. Never hardcode colors in components.
  */

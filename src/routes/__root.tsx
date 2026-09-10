@@ -84,13 +84,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Vedashramam — Veda Patasala & Spiritual Centre, Pondicherry" },
+      { title: "Vedashrama Gurukulam — Veda Patasala & Spiritual Centre, Pondicherry" },
       {
         name: "description",
         content:
-          "Vedashramam, Pondicherry — a charitable Sabha and a residential Veda Patasala preserving oral Vedic recitation in the guru-shishya parampara.",
+          "Vedashrama Gurukulam, Pondicherry — a charitable Sabha and a residential Veda Patasala preserving oral Vedic recitation in the guru-shishya parampara.",
       },
-      { property: "og:title", content: "Vedashramam — Veda Patasala & Spiritual Centre" },
+      { property: "og:title", content: "Vedashrama Gurukulam — Veda Patasala & Spiritual Centre" },
       {
         property: "og:description",
         content: "Sanatana Dharma Prachara, Veda Patasala and Spiritual Centre in Pondicherry.",

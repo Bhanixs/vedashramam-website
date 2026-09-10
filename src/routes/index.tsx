@@ -5,17 +5,20 @@ import { PageShell, SectionHeading, Sloka } from "@/components/site/PageShell";
 import heroRecitation from "@/assets/hero-recitation.jpg";
 import heroHomam from "@/assets/hero-homam.jpg";
 import heroTemple from "@/assets/hero-temple.jpg";
+import sankara01 from "@/assets/Sankara Jayanthi/sankara_jayanthi01.jpeg";
+import sankaranti01 from "@/assets/Sankaranti/sankaranti01.jpg";
+import krishna01 from "@/assets/Krishna_Jayanthi/krishna_jayanthi01.jpeg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Vedashramam — Veda Patasala & Spiritual Centre, Pondicherry" },
+      { title: "Vedashrama Gurukulam — Veda Patasala & Spiritual Centre, Pondicherry" },
       {
         name: "description",
         content:
-          "Welcome to Vedashramam: a charitable Sabha and a residential Veda Patasala in Pondicherry, training the next generation of Vedic scholars in the guru-shishya parampara.",
+          "Welcome to Vedashrama Gurukulam: a charitable Sabha and a residential Veda Patasala in Pondicherry, training the next generation of Vedic scholars in the guru-shishya parampara.",
       },
-      { property: "og:title", content: "Welcome to Vedashramam" },
+      { property: "og:title", content: "Welcome to Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Sanatana Dharma Prachara, Veda Patasala, Spiritual Centre — Pondicherry.",
@@ -27,10 +30,10 @@ export const Route = createFileRoute("/")({
 
 const SLIDES = [
   {
-    image: heroRecitation,
-    title: "Vinayaka Chaturthi Vrata Puja Vidhanam",
-    subtitle: "Mp3 Audio & Complete Guide for Vinayaka Chaturthi Puja Vidhanam",
-    cta: { label: "Read More", to: "/" },
+    image: sankara01,
+    title: "Sankara Jayanthi Mahotsavam",
+    subtitle: "Veda Parayanam, Shankara Bhashya Pathanam, Rudrabhishekam & Sadas",
+    cta: { label: "View Celebration", to: "/activities" },
   },
   {
     image: heroTemple,
@@ -51,10 +54,10 @@ const SLIDES = [
     cta: { label: "View Sevas", to: "/donate" },
   },
   {
-    image: heroRecitation,
-    title: "Samaveda & Yajur Upakarma",
-    subtitle: "Upakarma (Avani Avittam) procedure, audio recitation & guidance",
-    cta: { label: "Learn More", to: "/" },
+    image: sankaranti01,
+    title: "Makara Sankranti & Go Pooja",
+    subtitle: "Surya Namaskara Mantram, Pongal Samaradhana & Goshala Seva",
+    cta: { label: "View Celebration", to: "/activities" },
   },
 ] as const;
 
@@ -137,7 +140,7 @@ function Hero() {
 const PILLARS = [
   {
     icon: Flame,
-    title: "Vedashramam Sabha",
+    title: "Vedashrama Gurukulam Sabha",
     to: "/about-sabha",
     body: "A registered non-profitable charitable trust established for rendering yeoman service in religious and spiritual activities, and preserving the oral recitation of Vedas under the Guru-Sishya parampara.",
   },
@@ -151,25 +154,28 @@ const PILLARS = [
 
 const POSTS = [
   {
-    image: heroHomam,
-    category: "Activities & Events",
-    title: "Vinayaka Chaturthi Vrata Puja Vidhanam",
+    image: sankara01,
+    category: "Veda Parayanam & Sadas",
+    title: "Sankara Jayanthi Mahotsavam",
     excerpt:
-      "Ganesha or Ganapati is the Lord and destroyer of obstacles (Vighnaharta). Complete puja vidhanam, sankalpam, audio recitation and guidance for devotees.",
+      "Grand celebrations dedicated to Jagadguru Sri Adi Shankaracharya with multi-day Veda Parayanam, Shankara Bhashya Pathanam, Mahanyasa Purvaka Rudrabhishekam, and Deeparadhana by resident vidyarthis and learned acharyas.",
+    to: "/activities",
   },
   {
-    image: heroRecitation,
-    category: "Activities & Events",
-    title: "Samaveda & Yajur Upakarma",
+    image: sankaranti01,
+    category: "Festival & Go Pooja",
+    title: "Makara Sankranti & Go Pooja",
     excerpt:
-      "Complete Upakarma (Avani Avittam) procedure and audio for devotees observing the sacred annual rites, prayers, and renewal of Yagnopaveetham.",
+      "Auspicious Makara Sankranti and Pongal festival celebrated with Surya Namaskara mantram recitation, traditional Pongal naivedyam, special Veda Parayanam, and Go Pooja at the Gurukulam Goshala.",
+    to: "/activities",
   },
   {
-    image: heroTemple,
-    category: "Activities & Events",
-    title: "Gokulashtami Puja Vidhanam",
+    image: krishna01,
+    category: "Utsavam & Parayanam",
+    title: "Sri Krishna Jayanthi Utsavam",
     excerpt:
-      "Celebrating the auspicious appearance of Bhagavan Sri Krishna with traditional puja vidhanam, aradhana rituals, stotrams and naivedyam procedures.",
+      "Sri Krishna Jayanthi (Gokulashtami) celebrations featuring Srimad Bhagavatam recital, floral alankaram, midnight Sri Krishna Janma Pooja, special aradhana, and devotional chanting by our Vidyarthis.",
+    to: "/activities",
   },
 ];
 
@@ -185,7 +191,7 @@ function Home() {
       />
 
       <section className="container-page py-20">
-        <SectionHeading title="Welcome to Vedashramam" eyebrow="Sanatana Dharma Prachara · Veda Patasala · Spiritual Centre" />
+        <SectionHeading title="Welcome to Vedashrama Gurukulam" eyebrow="Sanatana Dharma Prachara · Veda Patasala · Spiritual Centre" />
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {PILLARS.map((p) => (
@@ -208,7 +214,7 @@ function Home() {
 
         <div className="mx-auto mt-20 max-w-3xl space-y-5 text-center text-[0.95rem] leading-relaxed text-foreground/85">
           <p>
-            Vedashramam is home to two connected institutions: a Sabha dedicated to preserving and promoting
+            Vedashrama Gurukulam is home to two connected institutions: a Sabha dedicated to preserving and promoting
             Vedic and spiritual tradition, and a residential Veda Patasala (Gurukulam) training the next
             generation of Vedic scholars in the traditional guru-shishya system — from Pondicherry.
           </p>
@@ -228,26 +234,35 @@ function Home() {
 
       <section className="mandala-bg border-y border-border py-20">
         <div className="container-page">
-          <SectionHeading title="Recent from Veda Vani" eyebrow="Articles, stotrams and event write-ups" />
+          <SectionHeading title="Recent Activities" eyebrow="Sacred celebrations, homams and festival observances" />
           <div className="mt-14 grid gap-6 md:grid-cols-3">
             {POSTS.map((post) => (
-              <article key={post.title} className="surface-card surface-card-hover overflow-hidden">
-                <img
-                  src={post.image}
-                  alt={post.title}
-                  className="h-48 w-full object-cover"
-                  loading="lazy"
-                  width={1920}
-                  height={1088}
-                />
+              <Link
+                key={post.title}
+                to={post.to}
+                className="surface-card surface-card-hover overflow-hidden group block"
+              >
+                <div className="h-48 w-full overflow-hidden bg-muted">
+                  <img
+                    src={post.image}
+                    alt={post.title}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
                 <div className="p-6">
                   <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-primary">
                     {post.category}
                   </p>
-                  <h3 className="mt-3 font-display text-lg leading-snug text-maroon">{post.title}</h3>
+                  <h3 className="mt-3 font-display text-lg leading-snug text-maroon group-hover:text-primary transition-colors">
+                    {post.title}
+                  </h3>
                   <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{post.excerpt}</p>
+                  <span className="mt-4 inline-flex items-center text-xs font-semibold text-primary">
+                    View Photos &amp; Details →
+                  </span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
@@ -256,9 +271,9 @@ function Home() {
       <section className="bg-maroon py-20 text-maroon-foreground">
         <div className="container-page text-center">
           <p className="font-display text-2xl text-gold">सर्वे भवन्तु सुखिनः</p>
-          <h2 className="mt-5 font-display text-3xl sm:text-4xl">Support Vedashramam</h2>
+          <h2 className="mt-5 font-display text-3xl sm:text-4xl">Support Vedashrama Gurukulam</h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-maroon-foreground/80">
-            As a trust, Vedashramam depends on the generosity of well-wishers to sustain the Sabha’s activities
+            As a trust, Vedashrama Gurukulam depends on the generosity of well-wishers to sustain the Sabha’s activities
             and the Veda Patasala’s residential education. Support can take the form of Vidyadanam (sponsoring a
             student’s education) or Annadanam (sponsoring meals).
           </p>

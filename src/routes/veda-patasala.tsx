@@ -5,13 +5,13 @@ import heroRecitation from "@/assets/hero-recitation.jpg";
 export const Route = createFileRoute("/veda-patasala")({
   head: () => ({
     meta: [
-      { title: "Veda Patasala — Vedashramam Gurukulam, Pondicherry" },
+      { title: "Veda Patasala — Vedashrama Gurukulam, Pondicherry" },
       {
         name: "description",
         content:
           "A traditional residential Gurukulam training students in Vedic chanting, Sanskrit and ritual knowledge through daily adhyayanam and oral transmission.",
       },
-      { property: "og:title", content: "Veda Patasala — Vedashramam" },
+      { property: "og:title", content: "Veda Patasala — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Residential Gurukulam training students in the traditional guru-shishya system.",

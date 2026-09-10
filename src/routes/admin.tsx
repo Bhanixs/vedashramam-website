@@ -752,7 +752,7 @@ function AdminPortalPage() {
             <ShieldCheck className="h-6 w-6" />
           </div>
           <div>
-            <h1 className="font-display text-lg font-bold leading-none text-stone-900">Veda Ashramam Admin Portal</h1>
+            <h1 className="font-display text-lg font-bold leading-none text-stone-900">Vedashrama Gurukulam Admin Portal</h1>
             <p className="mt-0.5 text-xs text-stone-500">Sri Sai Sankara Bhaktha Sabha Trust Management</p>
           </div>
         </div>

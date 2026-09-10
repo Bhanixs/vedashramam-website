@@ -5,13 +5,13 @@ import heroTemple from "@/assets/hero-temple.jpg";
 export const Route = createFileRoute("/sabha")({
   head: () => ({
     meta: [
-      { title: "About the Sabha — Vedashramam" },
+      { title: "About the Sabha — Vedashrama Gurukulam" },
       {
         name: "description",
         content:
-          "Vedashramam Sabha is a non-profit charitable trust promoting Sanatana Dharma and preserving oral Vedic recitation under the guru-shishya parampara.",
+          "Vedashrama Gurukulam Sabha is a non-profit charitable trust promoting Sanatana Dharma and preserving oral Vedic recitation under the guru-shishya parampara.",
       },
-      { property: "og:title", content: "About the Sabha — Vedashramam" },
+      { property: "og:title", content: "About the Sabha — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "A non-profit charitable trust rendering service in religious and spiritual activities.",

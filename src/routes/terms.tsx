@@ -4,16 +4,16 @@ import TermsPage from "@/pages/Terms";
 export const Route = createFileRoute("/terms")({
   head: () => ({
     meta: [
-      { title: "Terms & Conditions — Vedashramam, Pondicherry" },
+      { title: "Terms & Conditions — Vedashrama Gurukulam, Pondicherry" },
       {
         name: "description",
         content:
-          "Terms and conditions for Vedashramam Sabha and Veda Patasala, Pondicherry — trust objectives, donations, intellectual property, and jurisdiction.",
+          "Terms and conditions for Vedashrama Gurukulam Sabha and Veda Patasala, Pondicherry — trust objectives, donations, intellectual property, and jurisdiction.",
       },
-      { property: "og:title", content: "Terms & Conditions — Vedashramam" },
+      { property: "og:title", content: "Terms & Conditions — Vedashrama Gurukulam" },
       {
         property: "og:description",
-        content: "Institutional directives, donation terms, and legal jurisdiction of Vedashramam Sabha.",
+        content: "Institutional directives, donation terms, and legal jurisdiction of Vedashrama Gurukulam Sabha.",
       },
     ],
   }),

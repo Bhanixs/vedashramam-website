@@ -7,13 +7,13 @@ import { useTrustSettings } from "@/lib/use-trust-settings";
 export const Route = createFileRoute("/donate-for-sevas")({
   head: () => ({
     meta: [
-      { title: "Donate for Sevas / Annadanam — Vedashramam" },
+      { title: "Donate for Sevas / Annadanam — Vedashrama Gurukulam" },
       {
         name: "description",
         content:
-          "Sponsor sacred Sevas and Annadanam at Vedashramam. Sabha Sashwata Nidhi Fund, Nithya Sevas, Annual Sevas, and Corpus endowments.",
+          "Sponsor sacred Sevas and Annadanam at Vedashrama Gurukulam. Sabha Sashwata Nidhi Fund, Nithya Sevas, Annual Sevas, and Corpus endowments.",
       },
-      { property: "og:title", content: "Donate for Sevas / Annadanam — Vedashramam" },
+      { property: "og:title", content: "Donate for Sevas / Annadanam — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Offer sacred Sevas and Annadanam with Sankalpam and Prasadam for donors.",

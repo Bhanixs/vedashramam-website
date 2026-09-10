@@ -36,7 +36,7 @@ export function TermsPage() {
             </div>
             <div className="mt-6 space-y-4 text-[0.95rem] leading-relaxed text-foreground/85">
               <p>
-                By accessing, browsing, or using the website of <strong>Vedashramam</strong> (operating the Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust and residential Veda Ashrama Gurukulam in Puducherry), you acknowledge that you have read, understood, and agreed to be bound by these Terms & Conditions.
+                By accessing, browsing, or using the website of <strong>Vedashrama Gurukulam</strong> (operating the Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust and residential Veda Ashrama Gurukulam in Puducherry), you acknowledge that you have read, understood, and agreed to be bound by these Terms & Conditions.
               </p>
               <p className="rounded-lg bg-muted/50 p-4 text-sm text-foreground/80 italic">
                 வேதாஶ்ரமம் இணையதளத்தை அணுகுவதன் மூலம் மற்றும் பயன்படுத்துவதன் மூலம், இந்த விதிகளையும் நிபந்தனைகளையும் முழுமையாகப் படித்து, புரிந்து கொண்டு, ஏற்றுக்கொள்கிறீர்கள் என்பதை உறுதிப்படுத்துகிறீர்கள்.
@@ -112,10 +112,10 @@ export function TermsPage() {
             </div>
             <div className="mt-6 space-y-4 text-[0.95rem] leading-relaxed text-foreground/85">
               <p>
-                All written articles, stotram compilations, audio/video recitations, logo emblems, and Puja Vidhanam guides published under <strong>Veda Vani</strong> or Vedashramam digital platforms are sacred resources preserved and owned by the trust.
+                All written articles, stotram compilations, audio/video recitations, logo emblems, and Puja Vidhanam guides published under <strong>Veda Vani</strong> or Vedashrama Gurukulam digital platforms are sacred resources preserved and owned by the trust.
               </p>
               <p>
-                Content may be downloaded or shared for personal, non-commercial, and devotional purposes, provided credit is explicitly attributed to Vedashramam. Commercial reproduction, redistribution, or modification without written permission is strictly prohibited.
+                Content may be downloaded or shared for personal, non-commercial, and devotional purposes, provided credit is explicitly attributed to Vedashrama Gurukulam. Commercial reproduction, redistribution, or modification without written permission is strictly prohibited.
               </p>
             </div>
           </div>

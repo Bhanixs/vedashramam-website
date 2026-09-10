@@ -15,7 +15,7 @@ export const Route = createFileRoute("/donate")({
         content:
           "Support Veda Ashrama Gurukulam. Contribute for Sankara Jayanthi & Nithya Sevas, sponsor our Vidyarthis, or support the Patasala Building Fund.",
       },
-      { property: "og:title", content: "Donate Now — Vedashramam" },
+      { property: "og:title", content: "Donate Now — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Donate online for Sevas, Annadanam, Vidyarthi sponsorship, and the New Patasala Building Fund.",
@@ -260,7 +260,7 @@ function DonatePage() {
             {!submitted ? (
               <form onSubmit={handleSubmit} className="space-y-4">
                 <span className="text-xs font-semibold uppercase tracking-wider text-gold">Online Donation</span>
-                <h3 className="font-display text-2xl text-maroon">Support Vedashramam</h3>
+                <h3 className="font-display text-2xl text-maroon">Support Vedashrama Gurukulam</h3>
                 <p className="text-xs text-muted-foreground">Zero transaction charges apply.</p>
 
                 <div>

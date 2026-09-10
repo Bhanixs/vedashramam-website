@@ -5,13 +5,13 @@ import heroTemple from "@/assets/hero-temple.jpg";
 export const Route = createFileRoute("/about-sabha")({
   head: () => ({
     meta: [
-      { title: "About Sabha — Vedashramam, Puducherry" },
+      { title: "About Sabha — Vedashrama Gurukulam, Puducherry" },
       {
         name: "description",
         content:
           "Veda Ashrama Gurukulam and Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust in Karuvadikuppam, Puducherry.",
       },
-      { property: "og:title", content: "About Sabha — Vedashramam" },
+      { property: "og:title", content: "About Sabha — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Dedicated to Vedic knowledge, Sanatana Dharma, Agama traditions, and Go Samrakshana.",

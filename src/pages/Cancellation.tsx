@@ -62,7 +62,7 @@ export function CancellationPage() {
             </div>
             <div className="mt-6 space-y-4 text-[0.95rem] leading-relaxed text-foreground/85">
               <p>
-                In cases where a payment error occurs — such as a technical glitch resulting in double debiting, an incorrect amount being charged, or an accidental transaction — the donor must notify Vedashramam within <strong>7 calendar days</strong> of the transaction date.
+                In cases where a payment error occurs — such as a technical glitch resulting in double debiting, an incorrect amount being charged, or an accidental transaction — the donor must notify Vedashrama Gurukulam within <strong>7 calendar days</strong> of the transaction date.
               </p>
               <div className="rounded-lg bg-muted/50 p-4 text-sm text-foreground/80">
                 <strong>Notification Requirement:</strong> Please write to us with the transaction ID, date, donor name, and payment receipt copy to initiate verification.

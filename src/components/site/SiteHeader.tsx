@@ -100,15 +100,15 @@ export function SiteHeader({ transparent = false }: { transparent?: boolean }) {
     >
       <div className="container-page flex h-20 items-center justify-between gap-4">
         <Link to="/" className="flex items-center gap-3" onClick={() => setMobileOpen(false)}>
-          <img src={logoMark} alt="Vedashramam emblem" width={44} height={44} className="h-11 w-11" />
+          <img src={logoMark} alt="Vedashrama Gurukulam emblem" width={44} height={44} className="h-11 w-11" />
           <span className="leading-tight">
             <span
               className={cn(
-                "block font-display text-xl tracking-wide",
+                "block font-display text-lg sm:text-xl tracking-wide",
                 solid ? "text-maroon" : "text-primary-foreground",
               )}
             >
-              Vedashramam
+              Vedashrama Gurukulam
             </span>
             <span
               className={cn(

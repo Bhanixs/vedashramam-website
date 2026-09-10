@@ -6,13 +6,13 @@ import { BookOpen, Award, CheckCircle, Clock, Heart, Users } from "lucide-react"
 export const Route = createFileRoute("/patasala-details")({
   head: () => ({
     meta: [
-      { title: "Gurukulam & Patasala Details — Vedashramam" },
+      { title: "Gurukulam & Patasala Details — Vedashrama Gurukulam" },
       {
         name: "description",
         content:
           "Courses of study, admission of Vidyarthis, Gurukula oral teaching method, and daily life at Veda Ashrama Gurukulam.",
       },
-      { property: "og:title", content: "Patasala Details — Vedashramam" },
+      { property: "og:title", content: "Patasala Details — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Comprehensive overview of the 10-12 year Vedic curriculum, admission criteria, and student welfare.",

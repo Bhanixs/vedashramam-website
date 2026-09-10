@@ -6,13 +6,13 @@ import { Compass, BookOpen, Library, GraduationCap, Globe, Check } from "lucide-
 export const Route = createFileRoute("/our-vision")({
   head: () => ({
     meta: [
-      { title: "Our Vision & Objectives — Vedashramam" },
+      { title: "Our Vision & Objectives — Vedashrama Gurukulam" },
       {
         name: "description",
         content:
           "The vision, aims, and objectives of Veda Ashrama Gurukulam: Traditional Gurukula education, Higher Vedic Studies, and contemporary academic excellence.",
       },
-      { property: "og:title", content: "Our Vision & Objectives — Vedashramam" },
+      { property: "og:title", content: "Our Vision & Objectives — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Nurturing scholarly mastery of the Vedas while cultivating modern societal awareness.",

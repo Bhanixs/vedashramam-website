@@ -6,13 +6,13 @@ import { FileText, ShieldCheck, CheckCircle2 } from "lucide-react";
 export const Route = createFileRoute("/epfo-form-5a")({
   head: () => ({
     meta: [
-      { title: "EPFO Form 5A Extract — Statutory Disclosures — Vedashramam" },
+      { title: "EPFO Form 5A Extract — Statutory Disclosures — Vedashrama Gurukulam" },
       {
         name: "description",
         content:
           "Statutory disclosure of Employees' Provident Fund Organisation (EPFO) Form 5A establishment particulars and governance records.",
       },
-      { property: "og:title", content: "EPFO Form 5A Extract — Vedashramam" },
+      { property: "og:title", content: "EPFO Form 5A Extract — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "Statutory compliance and establishment particulars for Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust.",

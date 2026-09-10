@@ -7,13 +7,13 @@ import { Calendar as CalendarIcon, Clock, Sparkles, Sun, Moon } from "lucide-rea
 export const Route = createFileRoute("/panchangam")({
   head: () => ({
     meta: [
-      { title: "Panchangam — Vedashramam, Puducherry" },
+      { title: "Panchangam — Vedashrama Gurukulam, Puducherry" },
       {
         name: "description",
         content:
           "Daily Vedic Panchangam. Select a date to view Tithi, Nakshatram, Yogam, Karanam, Rahu Kalam, and auspicious timings.",
       },
-      { property: "og:title", content: "Panchangam — Vedashramam" },
+      { property: "og:title", content: "Panchangam — Vedashrama Gurukulam" },
       {
         property: "og:description",
         content: "View Vedic calendar details, auspicious muhurthams and tithi timings.",

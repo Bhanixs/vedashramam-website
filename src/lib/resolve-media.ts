@@ -1,4 +1,4 @@
-// Dynamic asset resolver for Vedashramam
+// Dynamic asset resolver for Vedashrama Gurukulam
 // Resolves Vite bundled assets (/src/assets/...), public static assets (/assets/...),
 // external Supabase Storage URLs (https://...), base64 data URLs, and handles expired blob: URLs gracefully.
 
