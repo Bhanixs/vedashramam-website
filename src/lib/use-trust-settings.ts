@@ -29,12 +29,14 @@ const DEFAULT_SETTINGS: TrustSettingsState = {
   reg80g: TRUST_DETAILS.registration80G,
 };
 
-const LOCAL_STORAGE_KEY = "vedabhavan_trust_settings_cache";
+const LOCAL_STORAGE_KEY = "vedashramam_trust_settings_cache";
 
 function getInitialSettings(): TrustSettingsState {
   if (typeof window !== "undefined") {
     try {
-      const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+      const stored =
+        localStorage.getItem(LOCAL_STORAGE_KEY) ||
+        localStorage.getItem("vedabhavan_trust_settings_cache");
       if (stored) {
         return { ...DEFAULT_SETTINGS, ...JSON.parse(stored) };
       }

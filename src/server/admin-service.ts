@@ -483,7 +483,7 @@ export async function handleAdminApi(request: Request): Promise<Response> {
       // Also persist to Supabase if configured
       if (isSupabaseConfigured()) {
         try {
-          await sbFetch("vedabhavan_contacts", "POST", newRecord);
+          await sbFetch("vedashramam_contacts", "POST", newRecord);
         } catch (e) {
           console.warn("Supabase contact write failed, cached in local store:", e);
         }
@@ -529,7 +529,7 @@ export async function handleAdminApi(request: Request): Promise<Response> {
       // Also persist to Supabase if configured
       if (isSupabaseConfigured()) {
         try {
-          await sbFetch("vedabhavan_donations", "POST", newRecord);
+          await sbFetch("vedashramam_donations", "POST", newRecord);
         } catch (e) {
           console.warn("Supabase donation write failed, cached in local store:", e);
         }
@@ -543,12 +543,12 @@ export async function handleAdminApi(request: Request): Promise<Response> {
       if (isSupabaseConfigured()) {
         try {
           const res = await sbFetch(
-            "vedabhavan_activities",
+            "vedashramam_activities",
             "GET",
             null,
             "order=sort_order.asc,created_at.desc",
           );
-          if (Array.isArray(res)) return jsonResponse(res);
+          if (Array.isArray(res) && res.length > 0) return jsonResponse(res);
         } catch (e) {
           console.warn("Supabase activities get failed, using local store:", e);
         }
@@ -562,12 +562,12 @@ export async function handleAdminApi(request: Request): Promise<Response> {
       if (isSupabaseConfigured()) {
         try {
           const res = await sbFetch(
-            "vedabhavan_gallery",
+            "vedashramam_gallery",
             "GET",
             null,
             "order=sort_order.asc,created_at.desc",
           );
-          if (Array.isArray(res)) return jsonResponse(res);
+          if (Array.isArray(res) && res.length > 0) return jsonResponse(res);
         } catch (e) {
           console.warn("Supabase gallery get failed, using local store:", e);
         }
@@ -580,7 +580,7 @@ export async function handleAdminApi(request: Request): Promise<Response> {
     if (action === "settings" && method === "GET") {
       if (isSupabaseConfigured()) {
         try {
-          const res = await sbFetch("vedabhavan_settings", "GET", null, "id=eq.general");
+          const res = await sbFetch("vedashramam_settings", "GET", null, "id=eq.general");
           if (Array.isArray(res) && res.length > 0) return jsonResponse(res[0]);
         } catch (e) {
           console.warn("Supabase settings get failed, using local store:", e);
@@ -598,6 +598,33 @@ export async function handleAdminApi(request: Request): Promise<Response> {
 
     // 7. STATS OVERVIEW (Authenticated GET)
     if (action === "stats" && method === "GET") {
+      if (isSupabaseConfigured()) {
+        try {
+          const [dons, conts, acts, gals] = await Promise.all([
+            sbFetch("vedashramam_donations", "GET").catch(() => []),
+            sbFetch("vedashramam_contacts", "GET").catch(() => []),
+            sbFetch("vedashramam_activities", "GET").catch(() => []),
+            sbFetch("vedashramam_gallery", "GET").catch(() => []),
+          ]);
+          const dList = Array.isArray(dons) ? dons : [];
+          const cList = Array.isArray(conts) ? conts : [];
+          const aList = Array.isArray(acts) ? acts : [];
+          const gList = Array.isArray(gals) ? gals : [];
+          const totalDonations = dList.reduce((sum, d) => sum + (Number(d.amount) || 0), 0);
+          return jsonResponse({
+            donationsCount: dList.length,
+            donationsTotalAmount: totalDonations,
+            pendingDonations: dList.filter((d) => d.status === "pending_verification").length,
+            contactsCount: cList.length,
+            pendingContacts: cList.filter((c) => c.status === "new").length,
+            activitiesCount: aList.length,
+            galleryCount: gList.length,
+          });
+        } catch (e) {
+          console.warn("Supabase stats fetch failed, fallback to local store:", e);
+        }
+      }
+
       const store = readLocalStore();
       const totalDonations = store.donations.reduce((sum, d) => sum + (Number(d.amount) || 0), 0);
       return jsonResponse({
@@ -616,7 +643,7 @@ export async function handleAdminApi(request: Request): Promise<Response> {
       if (method === "GET") {
         if (isSupabaseConfigured()) {
           try {
-            const res = await sbFetch("vedabhavan_contacts", "GET", null, "order=created_at.desc");
+            const res = await sbFetch("vedashramam_contacts", "GET", null, "order=created_at.desc");
             if (Array.isArray(res)) return jsonResponse(res);
           } catch (e) {
             console.warn("Supabase contacts fetch failed, using local store:", e);
@@ -629,7 +656,7 @@ export async function handleAdminApi(request: Request): Promise<Response> {
         const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
         if (isSupabaseConfigured()) {
           try {
-            await sbFetch("vedabhavan_contacts", "PATCH", body, `id=eq.${id}`);
+            await sbFetch("vedashramam_contacts", "PATCH", body, `id=eq.${id}`);
           } catch (e) {
             console.warn("Supabase contact patch failed:", e);
           }
@@ -644,7 +671,7 @@ export async function handleAdminApi(request: Request): Promise<Response> {
       if (method === "DELETE") {
         if (isSupabaseConfigured()) {
           try {
-            await sbFetch("vedabhavan_contacts", "DELETE", null, `id=eq.${id}`);
+            await sbFetch("vedashramam_contacts", "DELETE", null, `id=eq.${id}`);
           } catch (e) {
             console.warn("Supabase contact delete failed:", e);
           }
@@ -661,7 +688,7 @@ export async function handleAdminApi(request: Request): Promise<Response> {
       if (method === "GET") {
         if (isSupabaseConfigured()) {
           try {
-            const res = await sbFetch("vedabhavan_donations", "GET", null, "order=created_at.desc");
+            const res = await sbFetch("vedashramam_donations", "GET", null, "order=created_at.desc");
             if (Array.isArray(res)) return jsonResponse(res);
           } catch (e) {
             console.warn("Supabase donations fetch failed, using local store:", e);
@@ -674,7 +701,7 @@ export async function handleAdminApi(request: Request): Promise<Response> {
         const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
         if (isSupabaseConfigured()) {
           try {
-            await sbFetch("vedabhavan_donations", "PATCH", body, `id=eq.${id}`);
+            await sbFetch("vedashramam_donations", "PATCH", body, `id=eq.${id}`);
           } catch (e) {
             console.warn("Supabase donation patch failed:", e);
           }
@@ -689,7 +716,7 @@ export async function handleAdminApi(request: Request): Promise<Response> {
       if (method === "DELETE") {
         if (isSupabaseConfigured()) {
           try {
-            await sbFetch("vedabhavan_donations", "DELETE", null, `id=eq.${id}`);
+            await sbFetch("vedashramam_donations", "DELETE", null, `id=eq.${id}`);
           } catch (e) {
             console.warn("Supabase donation delete failed:", e);
           }
@@ -727,13 +754,33 @@ export async function handleAdminApi(request: Request): Promise<Response> {
           is_published: body.is_published !== false,
           sort_order: body.sort_order || store.activities.length + 1,
           created_at: new Date().toISOString(),
+          updated_at: new Date().toISOString(),
         };
+
+        if (isSupabaseConfigured()) {
+          try {
+            await sbFetch("vedashramam_activities", "POST", newAct);
+          } catch (e) {
+            console.warn("Supabase activity create failed:", e);
+          }
+        }
+
         store.activities.push(newAct);
         writeLocalStore(store);
         return jsonResponse(newAct, 201);
       }
       if (method === "PATCH") {
         const body = (await request.json().catch(() => ({}))) as Record<string, unknown>;
+        if (isSupabaseConfigured()) {
+          try {
+            await sbFetch("vedashramam_activities", "PATCH", {
+              ...body,
+              updated_at: new Date().toISOString(),
+            }, `id=eq.${id}`);
+          } catch (e) {
+            console.warn("Supabase activity patch failed:", e);
+          }
+        }
         const target = store.activities.find((a) => a.id === id);
         if (!target) return errorResponse("Activity not found", 404);
         Object.assign(target, body);
@@ -741,6 +788,13 @@ export async function handleAdminApi(request: Request): Promise<Response> {
         return jsonResponse(target);
       }
       if (method === "DELETE") {
+        if (isSupabaseConfigured()) {
+          try {
+            await sbFetch("vedashramam_activities", "DELETE", null, `id=eq.${id}`);
+          } catch (e) {
+            console.warn("Supabase activity delete failed:", e);
+          }
+        }
         store.activities = store.activities.filter((a) => a.id !== id);
         writeLocalStore(store);
         return jsonResponse({ success: true });
@@ -768,11 +822,27 @@ export async function handleAdminApi(request: Request): Promise<Response> {
           is_published: body.is_published !== false,
           created_at: new Date().toISOString(),
         };
+
+        if (isSupabaseConfigured()) {
+          try {
+            await sbFetch("vedashramam_gallery", "POST", newItem);
+          } catch (e) {
+            console.warn("Supabase gallery create failed:", e);
+          }
+        }
+
         store.gallery.push(newItem);
         writeLocalStore(store);
         return jsonResponse(newItem, 201);
       }
       if (method === "DELETE") {
+        if (isSupabaseConfigured()) {
+          try {
+            await sbFetch("vedashramam_gallery", "DELETE", null, `id=eq.${id}`);
+          } catch (e) {
+            console.warn("Supabase gallery delete failed:", e);
+          }
+        }
         store.gallery = store.gallery.filter((g) => g.id !== id);
         writeLocalStore(store);
         return jsonResponse({ success: true });
@@ -782,6 +852,16 @@ export async function handleAdminApi(request: Request): Promise<Response> {
     // 12. SETTINGS UPDATE (Authenticated POST/PATCH)
     if (action === "settings" && (method === "POST" || method === "PATCH")) {
       const body = (await request.json().catch(() => ({}))) as Partial<DbStore["settings"]>;
+      if (isSupabaseConfigured()) {
+        try {
+          await sbFetch("vedashramam_settings", "PATCH", {
+            ...body,
+            updated_at: new Date().toISOString(),
+          }, "id=eq.general");
+        } catch (e) {
+          console.warn("Supabase settings update failed:", e);
+        }
+      }
       const store = readLocalStore();
       store.settings = {
         ...store.settings,
@@ -831,7 +911,7 @@ export async function handleAdminApi(request: Request): Promise<Response> {
           const filePath = `uploads/${Date.now()}-${crypto.randomUUID().slice(0, 8)}.${ext || "jpg"}`;
           const mimeType = body.type || "image/jpeg";
 
-          const sbStorageUrl = `${sbUrl()}/storage/v1/object/vedabhavan-media/${filePath}`;
+          const sbStorageUrl = `${sbUrl()}/storage/v1/object/vedashramam-media/${filePath}`;
           const uploadRes = await fetch(sbStorageUrl, {
             method: "POST",
             headers: {
@@ -844,7 +924,7 @@ export async function handleAdminApi(request: Request): Promise<Response> {
           });
 
           if (uploadRes.ok) {
-            const publicUrl = `${sbUrl()}/storage/v1/object/public/vedabhavan-media/${filePath}`;
+            const publicUrl = `${sbUrl()}/storage/v1/object/public/vedashramam-media/${filePath}`;
             return jsonResponse({ url: publicUrl, filename: body.filename, success: true });
           }
         } catch (e) {

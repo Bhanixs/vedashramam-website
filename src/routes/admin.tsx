@@ -109,7 +109,7 @@ interface SiteSettings {
   reg_80g: string;
 }
 
-const STORAGE_KEY = "vedabhavan_admin_token";
+const STORAGE_KEY = "vedashramam_admin_token";
 
 function AdminPortalPage() {
   const [token, setToken] = useState<string | null>(null);
@@ -249,7 +249,9 @@ function AdminPortalPage() {
   };
 
   useEffect(() => {
-    const saved = sessionStorage.getItem(STORAGE_KEY);
+    const saved =
+      sessionStorage.getItem(STORAGE_KEY) ||
+      sessionStorage.getItem("vedabhavan_admin_token");
     if (saved) {
       setToken(saved);
     }
@@ -307,7 +309,7 @@ function AdminPortalPage() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `vedabhavan-admin-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `vedashramam-admin-backup-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
     toast.success("Downloaded complete admin store backup JSON!");
@@ -625,7 +627,7 @@ function AdminPortalPage() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `vedabhavan_donations_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute("download", `vedashramam_donations_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -645,7 +647,7 @@ function AdminPortalPage() {
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement("a");
     link.setAttribute("href", encodedUri);
-    link.setAttribute("download", `vedabhavan_contacts_${new Date().toISOString().slice(0, 10)}.csv`);
+    link.setAttribute("download", `vedashramam_contacts_${new Date().toISOString().slice(0, 10)}.csv`);
     document.body.appendChild(link);
     link.click();
     link.remove();
@@ -668,7 +670,7 @@ function AdminPortalPage() {
             <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-amber-100 text-amber-900">
               <ShieldCheck className="h-8 w-8" />
             </div>
-            <h1 className="mt-4 font-display text-2xl font-bold text-stone-900">Vedabhavan Admin Portal</h1>
+            <h1 className="mt-4 font-display text-2xl font-bold text-stone-900">Veda Ashramam Admin Portal</h1>
             <p className="mt-1 text-xs uppercase tracking-widest text-amber-800">
               Sri Sai Sankara Bhaktha Sabha Trust
             </p>
@@ -749,7 +751,7 @@ function AdminPortalPage() {
             <ShieldCheck className="h-6 w-6" />
           </div>
           <div>
-            <h1 className="font-display text-lg font-bold leading-none text-stone-900">Vedabhavan Admin Portal</h1>
+            <h1 className="font-display text-lg font-bold leading-none text-stone-900">Veda Ashramam Admin Portal</h1>
             <p className="mt-0.5 text-xs text-stone-500">Sri Sai Sankara Bhaktha Sabha Trust Management</p>
           </div>
         </div>

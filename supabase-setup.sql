@@ -1,11 +1,11 @@
 -- =====================================================
--- Vedabhavan CMS & Admin — Database Setup
--- Run this once in: Supabase Dashboard > SQL Editor
+-- Vedashramam CMS & Admin — Complete Database Setup
+-- Run this in: Supabase Dashboard > SQL Editor
 -- =====================================================
 
 -- 1. Contacts Table (Enquiries from /contact)
-create table if not exists vedabhavan_contacts (
-  id uuid primary key default gen_random_uuid(),
+create table if not exists vedashramam_contacts (
+  id text primary key,
   name text not null,
   contact text not null,
   interest text default 'General Enquiry',
@@ -15,21 +15,22 @@ create table if not exists vedabhavan_contacts (
 );
 
 -- 2. Donations Table (Submissions from /donate and /donate-for-sevas)
-create table if not exists vedabhavan_donations (
-  id uuid primary key default gen_random_uuid(),
+create table if not exists vedashramam_donations (
+  id text primary key,
   donor_name text not null,
   donor_phone text not null,
   donor_pan text default '',
   amount numeric not null default 0,
   purpose text not null,
+  payment_method text default 'Bank Transfer / UPI',
   status text not null default 'pending_verification' check (status in ('pending_verification', 'verified', 'receipt_sent')),
   notes text default '',
   created_at timestamptz not null default now()
 );
 
 -- 3. Activities & Events Table
-create table if not exists vedabhavan_activities (
-  id uuid primary key default gen_random_uuid(),
+create table if not exists vedashramam_activities (
+  id text primary key,
   title text not null,
   category text default 'Event',
   description text default '',
@@ -43,8 +44,8 @@ create table if not exists vedabhavan_activities (
 );
 
 -- 4. Gallery Images Table
-create table if not exists vedabhavan_gallery (
-  id uuid primary key default gen_random_uuid(),
+create table if not exists vedashramam_gallery (
+  id text primary key,
   title text default '',
   image_url text not null,
   category text default 'General',
@@ -54,7 +55,7 @@ create table if not exists vedabhavan_gallery (
 );
 
 -- 5. Site Settings Table
-create table if not exists vedabhavan_settings (
+create table if not exists vedashramam_settings (
   id text primary key default 'general',
   trust_name text default 'Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust',
   phone text default '+91 98423 27791',
@@ -71,50 +72,97 @@ create table if not exists vedabhavan_settings (
 );
 
 -- Initial settings row
-insert into vedabhavan_settings (id) values ('general')
+insert into vedashramam_settings (id) values ('general')
 on conflict (id) do nothing;
 
 -- Enable Row Level Security (RLS)
-alter table vedabhavan_contacts enable row level security;
-alter table vedabhavan_donations enable row level security;
-alter table vedabhavan_activities enable row level security;
-alter table vedabhavan_gallery enable row level security;
-alter table vedabhavan_settings enable row level security;
+alter table vedashramam_contacts enable row level security;
+alter table vedashramam_donations enable row level security;
+alter table vedashramam_activities enable row level security;
+alter table vedashramam_gallery enable row level security;
+alter table vedashramam_settings enable row level security;
 
--- Public read access for published activities, gallery, and settings
-create policy "public_read_activities" on vedabhavan_activities
-  for select to anon using (is_published = true);
+-- Public read access
+drop policy if exists "public_read_activities" on vedashramam_activities;
+create policy "public_read_activities" on vedashramam_activities for select using (is_published = true);
 
-create policy "public_read_gallery" on vedabhavan_gallery
-  for select to anon using (is_published = true);
+drop policy if exists "public_read_gallery" on vedashramam_gallery;
+create policy "public_read_gallery" on vedashramam_gallery for select using (is_published = true);
 
-create policy "public_read_settings" on vedabhavan_settings
-  for select to anon using (true);
+drop policy if exists "public_read_settings" on vedashramam_settings;
+create policy "public_read_settings" on vedashramam_settings for select using (true);
 
--- Service role full access for all operations via backend API
-create policy "service_all_contacts" on vedabhavan_contacts
-  for all to service_role using (true) with check (true);
+-- Public insert access for contact enquiries and donation intents
+drop policy if exists "public_insert_contacts" on vedashramam_contacts;
+create policy "public_insert_contacts" on vedashramam_contacts for insert with check (true);
 
-create policy "service_all_donations" on vedabhavan_donations
-  for all to service_role using (true) with check (true);
+drop policy if exists "public_insert_donations" on vedashramam_donations;
+create policy "public_insert_donations" on vedashramam_donations for insert with check (true);
 
-create policy "service_all_activities" on vedabhavan_activities
-  for all to service_role using (true) with check (true);
+-- Service role full administrative access
+drop policy if exists "service_all_contacts" on vedashramam_contacts;
+create policy "service_all_contacts" on vedashramam_contacts for all using (true) with check (true);
 
-create policy "service_all_gallery" on vedabhavan_gallery
-  for all to service_role using (true) with check (true);
+drop policy if exists "service_all_donations" on vedashramam_donations;
+create policy "service_all_donations" on vedashramam_donations for all using (true) with check (true);
 
-create policy "service_all_settings" on vedabhavan_settings
-  for all to service_role using (true) with check (true);
+drop policy if exists "service_all_activities" on vedashramam_activities;
+create policy "service_all_activities" on vedashramam_activities for all using (true) with check (true);
 
--- 6. Storage Bucket for Media Uploads (Optional but Recommended)
+drop policy if exists "service_all_gallery" on vedashramam_gallery;
+create policy "service_all_gallery" on vedashramam_gallery for all using (true) with check (true);
+
+drop policy if exists "service_all_settings" on vedashramam_settings;
+create policy "service_all_settings" on vedashramam_settings for all using (true) with check (true);
+
+-- 6. Storage Bucket for Media Uploads (vedashramam-media)
 insert into storage.buckets (id, name, public)
-values ('vedabhavan-media', 'vedabhavan-media', true)
+values ('vedashramam-media', 'vedashramam-media', true)
 on conflict (id) do update set public = true;
 
+drop policy if exists "public_media_read" on storage.objects;
 create policy "public_media_read" on storage.objects
-  for select to public using (bucket_id = 'vedabhavan-media');
+  for select using (bucket_id = 'vedashramam-media');
 
+drop policy if exists "service_media_upload" on storage.objects;
 create policy "service_media_upload" on storage.objects
-  for all to service_role using (bucket_id = 'vedabhavan-media') with check (bucket_id = 'vedabhavan-media');
+  for all using (bucket_id = 'vedashramam-media') with check (bucket_id = 'vedashramam-media');
 
+-- 7. Seed Initial Core Activities
+insert into vedashramam_activities (id, title, category, description, event_date, photos, videos, is_published, sort_order)
+values
+  ('act-sankara-jayanthi', 'Sankara Jayanthi', 'Veda Parayanam & Sadas', 'Grand celebrations dedicated to Jagadguru Sri Adi Shankaracharya with multi-day Veda Parayanam, Shankara Bhashya Pathanam, Mahanyasa Purvaka Rudrabhishekam, and Deeparadhana by resident vidyarthis and learned acharyas.', 'Annual Vaisakha Masam', '["/src/assets/Sankara Jayanthi/sankara_jayanthi01.jpeg", "/src/assets/Sankara Jayanthi/sankara_jayanthi02.jpeg", "/src/assets/Sankara Jayanthi/sankara_jayanthi03.jpeg", "/src/assets/Sankara Jayanthi/sankara_jayanthi04.jpeg", "/src/assets/Sankara Jayanthi/sankara_jayanthi05.jpeg", "/src/assets/Sankara Jayanthi/sankara_jayanthi06.jpeg", "/src/assets/Sankara Jayanthi/sankara_jayanthi07.jpeg", "/src/assets/Sankara Jayanthi/sankara_jayanthi08.jpeg"]'::jsonb, '["/src/assets/Sankara Jayanthi/sankara_jayanthi_video.mp4"]'::jsonb, true, 1),
+  ('act-sankaranti', 'Sankaranti', 'Festival & Go Pooja', 'Auspicious Makara Sankranti and Pongal festival celebrated with Surya Namaskara mantram recitation, traditional Pongal naivedyam, special Veda Parayanam, and Go Pooja at the Gurukulam Goshala.', 'Makara Sankranti / Thai Pongal', '["/src/assets/Sankaranti/sankaranti01.jpg", "/src/assets/Sankaranti/sankaranti02.jpg", "/src/assets/Sankaranti/sankaranti03.jpg", "/src/assets/Sankaranti/sankaranti04.jpg", "/src/assets/Sankaranti/sankaranti05.jpg", "/src/assets/Sankaranti/sankaranti06.jpg", "/src/assets/Sankaranti/sankaranti07.jpg", "/src/assets/Sankaranti/sankaranti08.jpg", "/src/assets/Sankaranti/sankaranti09.jpg"]'::jsonb, '[]'::jsonb, true, 2),
+  ('act-krishna-jayanthi', 'Krishna Jayanthi', 'Utsavam & Parayanam', 'Sri Krishna Jayanthi (Gokulashtami) celebrations featuring Srimad Bhagavatam recital, floral alankaram, midnight Sri Krishna Janma Pooja, special aradhana, and devotional chanting by our Vidyarthis.', 'Gokulashtami / Rohini', '["/src/assets/Krishna_Jayanthi/krishna_jayanthi01.jpeg", "/src/assets/Krishna_Jayanthi/krishna_jayanthi02.jpeg", "/src/assets/Krishna_Jayanthi/krishna_jayanthi03.jpeg"]'::jsonb, '[]'::jsonb, true, 3),
+  ('act-annadanam', 'Annadanam', 'Daily Seva', 'The sacred practice of Nithya Annadanam, offering wholesome satvik meals daily to resident Vidyarthis, adhyapakas, visiting sadhus, and devotees across all festivals, ceremonies, and Samaradhana occasions.', 'Nithya Annadanam / Daily', '["/src/assets/Annadanam/annadanam01.jpeg", "/src/assets/Annadanam/annadanam02.jpeg", "/src/assets/Annadanam/annadanam03.jpeg"]'::jsonb, '[]'::jsonb, true, 4),
+  ('act-ammavasai-tharpanam', 'Ammavasai Tharpanam', 'Monthly Anushtanam', 'Monthly Amavasya sacred rituals, Pitru Tharpanam guidance, and Tila Homam conducted by Patasala Sastrigals for pitru preethi and ancestral blessings for devotees and their families.', 'Every Amavasya (New Moon Day)', '["/src/assets/Ammavasai Tharpanam/ammavasai_tharpanam01.jpeg"]'::jsonb, '[]'::jsonb, true, 5),
+  ('act-singeri-madam-swamigal', 'Singeri Madam Swamigal', 'Guru Krupa & Anugraha Bhashanam', 'Reverent observances, Paduka Poojas, and benedictions associated with the Jagadgurus of Dakshinamnaya Sri Sringeri Sharada Peetham, inspiring the students through sacred Anugraha Bhashanam and spiritual guidance.', 'Sacred Guru Darshanam & Vijaya Yatra', '["/src/assets/Singeri Madam Swamigal/singeri_swamigal01.jpeg"]'::jsonb, '["/src/assets/Singeri Madam Swamigal/Singeri Swamigal video01.mp4"]'::jsonb, true, 6)
+on conflict (id) do nothing;
+
+-- 8. Seed Initial Gallery Images
+insert into vedashramam_gallery (id, title, image_url, category, sort_order, is_published)
+values
+  ('gal-01', 'Patasala & Sabha Photo 1', '/src/assets/Gallery/image01.jpg', 'Gurukulam Life', 1, true),
+  ('gal-02', 'Patasala & Sabha Photo 2', '/src/assets/Gallery/image02.jpg', 'Gurukulam Life', 2, true),
+  ('gal-03', 'Patasala & Sabha Photo 3', '/src/assets/Gallery/image03.jpg', 'Gurukulam Life', 3, true),
+  ('gal-04', 'Patasala & Sabha Photo 4', '/src/assets/Gallery/image04.jpg', 'Gurukulam Life', 4, true),
+  ('gal-05', 'Patasala & Sabha Photo 5', '/src/assets/Gallery/image05.jpg', 'Gurukulam Life', 5, true),
+  ('gal-06', 'Patasala & Sabha Photo 6', '/src/assets/Gallery/image06.jpg', 'Gurukulam Life', 6, true),
+  ('gal-07', 'Patasala & Sabha Photo 7', '/src/assets/Gallery/image07.jpg', 'Gurukulam Life', 7, true),
+  ('gal-08', 'Patasala & Sabha Photo 8', '/src/assets/Gallery/image08.jpg', 'Gurukulam Life', 8, true),
+  ('gal-09', 'Patasala & Sabha Photo 9', '/src/assets/Gallery/image09.jpg', 'Gurukulam Life', 9, true),
+  ('gal-10', 'Patasala & Sabha Photo 10', '/src/assets/Gallery/image10.jpg', 'Gurukulam Life', 10, true),
+  ('gal-11', 'Patasala & Sabha Photo 11', '/src/assets/Gallery/image11.jpg', 'Gurukulam Life', 11, true),
+  ('gal-12', 'Patasala & Sabha Photo 12', '/src/assets/Gallery/image12.jpg', 'Gurukulam Life', 12, true),
+  ('gal-13', 'Patasala & Sabha Photo 13', '/src/assets/Gallery/image13.jpg', 'Gurukulam Life', 13, true),
+  ('gal-14', 'Patasala & Sabha Photo 14', '/src/assets/Gallery/image14.jpg', 'Gurukulam Life', 14, true),
+  ('gal-15', 'Patasala & Sabha Photo 15', '/src/assets/Gallery/image15.jpg', 'Gurukulam Life', 15, true),
+  ('gal-16', 'Patasala & Sabha Photo 16', '/src/assets/Gallery/image16.jpg', 'Gurukulam Life', 16, true),
+  ('gal-17', 'Patasala & Sabha Photo 17', '/src/assets/Gallery/image17.jpg', 'Gurukulam Life', 17, true),
+  ('gal-18', 'Patasala & Sabha Photo 18', '/src/assets/Gallery/image18.jpg', 'Gurukulam Life', 18, true),
+  ('gal-19', 'Patasala & Sabha Photo 19', '/src/assets/Gallery/image19.jpg', 'Gurukulam Life', 19, true),
+  ('gal-20', 'Patasala & Sabha Photo 20', '/src/assets/Gallery/image20.jpg', 'Gurukulam Life', 20, true),
+  ('gal-21', 'Patasala & Sabha Photo 21', '/src/assets/Gallery/image21.jpg', 'Gurukulam Life', 21, true),
+  ('gal-22', 'Patasala & Sabha Photo 22', '/src/assets/Gallery/image22.jpg', 'Gurukulam Life', 22, true),
+  ('gal-23', 'Patasala & Sabha Photo 23', '/src/assets/Gallery/image23.jpg', 'Gurukulam Life', 23, true)
+on conflict (id) do nothing;
