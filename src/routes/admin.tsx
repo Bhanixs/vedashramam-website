@@ -20,7 +20,6 @@ import {
   Video,
   X,
   Eye,
-  AlertCircle,
   Save,
   Users,
   RefreshCw,
@@ -547,7 +546,7 @@ function AdminPortalPage() {
                 type="email"
                 value={loginEmail}
                 onChange={(e) => setLoginEmail(e.target.value)}
-                placeholder="admin@vedashramam.org"
+                placeholder="your@gmail.com"
                 required
                 className="mt-1.5 w-full rounded-xl border border-stone-300 px-4 py-2.5 text-sm text-stone-900 focus:border-amber-700 focus:outline-none focus:ring-2 focus:ring-amber-500/20"
               />

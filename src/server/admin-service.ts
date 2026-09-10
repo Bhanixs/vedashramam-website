@@ -4,19 +4,19 @@ import crypto from "node:crypto";
 import { TRUST_DETAILS } from "../lib/trust-details";
 
 // ── CONFIGURATION & CREDENTIALS ──────────────────────────────
-const ADMIN_EMAIL = process.env.ADMIN_EMAIL || "admin@vedashramam.org";
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || "VedaAshramam@2026";
+const ADMIN_EMAIL = process.env["ADMIN_EMAIL"];
+const ADMIN_PASSWORD = process.env["ADMIN_PASSWORD"];
 const STATIC_FALLBACK_TOKEN = "vedabhavan_secret_admin_token_2026";
 
 function sbUrl() {
-  const u = process.env.SUPABASE_URL || "";
+  const u = process.env["SUPABASE_URL"] || "";
   return u.replace(/\/(rest|storage)\/v1\/?.*$/, "").replace(/\/$/, "");
 }
 function sbAnon() {
-  return process.env.SUPABASE_ANON || "";
+  return process.env["SUPABASE_ANON"] || "";
 }
 function sbService() {
-  return process.env.SUPABASE_SERVICE || "";
+  return process.env["SUPABASE_SERVICE"] || "";
 }
 function isSupabaseConfigured() {
   return Boolean(sbUrl() && (sbService() || sbAnon()));
@@ -24,7 +24,7 @@ function isSupabaseConfigured() {
 
 // Persistent signed token registry
 const activeTokens = new Set<string>([STATIC_FALLBACK_TOKEN]);
-const TOKEN_SECRET = process.env.ADMIN_TOKEN_SECRET || "vedabhavan_hmac_secret_2026";
+const TOKEN_SECRET = process.env["ADMIN_TOKEN_SECRET"] || "vedabhavan_hmac_secret_2026";
 
 export function generateAdminToken(email: string): string {
   const timestamp = Date.now().toString();
@@ -327,8 +327,8 @@ async function sbFetch(table: string, method = "GET", body: unknown = null, qs =
     "content-type": "application/json",
   };
   if (method !== "GET") {
-    headers.authorization = `Bearer ${sbService() || sbAnon()}`;
-    headers.prefer = "return=representation";
+    headers["authorization"] = `Bearer ${sbService() || sbAnon()}`;
+    headers["prefer"] = "return=representation";
   }
   const opts: RequestInit = { method, headers };
   if (body !== null && body !== undefined) {
