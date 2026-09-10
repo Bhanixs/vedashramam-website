@@ -33,7 +33,7 @@ import { Route as SourcesOfSustenanceRouteImport } from './routes/sources-of-sus
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as VedaAshramamRouteImport } from './routes/veda-ashramam'
 import { Route as VedaPatasalaRouteImport } from './routes/veda-patasala'
-import { Route as VedabhavanRouteImport } from './routes/vedabhavan'
+import { Route as VedaashramamRouteImport } from './routes/vedaashramam'
 import { Route as WaysToSupportRouteImport } from './routes/ways-to-support'
 import { Route as WhyVedaSamrakshanamRouteImport } from './routes/why-veda-samrakshanam'
 
@@ -158,9 +158,9 @@ const VedaPatasalaRoute = VedaPatasalaRouteImport.update({
   path: '/veda-patasala',
   getParentRoute: () => rootRouteImport,
 } as any)
-const VedabhavanRoute = VedabhavanRouteImport.update({
-  id: '/vedabhavan',
-  path: '/vedabhavan',
+const VedaashramamRoute = VedaashramamRouteImport.update({
+  id: '/vedaashramam',
+  path: '/vedaashramam',
   getParentRoute: () => rootRouteImport,
 } as any)
 const WaysToSupportRoute = WaysToSupportRouteImport.update({
@@ -199,7 +199,7 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/veda-ashramam': typeof VedaAshramamRoute
   '/veda-patasala': typeof VedaPatasalaRoute
-  '/vedabhavan': typeof VedabhavanRoute
+  '/vedaashramam': typeof VedaashramamRoute
   '/ways-to-support': typeof WaysToSupportRoute
   '/why-veda-samrakshanam': typeof WhyVedaSamrakshanamRoute
 }
@@ -228,7 +228,7 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/veda-ashramam': typeof VedaAshramamRoute
   '/veda-patasala': typeof VedaPatasalaRoute
-  '/vedabhavan': typeof VedabhavanRoute
+  '/vedaashramam': typeof VedaashramamRoute
   '/ways-to-support': typeof WaysToSupportRoute
   '/why-veda-samrakshanam': typeof WhyVedaSamrakshanamRoute
 }
@@ -258,7 +258,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/veda-ashramam': typeof VedaAshramamRoute
   '/veda-patasala': typeof VedaPatasalaRoute
-  '/vedabhavan': typeof VedabhavanRoute
+  '/vedaashramam': typeof VedaashramamRoute
   '/ways-to-support': typeof WaysToSupportRoute
   '/why-veda-samrakshanam': typeof WhyVedaSamrakshanamRoute
 }
@@ -289,7 +289,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/veda-ashramam'
     | '/veda-patasala'
-    | '/vedabhavan'
+    | '/vedaashramam'
     | '/ways-to-support'
     | '/why-veda-samrakshanam'
   fileRoutesByTo: FileRoutesByTo
@@ -318,7 +318,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/veda-ashramam'
     | '/veda-patasala'
-    | '/vedabhavan'
+    | '/vedaashramam'
     | '/ways-to-support'
     | '/why-veda-samrakshanam'
   id:
@@ -347,7 +347,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/veda-ashramam'
     | '/veda-patasala'
-    | '/vedabhavan'
+    | '/vedaashramam'
     | '/ways-to-support'
     | '/why-veda-samrakshanam'
   fileRoutesById: FileRoutesById
@@ -377,7 +377,7 @@ export interface RootRouteChildren {
   TermsRoute: typeof TermsRoute
   VedaAshramamRoute: typeof VedaAshramamRoute
   VedaPatasalaRoute: typeof VedaPatasalaRoute
-  VedabhavanRoute: typeof VedabhavanRoute
+  VedaashramamRoute: typeof VedaashramamRoute
   WaysToSupportRoute: typeof WaysToSupportRoute
   WhyVedaSamrakshanamRoute: typeof WhyVedaSamrakshanamRoute
 }
@@ -552,11 +552,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof VedaPatasalaRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/vedabhavan': {
-      id: '/vedabhavan'
-      path: '/vedabhavan'
-      fullPath: '/vedabhavan'
-      preLoaderRoute: typeof VedabhavanRouteImport
+    '/vedaashramam': {
+      id: '/vedaashramam'
+      path: '/vedaashramam'
+      fullPath: '/vedaashramam'
+      preLoaderRoute: typeof VedaashramamRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/ways-to-support': {
@@ -601,7 +601,7 @@ const rootRouteChildren: RootRouteChildren = {
   TermsRoute: TermsRoute,
   VedaAshramamRoute: VedaAshramamRoute,
   VedaPatasalaRoute: VedaPatasalaRoute,
-  VedabhavanRoute: VedabhavanRoute,
+  VedaashramamRoute: VedaashramamRoute,
   WaysToSupportRoute: WaysToSupportRoute,
   WhyVedaSamrakshanamRoute: WhyVedaSamrakshanamRoute,
 }

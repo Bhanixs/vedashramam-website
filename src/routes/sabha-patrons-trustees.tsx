@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageBanner, SectionHeading, Sloka } from "@/components/site/PageShell";
 import heroTemple from "@/assets/hero-temple.jpg";
+import arunachalamPhoto from "@/assets/sabha-patrons-trustees/sri-g-arunachalam.jpg";
+import rajaSastrigalPhoto from "@/assets/sabha-patrons-trustees/brahmashri-raja-sastrigal.jpeg";
 import { GraduationCap } from "lucide-react";
 
 export const Route = createFileRoute("/sabha-patrons-trustees")({
@@ -48,42 +50,81 @@ function SabhaPatronsTrusteesPage() {
         <SectionHeading title="Patrons & Trustees" eyebrow="Leadership & Governance" />
 
         <div className="mx-auto mt-14 max-w-4xl space-y-10">
-          {/* Founder & Managing Trustee */}
-          <div className="surface-card rounded-2xl border-2 border-border/80 p-8 shadow-sm">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Founder &amp; Managing Trustee</span>
-            <h3 className="mt-2 font-display text-3xl text-maroon">Sri G Arunachalam</h3>
-            <p className="mt-1 text-sm font-semibold text-primary">Founder – Veda Ashrama Gurukulam, Puducherry</p>
-            <p className="mt-4 text-sm leading-relaxed text-foreground/85">
-              G Arunachalam is the founder of Veda Ashrama Gurukulam and Sri Sai Sankara Bhaktha Sabha
-              Gomarsakshana Educational Seva Trust. Based in Puducherry, he is dedicated to the preservation and development of
-              Vedic knowledge, Sanātana Dharma, Agama traditions, Go Samrakshana and traditional education.
-            </p>
-          </div>
+          {/* Managing Trustees */}
+          <div className="surface-card rounded-2xl border-2 border-border/80 p-6 sm:p-8 shadow-sm">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Leadership &amp; Governance</span>
+            <h3 className="mt-2 font-display text-2xl sm:text-3xl text-maroon">Founder &amp; Managing Trustees</h3>
 
-          {/* Managing Trustee */}
-          <div className="surface-card rounded-2xl border border-border p-8 shadow-sm">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Managing Trustee</span>
-            <h3 className="mt-2 font-display text-2xl text-maroon">Smt. Subulakshmi</h3>
-            <p className="mt-3 text-sm leading-relaxed text-foreground/85">
-              Smt. Subulakshmi serves as a Managing Trustee and works alongside Sri G Arunachalam in guiding and
-              developing the Gurukulam's educational, spiritual and service-oriented activities.
-            </p>
+            {/* Top Image */}
+            <div className="mt-6 overflow-hidden rounded-xl border border-border/60 bg-muted/20 shadow-sm">
+              <img
+                src={arunachalamPhoto}
+                alt="Sri G Arunachalam and Smt. Subbulakshmi — Founder & Managing Trustees"
+                className="w-full h-72 sm:h-96 md:h-[420px] object-cover object-center"
+              />
+            </div>
+
+            {/* Below Image: Two Managing Trustees Cards */}
+            <div className="mt-6 grid gap-6 sm:grid-cols-2">
+              <div className="rounded-xl border border-border/60 bg-muted/30 p-6 flex flex-col justify-between">
+                <div>
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-gold">Founder &amp; Managing Trustee</span>
+                  <h4 className="mt-1 font-display text-2xl text-maroon">Sri G Arunachalam</h4>
+                  <p className="text-xs font-semibold text-primary mt-0.5">Founder – Veda Ashrama Gurukulam, Puducherry</p>
+                  <p className="mt-3 text-sm leading-relaxed text-foreground/85">
+                    Founder of Veda Ashrama Gurukulam and Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust. Dedicated to the preservation and development of Vedic knowledge, Sanātana Dharma, Agama traditions, Go Samrakshana and traditional education.
+                  </p>
+                </div>
+              </div>
+
+              <div className="rounded-xl border border-border/60 bg-muted/30 p-6 flex flex-col justify-between">
+                <div>
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-gold">Managing Trustee</span>
+                  <h4 className="mt-1 font-display text-2xl text-maroon">Smt. Subbulakshmi</h4>
+                  <p className="text-xs font-semibold text-primary mt-0.5">Managing Trustee – Veda Ashrama Gurukulam</p>
+                  <p className="mt-3 text-sm leading-relaxed text-foreground/85">
+                    Serves as Managing Trustee and works alongside Sri G Arunachalam in guiding and developing the Gurukulam's educational, spiritual and service-oriented activities.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* Trustees */}
-          <div className="surface-card rounded-2xl border border-border p-8 shadow-sm">
+          <div className="surface-card rounded-2xl border border-border p-6 sm:p-8 shadow-sm">
             <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Trustees</span>
+            <h3 className="mt-2 font-display text-2xl sm:text-3xl text-maroon">Trustees</h3>
+
+            {/* Top Image */}
+            <div className="mt-6 overflow-hidden rounded-xl border border-border/60 bg-muted/20 shadow-sm">
+              <img
+                src={rajaSastrigalPhoto}
+                alt="Brahmashri Raja Sastrigal — Trustee"
+                className="w-full h-72 sm:h-96 md:h-[420px] object-cover object-top"
+              />
+            </div>
+
+            {/* Below Image: Two Trustees Cards */}
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
-              <div className="rounded-xl border border-border/60 bg-muted/30 p-5">
-                <h4 className="font-display text-xl text-maroon">Brahmashri Raja Sastrigal</h4>
-                <p className="text-xs font-semibold uppercase tracking-wider text-primary">Trustee</p>
+              <div className="rounded-xl border border-border/60 bg-muted/30 p-6">
+                <h4 className="font-display text-xl sm:text-2xl text-maroon">Brahmashri Raja Sastrigal</h4>
+                <p className="text-xs font-semibold uppercase tracking-wider text-primary mt-1">Trustee</p>
+                <p className="mt-3 text-sm leading-relaxed text-foreground/85">
+                  Distinguished Vedic scholar and Trustee guiding the Patasala's spiritual rituals, Adhyayana, and daily Vedic practices.
+                </p>
               </div>
 
-              <div className="rounded-xl border border-border/60 bg-muted/30 p-5">
-                <h4 className="font-display text-xl text-maroon">Smt. Kalyani</h4>
-                <p className="text-xs font-semibold uppercase tracking-wider text-primary">Trustee</p>
+              <div className="rounded-xl border border-border/60 bg-muted/30 p-6 flex flex-col justify-between">
+                <div>
+                  <h4 className="font-display text-xl sm:text-2xl text-maroon">Smt. Kalyani</h4>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-primary mt-1">Trustee</p>
+                  <p className="mt-3 text-sm leading-relaxed text-foreground/85">
+                    Dedicated Trustee supporting the institution's welfare, educational mission, and community service endeavors.
+                  </p>
+                </div>
               </div>
             </div>
+
             <p className="mt-6 text-sm leading-relaxed text-foreground/85">
               Sri Arunachalam and Smt. Subbulakshmi have played an important role in supporting the Vedic institution and its
               educational mission.

@@ -2,12 +2,11 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { BookOpen, Flame, Newspaper, ChevronLeft, ChevronRight } from "lucide-react";
 import { PageShell, SectionHeading, Sloka } from "@/components/site/PageShell";
-import heroRecitation from "@/assets/hero-recitation.jpg";
 import heroHomam from "@/assets/hero-homam.jpg";
 import heroTemple from "@/assets/hero-temple.jpg";
-import sankara01 from "@/assets/Sankara Jayanthi/sankara_jayanthi01.jpeg";
-import sankaranti01 from "@/assets/Sankaranti/sankaranti01.jpg";
-import krishna01 from "@/assets/Krishna_Jayanthi/krishna_jayanthi01.jpeg";
+import sankaraCover from "@/assets/Sankara Jayanthi/sankara_jayanthi04.jpeg";
+import sankarantiCover from "@/assets/Sankaranti/sankaranti04.jpg";
+import krishnaCover from "@/assets/Krishna_Jayanthi/krishna_jayanthi03.jpeg";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -30,7 +29,7 @@ export const Route = createFileRoute("/")({
 
 const SLIDES = [
   {
-    image: sankara01,
+    image: sankaraCover,
     title: "Sankara Jayanthi Mahotsavam",
     subtitle: "Veda Parayanam, Shankara Bhashya Pathanam, Rudrabhishekam & Sadas",
     cta: { label: "View Celebration", to: "/activities" },
@@ -54,7 +53,7 @@ const SLIDES = [
     cta: { label: "View Sevas", to: "/donate" },
   },
   {
-    image: sankaranti01,
+    image: sankarantiCover,
     title: "Makara Sankranti & Go Pooja",
     subtitle: "Surya Namaskara Mantram, Pongal Samaradhana & Goshala Seva",
     cta: { label: "View Celebration", to: "/activities" },
@@ -63,13 +62,15 @@ const SLIDES = [
 
 function Hero() {
   const [i, setI] = useState(0);
+  const currentSlide = SLIDES[i] ?? SLIDES[0];
+
   useEffect(() => {
     const t = setInterval(() => setI((v) => (v + 1) % SLIDES.length), 7000);
     return () => clearInterval(t);
   }, []);
 
   return (
-    <section className="relative h-[92vh] min-h-[540px] overflow-hidden">
+    <section className="relative h-[62vh] min-h-[420px] sm:h-[75vh] md:h-[85vh] lg:h-[90vh] overflow-hidden">
       {SLIDES.map((s, idx) => (
         <div
           key={s.title}
@@ -79,26 +80,27 @@ function Hero() {
           <img
             src={s.image}
             alt=""
-            className="h-full w-full object-cover"
+            className="h-full w-full object-cover object-[center_35%] sm:object-center"
             loading={idx === 0 ? "eager" : "lazy"}
           />
-          <div className="veil absolute inset-0" />
+          {/* Subtle gradient veil for enhanced readability without drowning the photo */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/45 to-black/35" />
         </div>
       ))}
 
-      <div className="container-page relative flex h-full items-center justify-center text-center">
+      <div className="container-page relative flex h-full items-center justify-center text-center px-4 sm:px-6">
         <div key={i} className="max-w-3xl animate-fade-up">
-          <h1 className="font-display text-4xl leading-tight text-primary-foreground sm:text-6xl">
-            {SLIDES[i].title}
+          <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-6xl leading-tight text-primary-foreground drop-shadow-sm">
+            {currentSlide.title}
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-sm text-primary-foreground/85 sm:text-lg">
-            {SLIDES[i].subtitle}
+          <p className="mx-auto mt-3 sm:mt-5 max-w-xl text-xs sm:text-base md:text-lg text-primary-foreground/90 leading-relaxed">
+            {currentSlide.subtitle}
           </p>
           <Link
-            to={SLIDES[i].cta.to}
-            className="mt-9 inline-flex rounded-md bg-primary px-8 py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground transition-colors hover:bg-maroon"
+            to={currentSlide.cta.to}
+            className="mt-5 sm:mt-8 inline-flex rounded-md bg-primary px-6 py-2.5 sm:px-8 sm:py-3.5 text-xs font-semibold uppercase tracking-[0.16em] text-primary-foreground transition-colors hover:bg-maroon shadow-md"
           >
-            {SLIDES[i].cta.label}
+            {currentSlide.cta.label}
           </Link>
         </div>
       </div>
@@ -120,7 +122,7 @@ function Hero() {
         <ChevronRight className="h-5 w-5" />
       </button>
 
-      <div className="absolute bottom-8 left-1/2 flex -translate-x-1/2 gap-2">
+      <div className="absolute bottom-6 sm:bottom-8 left-1/2 flex -translate-x-1/2 gap-2">
         {SLIDES.map((s, idx) => (
           <button
             key={s.title}
@@ -154,7 +156,7 @@ const PILLARS = [
 
 const POSTS = [
   {
-    image: sankara01,
+    image: sankaraCover,
     category: "Veda Parayanam & Sadas",
     title: "Sankara Jayanthi Mahotsavam",
     excerpt:
@@ -162,7 +164,7 @@ const POSTS = [
     to: "/activities",
   },
   {
-    image: sankaranti01,
+    image: sankarantiCover,
     category: "Festival & Go Pooja",
     title: "Makara Sankranti & Go Pooja",
     excerpt:
@@ -170,7 +172,7 @@ const POSTS = [
     to: "/activities",
   },
   {
-    image: krishna01,
+    image: krishnaCover,
     category: "Utsavam & Parayanam",
     title: "Sri Krishna Jayanthi Utsavam",
     excerpt:
@@ -191,7 +193,10 @@ function Home() {
       />
 
       <section className="container-page py-20">
-        <SectionHeading title="Welcome to Vedashrama Gurukulam" eyebrow="Sanatana Dharma Prachara · Veda Patasala · Spiritual Centre" />
+        <SectionHeading
+          title="Welcome to Vedashrama Gurukulam"
+          eyebrow="Sanatana Dharma Prachara · Veda Patasala · Spiritual Centre"
+        />
 
         <div className="mt-14 grid gap-6 md:grid-cols-2">
           {PILLARS.map((p) => (
@@ -214,14 +219,15 @@ function Home() {
 
         <div className="mx-auto mt-20 max-w-3xl space-y-5 text-center text-[0.95rem] leading-relaxed text-foreground/85">
           <p>
-            Vedashrama Gurukulam is home to two connected institutions: a Sabha dedicated to preserving and promoting
-            Vedic and spiritual tradition, and a residential Veda Patasala (Gurukulam) training the next
-            generation of Vedic scholars in the traditional guru-shishya system — from Pondicherry.
+            Vedashrama Gurukulam is home to two connected institutions: a Sabha dedicated to
+            preserving and promoting Vedic and spiritual tradition, and a residential Veda Patasala
+            (Gurukulam) training the next generation of Vedic scholars in the traditional
+            guru-shishya system — from Pondicherry.
           </p>
           <p>
-            The Sabha promotes Sanatana Dharma, supports the preservation of oral Vedic recitation, and
-            sustains the Patasala’s residential education programme — covering student boarding, acharya
-            support and facility upkeep.
+            The Sabha promotes Sanatana Dharma, supports the preservation of oral Vedic recitation,
+            and sustains the Patasala’s residential education programme — covering student boarding,
+            acharya support and facility upkeep.
           </p>
           <Link
             to="/patasala-details"
@@ -232,32 +238,39 @@ function Home() {
         </div>
       </section>
 
-      <section className="mandala-bg border-y border-border py-20">
+      <section className="mandala-bg border-y border-border py-16 sm:py-20">
         <div className="container-page">
-          <SectionHeading title="Recent Activities" eyebrow="Sacred celebrations, homams and festival observances" />
-          <div className="mt-14 grid gap-6 md:grid-cols-3">
+          <SectionHeading
+            title="Recent Activities"
+            eyebrow="Sacred celebrations, homams and festival observances"
+          />
+          <div className="mt-10 sm:mt-14 grid gap-6 md:grid-cols-3">
             {POSTS.map((post) => (
               <Link
                 key={post.title}
                 to={post.to}
-                className="surface-card surface-card-hover overflow-hidden group block"
+                className="surface-card surface-card-hover overflow-hidden group block rounded-2xl"
               >
-                <div className="h-48 w-full overflow-hidden bg-muted">
+                <div className="relative aspect-[16/10] w-full overflow-hidden bg-stone-100">
                   <img
                     src={post.image}
                     alt={post.title}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
                     loading="lazy"
                   />
+                  <div className="absolute top-3 left-3">
+                    <span className="rounded-full bg-black/65 backdrop-blur-md px-2.5 py-0.5 text-[10px] font-semibold text-white uppercase tracking-wider shadow-sm">
+                      {post.category}
+                    </span>
+                  </div>
                 </div>
-                <div className="p-6">
-                  <p className="text-[0.68rem] font-semibold uppercase tracking-[0.16em] text-primary">
-                    {post.category}
-                  </p>
-                  <h3 className="mt-3 font-display text-lg leading-snug text-maroon group-hover:text-primary transition-colors">
+                <div className="p-5 sm:p-6">
+                  <h3 className="font-display text-lg sm:text-xl leading-snug text-maroon group-hover:text-primary transition-colors">
                     {post.title}
                   </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{post.excerpt}</p>
+                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground line-clamp-3">
+                    {post.excerpt}
+                  </p>
                   <span className="mt-4 inline-flex items-center text-xs font-semibold text-primary">
                     View Photos &amp; Details →
                   </span>
@@ -273,9 +286,10 @@ function Home() {
           <p className="font-display text-2xl text-gold">सर्वे भवन्तु सुखिनः</p>
           <h2 className="mt-5 font-display text-3xl sm:text-4xl">Support Vedashrama Gurukulam</h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm leading-relaxed text-maroon-foreground/80">
-            As a trust, Vedashrama Gurukulam depends on the generosity of well-wishers to sustain the Sabha’s activities
-            and the Veda Patasala’s residential education. Support can take the form of Vidyadanam (sponsoring a
-            student’s education) or Annadanam (sponsoring meals).
+            As a trust, Vedashrama Gurukulam depends on the generosity of well-wishers to sustain
+            the Sabha’s activities and the Veda Patasala’s residential education. Support can take
+            the form of Vidyadanam (sponsoring a student’s education) or Annadanam (sponsoring
+            meals).
           </p>
           <Link
             to="/donate"

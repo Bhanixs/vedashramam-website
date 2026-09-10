@@ -40,7 +40,7 @@ const NAV: NavItem[] = [
       { label: "Sources of Sustenance", to: "/sources-of-sustenance" },
       { label: "Ways to Support – Donate Now", to: "/ways-to-support" },
       { label: "Appeal for Building Construction", to: "/appeal-for-building-construction" },
-      { label: "EPFO Form 5A Extract", to: "/epfo-form-5a" },
+      /*{ label: "EPFO Form 5A Extract", to: "/epfo-form-5a" },*/
     ],
   },
   { label: "Gallery", to: "/gallery" },
