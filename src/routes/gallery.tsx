@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { PageShell, PageBanner, SectionHeading } from "@/components/site/PageShell";
 import heroTemple from "@/assets/hero-temple.jpg";
 import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { resolveMediaUrl, isTemporaryBlobUrl } from "@/lib/resolve-media";
 
 // Gallery folder images
 import img01 from "@/assets/Gallery/image01.jpg";
@@ -96,10 +97,9 @@ const GALLERY_MAP: Record<string, string> = {
   "/src/assets/Gallery/image22.jpg": img22,
   "/src/assets/Gallery/image23.jpg": img23,
 };
-
 function resolveGalleryUrl(url: string): string {
   if (!url) return "";
-  return GALLERY_MAP[url] || url;
+  return resolveMediaUrl(url, url);
 }
 
 function GalleryPage() {
@@ -112,8 +112,9 @@ function GalleryPage() {
       .then((data) => {
         if (Array.isArray(data) && data.length > 0) {
           const mapped = data
-            .filter((item: any) => item.is_published !== false && Boolean(item.image_url))
-            .map((item: any) => resolveGalleryUrl(item.image_url));
+            .filter((item: any) => item.is_published !== false && Boolean(item.image_url) && !isTemporaryBlobUrl(item.image_url))
+            .map((item: any) => resolveGalleryUrl(item.image_url))
+            .filter(Boolean);
           if (mapped.length > 0) {
             setAllImages(mapped);
           }

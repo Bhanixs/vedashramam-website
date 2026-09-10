@@ -206,12 +206,13 @@ const ASSET_MAP: Record<string, string> = {
   "/src/assets/Ammavasai Tharpanam/ammavasai_tharpanam01.jpeg": ammavasai01,
 
   "/src/assets/Singeri Madam Swamigal/singeri_swamigal01.jpeg": singeriThumb,
-  "/src/assets/Singeri Madam Swamigal/Singeri Swamigal video01.mp4": singeriVideo,
 };
+
+import { resolveMediaUrl as resolveMedia, isTemporaryBlobUrl } from "@/lib/resolve-media";
 
 function resolveMediaUrl(url: string): string {
   if (!url) return "";
-  return ASSET_MAP[url] || url;
+  return resolveMedia(url, ASSET_MAP[url] || url);
 }
 
 function ActivitiesPage() {
@@ -232,8 +233,8 @@ function ActivitiesPage() {
               const defaultEvent = EVENTS.find(
                 (e) => e.id === d.id || e.title.toLowerCase() === d.title.toLowerCase()
               );
-              const photos: string[] = Array.isArray(d.photos) ? d.photos : [];
-              const videos: string[] = Array.isArray(d.videos) ? d.videos : [];
+              const photos: string[] = (Array.isArray(d.photos) ? d.photos : []).filter((p) => !isTemporaryBlobUrl(p));
+              const videos: string[] = (Array.isArray(d.videos) ? d.videos : []).filter((v) => !isTemporaryBlobUrl(v));
 
               let mediaList: MediaItem[] = [
                 ...photos.map((p, idx) => ({

@@ -35,6 +35,7 @@ import {
 import { toast } from "sonner";
 import { TRUST_DETAILS } from "@/lib/trust-details";
 import { updateTrustSettingsCache } from "@/lib/use-trust-settings";
+import { resolveMediaUrl, isTemporaryBlobUrl } from "@/lib/resolve-media";
 
 export const Route = createFileRoute("/admin")({
   head: () => ({
@@ -1253,47 +1254,64 @@ function AdminPortalPage() {
               </div>
 
               <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-                {activities.map((act) => (
-                  <div
-                    key={act.id}
-                    className="flex flex-col justify-between rounded-2xl border border-stone-200 bg-white p-5 shadow-sm transition hover:shadow-md"
-                  >
-                    <div>
-                      <div className="flex items-center justify-between">
-                        <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-semibold text-amber-900">
-                          {act.category}
-                        </span>
-                        <span className="text-xs text-stone-400 font-medium">{act.event_date}</span>
-                      </div>
-                      <h3 className="mt-3 font-display text-lg font-bold text-stone-900">{act.title}</h3>
-                      <p className="mt-2 text-xs text-stone-600 line-clamp-3 leading-relaxed">{act.description}</p>
+                {activities.map((act) => {
+                  const coverUrl = act.photos?.[0] ? resolveMediaUrl(act.photos[0]) : null;
+                  return (
+                    <div
+                      key={act.id}
+                      className="flex flex-col justify-between rounded-2xl border border-stone-200 bg-white overflow-hidden shadow-sm transition hover:shadow-md"
+                    >
+                      {coverUrl && (
+                        <div className="h-36 w-full overflow-hidden bg-stone-100 border-b border-stone-100">
+                          <img
+                            src={coverUrl}
+                            alt={act.title}
+                            className="h-full w-full object-cover"
+                            onError={(e) => {
+                              (e.target as HTMLElement).style.display = "none";
+                            }}
+                          />
+                        </div>
+                      )}
+                      <div className="p-5 flex-1 flex flex-col justify-between">
+                        <div>
+                          <div className="flex items-center justify-between">
+                            <span className="rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-semibold text-amber-900">
+                              {act.category}
+                            </span>
+                            <span className="text-xs text-stone-400 font-medium">{act.event_date}</span>
+                          </div>
+                          <h3 className="mt-3 font-display text-lg font-bold text-stone-900">{act.title}</h3>
+                          <p className="mt-2 text-xs text-stone-600 line-clamp-3 leading-relaxed">{act.description}</p>
 
-                      <div className="mt-4 flex items-center gap-3 text-xs text-stone-500">
-                        <span className="inline-flex items-center gap-1">
-                          <ImageIcon className="h-3.5 w-3.5 text-amber-800" /> {act.photos?.length || 0} Photos
-                        </span>
-                        <span className="inline-flex items-center gap-1">
-                          <Video className="h-3.5 w-3.5 text-amber-800" /> {act.videos?.length || 0} Videos
-                        </span>
+                          <div className="mt-4 flex items-center gap-3 text-xs text-stone-500">
+                            <span className="inline-flex items-center gap-1">
+                              <ImageIcon className="h-3.5 w-3.5 text-amber-800" /> {act.photos?.length || 0} Photos
+                            </span>
+                            <span className="inline-flex items-center gap-1">
+                              <Video className="h-3.5 w-3.5 text-amber-800" /> {act.videos?.length || 0} Videos
+                            </span>
+                          </div>
+                        </div>
+
+                        <div className="mt-6 flex items-center justify-end gap-2 border-t border-stone-100 pt-3">
+                          <button
+                            onClick={() => openEditActivityModal(act)}
+                            className="inline-flex items-center gap-1 rounded-lg border border-stone-300 px-3 py-1.5 text-xs font-semibold text-stone-700 hover:bg-stone-50"
+                          >
+                            <Edit2 className="h-3.5 w-3.5" /> Edit
+                          </button>
+                          <button
+                            onClick={() => deleteActivity(act.id)}
+                            className="inline-flex items-center gap-1 rounded-lg border border-red-200 px-3 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-50"
+                          >
+                            <Trash2 className="h-3.5 w-3.5" /> Delete
+                          </button>
+                        </div>
                       </div>
                     </div>
-
-                    <div className="mt-6 flex items-center justify-end gap-2 border-t border-stone-100 pt-3">
-                      <button
-                        onClick={() => openEditActivityModal(act)}
-                        className="inline-flex items-center gap-1 rounded-lg border border-stone-300 px-3 py-1.5 text-xs font-semibold text-stone-700 hover:bg-stone-50"
-                      >
-                        <Edit2 className="h-3.5 w-3.5" /> Edit
-                      </button>
-                      <button
-                        onClick={() => deleteActivity(act.id)}
-                        className="inline-flex items-center gap-1 rounded-lg border border-red-200 px-3 py-1.5 text-xs font-semibold text-red-600 hover:bg-red-50"
-                      >
-                        <Trash2 className="h-3.5 w-3.5" /> Delete
-                      </button>
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             </div>
           )}
@@ -1324,23 +1342,43 @@ function AdminPortalPage() {
                 </div>
               ) : (
                 <div className="grid gap-4 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
-                  {gallery.map((g) => (
-                    <div key={g.id} className="group relative aspect-square overflow-hidden rounded-2xl border border-stone-200 bg-stone-100">
-                      <img src={g.image_url} alt={g.title} className="h-full w-full object-cover" />
-                      <div className="absolute inset-0 bg-black/50 opacity-0 transition group-hover:opacity-100 flex flex-col justify-between p-3 text-white">
-                        <span className="text-xs font-semibold">{g.category}</span>
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs truncate">{g.title || "Untitled"}</span>
-                          <button
-                            onClick={() => deleteGalleryPhoto(g.id)}
-                            className="rounded-lg bg-red-600 p-1.5 text-white hover:bg-red-700"
-                          >
-                            <Trash2 className="h-3.5 w-3.5" />
-                          </button>
+                  {gallery.map((g) => {
+                    const isBlob = isTemporaryBlobUrl(g.image_url);
+                    const resolved = resolveMediaUrl(g.image_url);
+                    return (
+                      <div key={g.id} className="group relative aspect-square overflow-hidden rounded-2xl border border-stone-200 bg-stone-100">
+                        {isBlob ? (
+                          <div className="flex h-full w-full flex-col items-center justify-center p-3 text-center bg-amber-50">
+                            <AlertTriangle className="h-6 w-6 text-amber-600 mb-1" />
+                            <span className="text-xs font-semibold text-amber-800">Temporary Link Expired</span>
+                            <span className="text-[10px] text-stone-500 mt-1">WhatsApp blob URL</span>
+                          </div>
+                        ) : (
+                          <img
+                            src={resolved || g.image_url}
+                            alt={g.title}
+                            className="h-full w-full object-cover"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = "/favicon.png";
+                            }}
+                          />
+                        )}
+                        <div className="absolute inset-0 bg-black/50 opacity-0 transition group-hover:opacity-100 flex flex-col justify-between p-3 text-white">
+                          <span className="text-xs font-semibold">{g.category}</span>
+                          <div className="flex items-center justify-between">
+                            <span className="text-xs truncate max-w-[120px]">{g.title || "Untitled"}</span>
+                            <button
+                              onClick={() => deleteGalleryPhoto(g.id)}
+                              className="rounded-lg bg-red-600 p-1.5 text-white hover:bg-red-700"
+                              title="Delete photo"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </button>
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>
@@ -1713,19 +1751,41 @@ function AdminPortalPage() {
                   </div>
                 </div>
                 {actPhotos.length > 0 && (
-                  <div className="mt-3 flex flex-wrap gap-2">
-                    {actPhotos.map((p, idx) => (
-                      <div key={idx} className="flex items-center gap-1 rounded-lg border border-stone-200 bg-white px-2 py-1 text-xs">
-                        <span className="max-w-[150px] truncate">{p}</span>
-                        <button
-                          type="button"
-                          onClick={() => setActPhotos(actPhotos.filter((_, i) => i !== idx))}
-                          className="text-red-500 hover:text-red-700"
-                        >
-                          <X className="h-3 w-3" />
-                        </button>
-                      </div>
-                    ))}
+                  <div className="mt-3 grid grid-cols-2 sm:grid-cols-4 gap-2">
+                    {actPhotos.map((p, idx) => {
+                      const thumb = resolveMediaUrl(p);
+                      return (
+                        <div key={idx} className="relative group rounded-xl border border-stone-200 overflow-hidden bg-white">
+                          <div className="h-20 w-full overflow-hidden bg-stone-100 flex items-center justify-center">
+                            {thumb ? (
+                              <img
+                                src={thumb}
+                                alt={`Photo ${idx + 1}`}
+                                className="h-full w-full object-cover"
+                                onError={(e) => {
+                                  (e.target as HTMLElement).style.display = "none";
+                                }}
+                              />
+                            ) : (
+                              <ImageIcon className="h-6 w-6 text-stone-300" />
+                            )}
+                          </div>
+                          <div className="p-1.5 flex items-center justify-between bg-stone-50 text-[10px] border-t border-stone-100">
+                            <span className="truncate max-w-[80px] text-stone-600 font-medium">
+                              {p.split("/").pop()}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => setActPhotos(actPhotos.filter((_, i) => i !== idx))}
+                              className="text-red-500 hover:text-red-700 p-0.5 rounded"
+                              title="Remove photo"
+                            >
+                              <X className="h-3.5 w-3.5" />
+                            </button>
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 )}
               </div>
@@ -1886,7 +1946,7 @@ function AdminPortalPage() {
                 {newGalUrl && !newGalUrl.trim().startsWith("blob:") && (
                   <div className="mt-2 flex items-center gap-3 rounded-xl border border-stone-200 bg-stone-50 p-2">
                     <img
-                      src={newGalUrl}
+                      src={resolveMediaUrl(newGalUrl) || newGalUrl}
                       alt="Preview"
                       className="h-14 w-14 object-cover rounded-lg border border-stone-200 bg-white"
                       onError={(e) => {

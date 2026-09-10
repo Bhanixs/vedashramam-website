@@ -166,3 +166,34 @@ values
   ('gal-22', 'Patasala & Sabha Photo 22', '/src/assets/Gallery/image22.jpg', 'Gurukulam Life', 22, true),
   ('gal-23', 'Patasala & Sabha Photo 23', '/src/assets/Gallery/image23.jpg', 'Gurukulam Life', 23, true)
 on conflict (id) do nothing;
+
+-- 9. Setup Supabase Storage Bucket for Media Uploads
+insert into storage.buckets (id, name, public)
+values ('vedashramam-media', 'vedashramam-media', true)
+on conflict (id) do update set public = true;
+
+-- Ensure storage policies exist for public reading and admin uploads
+drop policy if exists "Public Access vedashramam-media" on storage.objects;
+drop policy if exists "Public Upload vedashramam-media" on storage.objects;
+drop policy if exists "Public Manage vedashramam-media" on storage.objects;
+drop policy if exists "Public Delete vedashramam-media" on storage.objects;
+
+create policy "Public Access vedashramam-media"
+on storage.objects for select
+using ( bucket_id = 'vedashramam-media' );
+
+create policy "Public Upload vedashramam-media"
+on storage.objects for insert
+with check ( bucket_id = 'vedashramam-media' );
+
+create policy "Public Manage vedashramam-media"
+on storage.objects for update
+using ( bucket_id = 'vedashramam-media' );
+
+create policy "Public Delete vedashramam-media"
+on storage.objects for delete
+using ( bucket_id = 'vedashramam-media' );
+
+-- 10. Clean up any invalid temporary blob URLs (e.g. from WhatsApp Web pastes)
+delete from vedashramam_gallery where image_url like 'blob:%';
+
