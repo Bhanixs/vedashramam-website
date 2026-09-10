@@ -35,6 +35,9 @@ dist-ssr
 .env.*
 !.env.example
 
+# Vercel output
+.vercel/
+
 # Local Data Stores & Backups (prevent leaking donor/contact submissions to git)
 data/admin-store.json
 data/*.local.json

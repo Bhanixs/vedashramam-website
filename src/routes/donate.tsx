@@ -87,7 +87,7 @@ function DonatePage() {
     e.preventDefault();
     setSubmitting(true);
     try {
-      await fetch("/api/admin?action=donate", {
+      const res = await fetch("/api/admin?action=donate", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -99,11 +99,16 @@ function DonatePage() {
           payment_method: "Bank Transfer / UPI",
         }),
       });
+      if (res.ok) {
+        setSubmitted(true);
+        toast.success("நன்றி! உங்கள் காணிக்கை விபரம் பதிவு செய்யப்பட்டது / Donation intent registered.");
+      } else {
+        toast.error("Submission failed on server. Please try contacting directly.");
+      }
     } catch {
-      // Continue to show confirmation message even if offline
+      toast.error("Network error. Please try again.");
     } finally {
       setSubmitting(false);
-      setSubmitted(true);
     }
   };
 
