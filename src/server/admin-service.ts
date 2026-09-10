@@ -263,39 +263,109 @@ const DEFAULT_STORE: DbStore = {
     bank_account: TRUST_DETAILS.banking?.accountNumber || TRUST_DETAILS.bank?.accountNumber || "",
     bank_ifsc: TRUST_DETAILS.banking?.ifscCode || TRUST_DETAILS.bank?.ifscCode || "",
     pan: TRUST_DETAILS.pan || "",
-    reg_80g: TRUST_DETAILS.registration80G || TRUST_DETAILS.approval80G?.uniqueRegistrationNumber || "",
+    reg_80g:
+      TRUST_DETAILS.registration80G || TRUST_DETAILS.approval80G?.uniqueRegistrationNumber || "",
     updated_at: new Date().toISOString(),
   },
 };
 
 const DB_FILE_PATH = path.resolve(process.cwd(), "data", "admin-store.json");
+const DB_EXAMPLE_PATH = path.resolve(process.cwd(), "data", "admin-store.example.json");
+
+let inMemoryStore: DbStore | null = null;
+
+function validateAndFillDefaults(parsed: any) {
+  if (!parsed) return;
+  if (!Array.isArray(parsed.activities) || parsed.activities.length === 0) {
+    parsed.activities = CORE_ACTIVITIES;
+  }
+  if (!Array.isArray(parsed.gallery) || parsed.gallery.length === 0) {
+    parsed.gallery = CORE_GALLERY;
+  }
+  if (!parsed.settings) {
+    parsed.settings = DEFAULT_STORE.settings;
+  }
+  if (!Array.isArray(parsed.contacts)) {
+    parsed.contacts = [];
+  }
+  if (!Array.isArray(parsed.donations)) {
+    parsed.donations = [];
+  }
+}
+
+function getEnvStore(): DbStore | null {
+  try {
+    const rawEnv = process.env["ADMIN_STORE_JSON"];
+    if (rawEnv && rawEnv.trim()) {
+      const parsed = JSON.parse(rawEnv);
+      validateAndFillDefaults(parsed);
+      return parsed;
+    }
+    const rawB64 = process.env["ADMIN_STORE_BASE64"];
+    if (rawB64 && rawB64.trim()) {
+      const decoded = Buffer.from(rawB64, "base64").toString("utf-8");
+      const parsed = JSON.parse(decoded);
+      validateAndFillDefaults(parsed);
+      return parsed;
+    }
+  } catch (err) {
+    console.warn(
+      "Failed to parse ADMIN_STORE_JSON / ADMIN_STORE_BASE64 environment variable:",
+      err,
+    );
+  }
+  return null;
+}
 
 function readLocalStore(): DbStore {
+  if (inMemoryStore) {
+    return inMemoryStore;
+  }
+
+  // 1. Check primary DB_FILE_PATH
   try {
     if (fs.existsSync(DB_FILE_PATH)) {
       const raw = fs.readFileSync(DB_FILE_PATH, "utf-8");
       const parsed = JSON.parse(raw);
-      let needsSave = false;
-      if (!Array.isArray(parsed.activities) || parsed.activities.length === 0) {
-        parsed.activities = CORE_ACTIVITIES;
-        needsSave = true;
-      }
-      if (!Array.isArray(parsed.gallery) || parsed.gallery.length === 0) {
-        parsed.gallery = CORE_GALLERY;
-        needsSave = true;
-      }
-      if (!parsed.settings) {
-        parsed.settings = DEFAULT_STORE.settings;
-        needsSave = true;
-      }
-      if (needsSave) {
-        writeLocalStore(parsed);
-      }
+      validateAndFillDefaults(parsed);
+      inMemoryStore = parsed;
       return parsed;
     }
   } catch (err) {
-    console.warn("Failed to read local DB store file, using in-memory defaults:", err);
+    console.warn("Failed to read local DB store file:", err);
   }
+
+  // 2. Check /tmp fallback on serverless platforms like Vercel
+  const tmpPath = path.resolve("/tmp", "admin-store.json");
+  try {
+    if (fs.existsSync(tmpPath)) {
+      const raw = fs.readFileSync(tmpPath, "utf-8");
+      const parsed = JSON.parse(raw);
+      validateAndFillDefaults(parsed);
+      inMemoryStore = parsed;
+      return parsed;
+    }
+  } catch {}
+
+  // 3. Check environment variable (ADMIN_STORE_JSON or ADMIN_STORE_BASE64)
+  const envStore = getEnvStore();
+  if (envStore) {
+    inMemoryStore = envStore;
+    return envStore;
+  }
+
+  // 4. Check example template file data/admin-store.example.json
+  try {
+    if (fs.existsSync(DB_EXAMPLE_PATH)) {
+      const raw = fs.readFileSync(DB_EXAMPLE_PATH, "utf-8");
+      const parsed = JSON.parse(raw);
+      validateAndFillDefaults(parsed);
+      inMemoryStore = parsed;
+      return parsed;
+    }
+  } catch {}
+
+  // 5. Default fallback
   const initial: DbStore = {
     contacts: [],
     donations: [],
@@ -303,19 +373,30 @@ function readLocalStore(): DbStore {
     gallery: CORE_GALLERY,
     settings: DEFAULT_STORE.settings,
   };
+  inMemoryStore = initial;
   writeLocalStore(initial);
   return initial;
 }
 
 function writeLocalStore(store: DbStore): void {
+  inMemoryStore = store;
   try {
     const dir = path.dirname(DB_FILE_PATH);
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
     fs.writeFileSync(DB_FILE_PATH, JSON.stringify(store, null, 2), "utf-8");
+    return;
   } catch (err) {
-    console.warn("Failed to write to local DB store file:", err);
+    // Primary path failed (e.g. read-only serverless filesystem on Vercel)
+  }
+
+  // Fallback to /tmp in serverless environments
+  try {
+    const tmpPath = path.resolve("/tmp", "admin-store.json");
+    fs.writeFileSync(tmpPath, JSON.stringify(store, null, 2), "utf-8");
+  } catch (err) {
+    console.warn("Failed to write to fallback /tmp/admin-store.json:", err);
   }
 }
 
@@ -356,8 +437,7 @@ export async function handleAdminApi(request: Request): Promise<Response> {
       headers: { "Content-Type": "application/json" },
     });
 
-  const errorResponse = (message: string, status = 400) =>
-    jsonResponse({ error: message }, status);
+  const errorResponse = (message: string, status = 400) => jsonResponse({ error: message }, status);
 
   try {
     // 1. LOGIN (Public)
@@ -366,7 +446,7 @@ export async function handleAdminApi(request: Request): Promise<Response> {
         email?: string;
         password?: string;
       };
-      if (body.email === ADMIN_EMAIL && body.password === ADMIN_PASSWORD) {
+      if (body.email === ADMIN_EMAIL && body.password === ADMIN_PASSWORD && ADMIN_EMAIL) {
         const token = generateAdminToken(ADMIN_EMAIL);
         return jsonResponse({ token, email: ADMIN_EMAIL, success: true });
       }
@@ -462,7 +542,12 @@ export async function handleAdminApi(request: Request): Promise<Response> {
     if (action === "activities" && method === "GET") {
       if (isSupabaseConfigured()) {
         try {
-          const res = await sbFetch("vedabhavan_activities", "GET", null, "order=sort_order.asc,created_at.desc");
+          const res = await sbFetch(
+            "vedabhavan_activities",
+            "GET",
+            null,
+            "order=sort_order.asc,created_at.desc",
+          );
           if (Array.isArray(res)) return jsonResponse(res);
         } catch (e) {
           console.warn("Supabase activities get failed, using local store:", e);
@@ -476,7 +561,12 @@ export async function handleAdminApi(request: Request): Promise<Response> {
     if (action === "gallery" && method === "GET") {
       if (isSupabaseConfigured()) {
         try {
-          const res = await sbFetch("vedabhavan_gallery", "GET", null, "order=sort_order.asc,created_at.desc");
+          const res = await sbFetch(
+            "vedabhavan_gallery",
+            "GET",
+            null,
+            "order=sort_order.asc,created_at.desc",
+          );
           if (Array.isArray(res)) return jsonResponse(res);
         } catch (e) {
           console.warn("Supabase gallery get failed, using local store:", e);
@@ -702,7 +792,26 @@ export async function handleAdminApi(request: Request): Promise<Response> {
       return jsonResponse(store.settings);
     }
 
-    // 13. FILE UPLOAD (Authenticated POST)
+    // 13. BACKUP / EXPORT (Authenticated GET)
+    if (action === "backup" && method === "GET") {
+      const store = readLocalStore();
+      const minifiedJson = JSON.stringify(store);
+      const base64 = Buffer.from(minifiedJson).toString("base64");
+      return jsonResponse({
+        store,
+        jsonString: minifiedJson,
+        base64,
+        isSupabaseConfigured: isSupabaseConfigured(),
+        counts: {
+          contacts: store.contacts.length,
+          donations: store.donations.length,
+          activities: store.activities.length,
+          gallery: store.gallery.length,
+        },
+      });
+    }
+
+    // 14. FILE UPLOAD (Authenticated POST)
     if (action === "upload" && method === "POST") {
       const body = (await request.json().catch(() => ({}))) as {
         filename?: string;

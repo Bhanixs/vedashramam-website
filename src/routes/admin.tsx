@@ -23,6 +23,12 @@ import {
   Save,
   Users,
   RefreshCw,
+  Copy,
+  Database,
+  Cloud,
+  AlertTriangle,
+  FileJson,
+  Check,
 } from "lucide-react";
 import { toast } from "sonner";
 import { TRUST_DETAILS } from "@/lib/trust-details";
@@ -161,6 +167,11 @@ function AdminPortalPage() {
   const [newGalTitle, setNewGalTitle] = useState("");
   const [newGalCategory, setNewGalCategory] = useState("Veda Patasala");
 
+  // Backup & Cloud Deployment
+  const [backupLoading, setBackupLoading] = useState(false);
+  const [isSupabaseConfigured, setIsSupabaseConfigured] = useState<boolean | null>(null);
+  const [copiedEnv, setCopiedEnv] = useState(false);
+
   useEffect(() => {
     const saved = sessionStorage.getItem(STORAGE_KEY);
     if (saved) {
@@ -184,17 +195,60 @@ function AdminPortalPage() {
     return res;
   };
 
+  const fetchBackupData = async () => {
+    setBackupLoading(true);
+    try {
+      const res = await apiFetch("/api/admin?action=backup");
+      if (!res.ok) throw new Error("Failed to fetch backup data");
+      const data = await res.json();
+      setIsSupabaseConfigured(Boolean(data.isSupabaseConfigured));
+      return data;
+    } catch {
+      toast.error("Could not fetch backup data");
+      return null;
+    } finally {
+      setBackupLoading(false);
+    }
+  };
+
+  const copyVercelEnvVar = async () => {
+    const data = await fetchBackupData();
+    if (!data?.jsonString) return;
+    try {
+      await navigator.clipboard.writeText(data.jsonString);
+      setCopiedEnv(true);
+      setTimeout(() => setCopiedEnv(false), 3000);
+      toast.success("Copied ADMIN_STORE_JSON! Paste into Vercel Project Settings > Environment Variables.");
+    } catch {
+      toast.error("Clipboard permission denied. Please use the download option.");
+    }
+  };
+
+  const downloadBackupJson = async () => {
+    const data = await fetchBackupData();
+    if (!data?.store) return;
+    const blob = new Blob([JSON.stringify(data.store, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `vedabhavan-admin-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+    toast.success("Downloaded complete admin store backup JSON!");
+  };
+
   const fetchAllData = async (silent = false) => {
     if (!token) return;
     if (!silent) setLoadingData(true);
     try {
-      const [resStats, resDonations, resContacts, resActs, resGal, resSettings] = await Promise.all([
+      const [resStats, resDonations, resContacts, resActs, resGal, resSettings, resBackup] = await Promise.all([
         apiFetch("/api/admin?action=stats").then((r) => (r.ok ? r.json() : null)).catch(() => null),
         apiFetch("/api/admin?action=donations").then((r) => (r.ok ? r.json() : [])).catch(() => []),
         apiFetch("/api/admin?action=contacts").then((r) => (r.ok ? r.json() : [])).catch(() => []),
         apiFetch("/api/admin?action=activities").then((r) => (r.ok ? r.json() : [])).catch(() => []),
         apiFetch("/api/admin?action=gallery").then((r) => (r.ok ? r.json() : [])).catch(() => []),
         apiFetch("/api/admin?action=settings").then((r) => (r.ok ? r.json() : null)).catch(() => null),
+        apiFetch("/api/admin?action=backup").then((r) => (r.ok ? r.json() : null)).catch(() => null),
       ]);
 
       if (resStats && !resStats.error) setStats(resStats);
@@ -203,6 +257,7 @@ function AdminPortalPage() {
       if (Array.isArray(resActs)) setActivities(resActs);
       if (Array.isArray(resGal)) setGallery(resGal);
       if (resSettings && resSettings.trust_name) setSettings(resSettings);
+      if (resBackup) setIsSupabaseConfigured(Boolean(resBackup.isSupabaseConfigured));
     } catch {
       if (!silent) toast.error("Failed to load some dashboard data");
     } finally {
@@ -1355,6 +1410,94 @@ function AdminPortalPage() {
                   </button>
                 </div>
               </form>
+
+              {/* CLOUD DEPLOYMENT & PRIVACY BACKUP CENTER */}
+              <div className="rounded-2xl border border-stone-200 bg-white p-6 sm:p-8 shadow-sm space-y-6">
+                <div>
+                  <div className="flex items-center gap-2">
+                    <Cloud className="h-5 w-5 text-amber-800" />
+                    <h3 className="font-bold text-stone-900 text-lg">Cloud Deployment &amp; Privacy Backup</h3>
+                  </div>
+                  <p className="mt-1 text-xs text-stone-500">
+                    Manage environment variable backups, Git security protection, and Supabase cloud persistence.
+                  </p>
+                </div>
+
+                {/* Status Banners */}
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className={`rounded-xl border p-4 ${isSupabaseConfigured ? "border-emerald-200 bg-emerald-50/60" : "border-amber-200 bg-amber-50/60"}`}>
+                    <div className="flex items-center gap-2">
+                      <Database className={`h-4 w-4 ${isSupabaseConfigured ? "text-emerald-700" : "text-amber-700"}`} />
+                      <span className="text-xs font-bold uppercase tracking-wider text-stone-900">
+                        Supabase Database Status
+                      </span>
+                    </div>
+                    <div className="mt-2 text-xs font-medium text-stone-700">
+                      {isSupabaseConfigured ? (
+                        <span className="text-emerald-700 flex items-center gap-1 font-semibold">
+                          <CheckCircle className="h-3.5 w-3.5 inline" /> Connected &amp; Persistent
+                        </span>
+                      ) : (
+                        <span className="text-amber-800 flex items-center gap-1 font-semibold">
+                          <AlertTriangle className="h-3.5 w-3.5 inline" /> Not Connected (Local / Env Fallback Mode)
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-1 text-[11px] text-stone-500 leading-relaxed">
+                      {isSupabaseConfigured
+                        ? "Incoming donations & enquiries are securely written to your Supabase PostgreSQL cloud database, persisting across all Vercel restarts."
+                        : "For production on Vercel, connect Supabase so donor submissions are never lost when serverless lambdas spin down. Run supabase-setup.sql."}
+                    </p>
+                  </div>
+
+                  <div className="rounded-xl border border-stone-200 bg-stone-50 p-4">
+                    <div className="flex items-center gap-2">
+                      <ShieldCheck className="h-4 w-4 text-stone-700" />
+                      <span className="text-xs font-bold uppercase tracking-wider text-stone-900">
+                        GitHub Privacy Protection
+                      </span>
+                    </div>
+                    <div className="mt-2 text-xs font-semibold text-emerald-700 flex items-center gap-1">
+                      <CheckCircle className="h-3.5 w-3.5 inline" /> Protected by .gitignore
+                    </div>
+                    <p className="mt-1 text-[11px] text-stone-500 leading-relaxed">
+                      Your local <code className="font-mono text-[10px] bg-stone-200 px-1 py-0.5 rounded">data/admin-store.json</code> containing donor PAN numbers, phones, and messages is untracked and will NEVER be pushed to GitHub.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Action Buttons */}
+                <div className="pt-2 border-t border-stone-100 flex flex-col sm:flex-row gap-3">
+                  <button
+                    type="button"
+                    onClick={copyVercelEnvVar}
+                    disabled={backupLoading}
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-stone-300 bg-stone-50 px-4 py-2.5 text-xs font-semibold text-stone-800 hover:bg-stone-100 transition disabled:opacity-50"
+                  >
+                    {copiedEnv ? (
+                      <>
+                        <Check className="h-4 w-4 text-emerald-600" />
+                        <span className="text-emerald-700 font-bold">Copied ADMIN_STORE_JSON!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-4 w-4 text-stone-600" />
+                        <span>Copy Vercel Env Var (ADMIN_STORE_JSON)</span>
+                      </>
+                    )}
+                  </button>
+
+                  <button
+                    type="button"
+                    onClick={downloadBackupJson}
+                    disabled={backupLoading}
+                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-amber-300 bg-amber-50 px-4 py-2.5 text-xs font-semibold text-amber-900 hover:bg-amber-100 transition disabled:opacity-50"
+                  >
+                    <Download className="h-4 w-4 text-amber-800" />
+                    Download Backup JSON File
+                  </button>
+                </div>
+              </div>
             </div>
           )}
         </main>

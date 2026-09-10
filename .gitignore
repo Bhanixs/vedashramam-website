@@ -32,4 +32,11 @@ dist-ssr
 *.sw?
 
 .env
-.admin-storee.json
+.env.*
+!.env.example
+
+# Local Data Stores & Backups (prevent leaking donor/contact submissions to git)
+data/admin-store.json
+data/*.local.json
+*.json.bak
+!data/admin-store.example.json
