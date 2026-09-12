@@ -4,6 +4,7 @@ import heroTemple from "@/assets/hero-temple.jpg";
 import arunachalamPhoto from "@/assets/sabha-patrons-trustees/sri-g-arunachalam.jpg";
 import rajaSastrigalPhoto from "@/assets/sabha-patrons-trustees/brahmashri-raja-sastrigal.jpeg";
 import guruPrasadBhattPhoto from "@/assets/sabha-patrons-trustees/guru-prasa-bhatt.jpeg";
+import gouriShankaraSharma from "@/assets/sabha-patrons-trustees/gouri-shankara-sharma.jpeg";
 import { GraduationCap } from "lucide-react";
 
 export const Route = createFileRoute("/sabha-patrons-trustees")({
@@ -27,7 +28,16 @@ export const Route = createFileRoute("/sabha-patrons-trustees")({
 });
 
 const TEACHERS = [
-  { name: "Gouri Shankara Sharma", role: "Agama Teacher" },
+  {
+    name: "Guru Prasad Bhatt",
+    role: "Vedic Teacher",
+    img: guruPrasadBhattPhoto,
+  },
+  {
+    name: "Gouri Shankara Sharma",
+    role: "Agama Teacher",
+    img: gouriShankaraSharma,
+  },
   { name: "Mehta Sastrigal", role: "Prayoga Teacher" },
   { name: "Chidambaram Sena Sastrigal", role: "Prayoga Teacher" },
 ];
@@ -178,27 +188,19 @@ function SabhaPatronsTrusteesPage() {
               traditional education and training of its students:
             </p>
 
-            <div>
-              <img
-                src={guruPrasadBhattPhoto}
-                alt="Guru Prasad Bhatt Image"
-                className="w-full h-72 sm:h-96 md:h-[420px] object-cover object-center rounded-xl my-4"
-              />
-              <div
-                key="Guru Prasad Bhatt"
-                className="flex items-center justify-between rounded-xl border border-border/60 bg-card p-4 shadow-2xs"
-              >
-                <span className="font-semibold text-foreground">Guru Prasad Bhatt</span>
-                <span className="text-xs font-medium text-primary">Vedic Teacher</span>
-              </div>
-            </div>
-
-            <div className="mt-6 grid gap-4 sm:grid-cols-3">
+            <div className="mt-6 grid gap-4 sm:grid-cols-1">
               {TEACHERS.map((t) => (
                 <div
                   key={t.name}
-                  className="flex items-center justify-between rounded-xl border border-border/60 bg-card p-4 shadow-2xs"
+                  className="flex flex-col items-center justify-between rounded-xl border border-border/60 bg-card p-4 shadow-2xs"
                 >
+                  {t.img && (
+                    <img
+                      src={t.img}
+                      alt={`${t.name} Image`}
+                      className="w-xs h-xs sm:h-md md:h-md object-cover object-center rounded-full my-4"
+                    />
+                  )}
                   <span className="font-semibold text-foreground">{t.name}</span>
                   <span className="text-xs font-medium text-primary">{t.role}</span>
                 </div>
