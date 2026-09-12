@@ -3,6 +3,7 @@ import { PageShell, PageBanner, SectionHeading, Sloka } from "@/components/site/
 import heroTemple from "@/assets/hero-temple.jpg";
 import arunachalamPhoto from "@/assets/sabha-patrons-trustees/sri-g-arunachalam.jpg";
 import rajaSastrigalPhoto from "@/assets/sabha-patrons-trustees/brahmashri-raja-sastrigal.jpeg";
+import guruPrasadBhattPhoto from "@/assets/sabha-patrons-trustees/guru-prasa-bhatt.jpeg";
 import { GraduationCap } from "lucide-react";
 
 export const Route = createFileRoute("/sabha-patrons-trustees")({
@@ -17,7 +18,8 @@ export const Route = createFileRoute("/sabha-patrons-trustees")({
       { property: "og:title", content: "Patrons & Trustees — Vedashrama Gurukulam" },
       {
         property: "og:description",
-        content: "Our Founder, Managing Trustees, Trustees, and dedicated Vedic Teachers & Scholars.",
+        content:
+          "Our Founder, Managing Trustees, Trustees, and dedicated Vedic Teachers & Scholars.",
       },
     ],
   }),
@@ -25,7 +27,6 @@ export const Route = createFileRoute("/sabha-patrons-trustees")({
 });
 
 const TEACHERS = [
-  { name: "Guru Prasad Bhatt", role: "Vedic Teacher" },
   { name: "Gouri Shankara Sharma", role: "Agama Teacher" },
   { name: "Mehta Sastrigal", role: "Prayoga Teacher" },
   { name: "Chidambaram Sena Sastrigal", role: "Prayoga Teacher" },
@@ -52,8 +53,12 @@ function SabhaPatronsTrusteesPage() {
         <div className="mx-auto mt-14 max-w-4xl space-y-10">
           {/* Managing Trustees */}
           <div className="surface-card rounded-2xl border-2 border-border/80 p-6 sm:p-8 shadow-sm">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Leadership &amp; Governance</span>
-            <h3 className="mt-2 font-display text-2xl sm:text-3xl text-maroon">Founder &amp; Managing Trustees</h3>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+              Leadership &amp; Governance
+            </span>
+            <h3 className="mt-2 font-display text-2xl sm:text-3xl text-maroon">
+              Founder &amp; Managing Trustees
+            </h3>
 
             {/* Top Image */}
             <div className="mt-6 overflow-hidden rounded-xl border border-border/60 bg-muted/20 shadow-sm">
@@ -68,22 +73,35 @@ function SabhaPatronsTrusteesPage() {
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
               <div className="rounded-xl border border-border/60 bg-muted/30 p-6 flex flex-col justify-between">
                 <div>
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-gold">Founder &amp; Managing Trustee</span>
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-gold">
+                    Founder &amp; Managing Trustee
+                  </span>
                   <h4 className="mt-1 font-display text-2xl text-maroon">Sri G Arunachalam</h4>
-                  <p className="text-xs font-semibold text-primary mt-0.5">Founder – Veda Ashrama Gurukulam, Puducherry</p>
+                  <p className="text-xs font-semibold text-primary mt-0.5">
+                    Founder – Veda Ashrama Gurukulam, Puducherry
+                  </p>
                   <p className="mt-3 text-sm leading-relaxed text-foreground/85">
-                    Founder of Veda Ashrama Gurukulam and Sri Sai Sankara Bhaktha Sabha Gomarsakshana Educational Seva Trust. Dedicated to the preservation and development of Vedic knowledge, Sanātana Dharma, Agama traditions, Go Samrakshana and traditional education.
+                    Founder of Veda Ashrama Gurukulam and Sri Sai Sankara Bhaktha Sabha
+                    Gomarsakshana Educational Seva Trust. Dedicated to the preservation and
+                    development of Vedic knowledge, Sanātana Dharma, Agama traditions, Go
+                    Samrakshana and traditional education.
                   </p>
                 </div>
               </div>
 
               <div className="rounded-xl border border-border/60 bg-muted/30 p-6 flex flex-col justify-between">
                 <div>
-                  <span className="text-[11px] font-semibold uppercase tracking-wider text-gold">Managing Trustee</span>
+                  <span className="text-[11px] font-semibold uppercase tracking-wider text-gold">
+                    Managing Trustee
+                  </span>
                   <h4 className="mt-1 font-display text-2xl text-maroon">Smt. Subbulakshmi</h4>
-                  <p className="text-xs font-semibold text-primary mt-0.5">Managing Trustee – Veda Ashrama Gurukulam</p>
+                  <p className="text-xs font-semibold text-primary mt-0.5">
+                    Managing Trustee – Veda Ashrama Gurukulam
+                  </p>
                   <p className="mt-3 text-sm leading-relaxed text-foreground/85">
-                    Serves as Managing Trustee and works alongside Sri G Arunachalam in guiding and developing the Gurukulam's educational, spiritual and service-oriented activities.
+                    Serves as Managing Trustee and works alongside Sri G Arunachalam in guiding and
+                    developing the Gurukulam's educational, spiritual and service-oriented
+                    activities.
                   </p>
                 </div>
               </div>
@@ -92,7 +110,9 @@ function SabhaPatronsTrusteesPage() {
 
           {/* Trustees */}
           <div className="surface-card rounded-2xl border border-border p-6 sm:p-8 shadow-sm">
-            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Trustees</span>
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+              Trustees
+            </span>
             <h3 className="mt-2 font-display text-2xl sm:text-3xl text-maroon">Trustees</h3>
 
             {/* Top Image */}
@@ -107,27 +127,35 @@ function SabhaPatronsTrusteesPage() {
             {/* Below Image: Two Trustees Cards */}
             <div className="mt-6 grid gap-6 sm:grid-cols-2">
               <div className="rounded-xl border border-border/60 bg-muted/30 p-6">
-                <h4 className="font-display text-xl sm:text-2xl text-maroon">Brahmashri Raja Sastrigal</h4>
-                <p className="text-xs font-semibold uppercase tracking-wider text-primary mt-1">Trustee</p>
+                <h4 className="font-display text-xl sm:text-2xl text-maroon">
+                  Brahmashri Raja Sastrigal
+                </h4>
+                <p className="text-xs font-semibold uppercase tracking-wider text-primary mt-1">
+                  Trustee
+                </p>
                 <p className="mt-3 text-sm leading-relaxed text-foreground/85">
-                  Distinguished Vedic scholar and Trustee guiding the Patasala's spiritual rituals, Adhyayana, and daily Vedic practices.
+                  Distinguished Vedic scholar and Trustee guiding the Patasala's spiritual rituals,
+                  Adhyayana, and daily Vedic practices.
                 </p>
               </div>
 
               <div className="rounded-xl border border-border/60 bg-muted/30 p-6 flex flex-col justify-between">
                 <div>
                   <h4 className="font-display text-xl sm:text-2xl text-maroon">Smt. Kalyani</h4>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-primary mt-1">Trustee</p>
+                  <p className="text-xs font-semibold uppercase tracking-wider text-primary mt-1">
+                    Trustee
+                  </p>
                   <p className="mt-3 text-sm leading-relaxed text-foreground/85">
-                    Dedicated Trustee supporting the institution's welfare, educational mission, and community service endeavors.
+                    Dedicated Trustee supporting the institution's welfare, educational mission, and
+                    community service endeavors.
                   </p>
                 </div>
               </div>
             </div>
 
             <p className="mt-6 text-sm leading-relaxed text-foreground/85">
-              Sri Arunachalam and Smt. Subbulakshmi have played an important role in supporting the Vedic institution and its
-              educational mission.
+              Sri Arunachalam and Smt. Subbulakshmi have played an important role in supporting the
+              Vedic institution and its educational mission.
             </p>
           </div>
 
@@ -138,19 +166,39 @@ function SabhaPatronsTrusteesPage() {
                 <GraduationCap className="h-5 w-5" />
               </div>
               <div>
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Scholars &amp; Adhyapakas</span>
+                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">
+                  Scholars &amp; Adhyapakas
+                </span>
                 <h3 className="font-display text-2xl text-maroon">Vedic Teachers &amp; Scholars</h3>
               </div>
             </div>
 
             <p className="mt-4 text-sm leading-relaxed text-foreground/85">
-              The Gurukulam is supported by dedicated teachers and scholars who contribute to the traditional education
-              and training of its students:
+              The Gurukulam is supported by dedicated teachers and scholars who contribute to the
+              traditional education and training of its students:
             </p>
 
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
+            <div>
+              <img
+                src={guruPrasadBhattPhoto}
+                alt="Guru Prasad Bhatt Image"
+                className="w-full h-72 sm:h-96 md:h-[420px] object-cover object-center rounded-xl my-4"
+              />
+              <div
+                key="Guru Prasad Bhatt"
+                className="flex items-center justify-between rounded-xl border border-border/60 bg-card p-4 shadow-2xs"
+              >
+                <span className="font-semibold text-foreground">Guru Prasad Bhatt</span>
+                <span className="text-xs font-medium text-primary">Vedic Teacher</span>
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-4 sm:grid-cols-3">
               {TEACHERS.map((t) => (
-                <div key={t.name} className="flex items-center justify-between rounded-xl border border-border/60 bg-card p-4 shadow-2xs">
+                <div
+                  key={t.name}
+                  className="flex items-center justify-between rounded-xl border border-border/60 bg-card p-4 shadow-2xs"
+                >
                   <span className="font-semibold text-foreground">{t.name}</span>
                   <span className="text-xs font-medium text-primary">{t.role}</span>
                 </div>
@@ -158,15 +206,20 @@ function SabhaPatronsTrusteesPage() {
             </div>
 
             <p className="mt-6 text-sm leading-relaxed text-foreground/85">
-              Together, the trustees, teachers and scholars work towards preserving a living Vedic tradition and passing
-              Vedic wisdom, discipline, values, culture and spiritual knowledge to the next generation.
+              Together, the trustees, teachers and scholars work towards preserving a living Vedic
+              tradition and passing Vedic wisdom, discipline, values, culture and spiritual
+              knowledge to the next generation.
             </p>
           </div>
 
           {/* Closing Universal Prayer */}
           <div className="mandala-bg rounded-2xl border border-border p-8 text-center">
-            <h4 className="font-display text-2xl font-bold text-maroon">Loka Samastha Sukhino Bhavantu</h4>
-            <p className="mt-2 text-sm italic text-foreground/80">May all beings in the world be happy and peaceful.</p>
+            <h4 className="font-display text-2xl font-bold text-maroon">
+              Loka Samastha Sukhino Bhavantu
+            </h4>
+            <p className="mt-2 text-sm italic text-foreground/80">
+              May all beings in the world be happy and peaceful.
+            </p>
           </div>
         </div>
       </section>
