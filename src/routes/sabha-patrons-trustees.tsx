@@ -2,7 +2,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { PageShell, PageBanner, SectionHeading, Sloka } from "@/components/site/PageShell";
 import heroTemple from "@/assets/hero-temple.jpg";
 import arunachalamPhoto from "@/assets/sabha-patrons-trustees/sri-g-arunachalam.jpg";
-import rajaSastrigalPhoto from "@/assets/sabha-patrons-trustees/brahmashri-raja-sastrigal.jpeg";
+import rajaSastrigalPhoto from "@/assets/sabha-patrons-trustees/raja-sastrigal.jpeg";
 import guruPrasadBhattPhoto from "@/assets/sabha-patrons-trustees/guru-prasa-bhatt.jpeg";
 import gouriShankaraSharma from "@/assets/sabha-patrons-trustees/gouri-shankara-sharma.jpeg";
 import methaTeacher from "@/assets/sabha-patrons-trustees/metha-teacher.jpeg";
