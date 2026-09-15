@@ -43,12 +43,12 @@ const TEACHERS = [
   { 
     name: "Mehta Sastrigal", 
     role: "Prayoga Teacher", 
-    img: methaTeacher 
+    img: methaTeacher,
   },
   { 
     name: "Chidambaram Sena Sastrigal", 
     role: "Prayoga Teacher", 
-    img: senaTeacher 
+    img: senaTeacher,
   },
 ];
 
