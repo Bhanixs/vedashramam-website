@@ -5,6 +5,8 @@ import arunachalamPhoto from "@/assets/sabha-patrons-trustees/sri-g-arunachalam.
 import rajaSastrigalPhoto from "@/assets/sabha-patrons-trustees/brahmashri-raja-sastrigal.jpeg";
 import guruPrasadBhattPhoto from "@/assets/sabha-patrons-trustees/guru-prasa-bhatt.jpeg";
 import gouriShankaraSharma from "@/assets/sabha-patrons-trustees/gouri-shankara-sharma.jpeg";
+import methaTeacher from "@/assets/sabha-patrons-trustees/metha-teacher.jpeg";
+import senaTeacher from "@/assets/sabha-patrons-trustees/sena-teacher.jpeg";
 import { GraduationCap } from "lucide-react";
 
 export const Route = createFileRoute("/sabha-patrons-trustees")({
@@ -38,8 +40,16 @@ const TEACHERS = [
     role: "Agama Teacher",
     img: gouriShankaraSharma,
   },
-  { name: "Mehta Sastrigal", role: "Prayoga Teacher" },
-  { name: "Chidambaram Sena Sastrigal", role: "Prayoga Teacher" },
+  { 
+    name: "Mehta Sastrigal", 
+    role: "Prayoga Teacher", 
+    img: methaTeacher 
+  },
+  { 
+    name: "Chidambaram Sena Sastrigal", 
+    role: "Prayoga Teacher", 
+    img: senaTeacher 
+  },
 ];
 
 function SabhaPatronsTrusteesPage() {
