@@ -57,7 +57,6 @@ export function SiteFooter() {
               { label: "Sources of Sustenance", to: "/sources-of-sustenance" },
               { label: "Ways to Support – Donate Now", to: "/ways-to-support" },
               { label: "Appeal for Building Construction", to: "/appeal-for-building-construction" },
-              { label: "EPFO Form 5A Extract", to: "/epfo-form-5a" },
             ].map((l) => (
               <li key={l.to}>
                 <Link to={l.to} className="transition-colors hover:text-gold">

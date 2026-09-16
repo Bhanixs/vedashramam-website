@@ -115,6 +115,7 @@ interface DbStore {
     email: string;
     address: string;
     upi_id: string;
+    upi_qr_url?: string;
     bank_name: string;
     bank_branch: string;
     bank_account: string;
@@ -258,6 +259,7 @@ const DEFAULT_STORE: DbStore = {
     email: TRUST_DETAILS.officialEmail || TRUST_DETAILS.contact?.email || "",
     address: TRUST_DETAILS.registeredAddress || TRUST_DETAILS.address?.full || "",
     upi_id: TRUST_DETAILS.banking?.upiId || TRUST_DETAILS.upi?.id || "",
+    upi_qr_url: (TRUST_DETAILS.banking as any)?.upiQrUrl || "/src/assets/UPI-QR/qr-code.jpeg",
     bank_name: TRUST_DETAILS.banking?.bankName || TRUST_DETAILS.bank?.bankName || "",
     bank_branch: TRUST_DETAILS.banking?.branch || TRUST_DETAILS.bank?.branch || "",
     bank_account: TRUST_DETAILS.banking?.accountNumber || TRUST_DETAILS.bank?.accountNumber || "",

@@ -62,6 +62,7 @@ create table if not exists vedashramam_settings (
   email text default 'info@vedashramam.org',
   address text default '151, Edayanchavadi Road, OM Sakthi Nagar, Lawspet S.O, Puducherry, India - 605008',
   upi_id text default '9842327791@IOB',
+  upi_qr_url text default '/src/assets/UPI-QR/qr-code.jpeg',
   bank_name text default 'Indian Overseas Bank',
   bank_branch text default 'Lawspet Branch, Puducherry - 605 008',
   bank_account text default '212101000031000',
@@ -196,4 +197,7 @@ using ( bucket_id = 'vedashramam-media' );
 
 -- 10. Clean up any invalid temporary blob URLs (e.g. from WhatsApp Web pastes)
 delete from vedashramam_gallery where image_url like 'blob:%';
+
+-- 11. Ensure upi_qr_url column exists in settings
+alter table vedashramam_settings add column if not exists upi_qr_url text default '/src/assets/UPI-QR/qr-code.jpeg';
 

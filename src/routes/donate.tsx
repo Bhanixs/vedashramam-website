@@ -1,10 +1,12 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { PageShell, PageBanner, SectionHeading, Sloka } from "@/components/site/PageShell";
 import heroTemple from "@/assets/hero-temple.jpg";
-import { CreditCard, ArrowRight, ShieldCheck, Heart, Building2, CheckCircle2, X } from "lucide-react";
+import defaultUpiQr from "@/assets/UPI-QR/qr-code.jpeg";
+import { ArrowRight, Building2, Copy, Check, QrCode, Maximize2, X, ZoomIn } from "lucide-react";
 import { useTrustSettings } from "@/lib/use-trust-settings";
 import { TRUST_DETAILS } from "@/lib/trust-details";
+import { resolveMediaUrl } from "@/lib/resolve-media";
 
 export const Route = createFileRoute("/donate")({
   head: () => ({
@@ -67,48 +69,32 @@ const DONATION_STREAMS: DonationStream[] = [
 
 function DonatePage() {
   const trust = useTrustSettings();
-  const [modalOpen, setModalOpen] = useState(false);
-  const [selectedPurpose, setSelectedPurpose] = useState<string>("Sankara Jayanthi & Nithya Sevas");
-  const [amount, setAmount] = useState<string>("5000");
-  const [donorName, setDonorName] = useState<string>("");
-  const [donorPhone, setDonorPhone] = useState<string>("");
-  const [donorPan, setDonorPan] = useState<string>("");
-  const [submitted, setSubmitted] = useState(false);
+  const [copiedUpi, setCopiedUpi] = useState(false);
+  const [isQrZoomed, setIsQrZoomed] = useState(false);
 
-  const [submitting, setSubmitting] = useState(false);
-
-  const openDonateModal = (purpose: string) => {
-    setSelectedPurpose(purpose);
-    setSubmitted(false);
-    setModalOpen(true);
-  };
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setSubmitting(true);
-    try {
-      const res = await fetch("/api/admin?action=donate", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          donor_name: donorName,
-          donor_phone: donorPhone,
-          donor_pan: donorPan,
-          amount: Number(amount) || 0,
-          purpose: selectedPurpose,
-          payment_method: "Bank Transfer / UPI",
-        }),
-      });
-      if (res.ok) {
-        setSubmitted(true);
-        toast.success("நன்றி! உங்கள் காணிக்கை விபரம் பதிவு செய்யப்பட்டது / Donation intent registered.");
-      } else {
-        toast.error("Submission failed on server. Please try contacting directly.");
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsQrZoomed(false);
       }
-    } catch {
-      toast.error("Network error. Please try again.");
-    } finally {
-      setSubmitting(false);
+    };
+    if (isQrZoomed) {
+      window.addEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
+    };
+  }, [isQrZoomed]);
+
+  const handleCopyUpi = () => {
+    if (typeof navigator !== "undefined" && navigator.clipboard) {
+      navigator.clipboard.writeText(trust.upiId);
+      setCopiedUpi(true);
+      setTimeout(() => setCopiedUpi(false), 2500);
     }
   };
 
@@ -148,14 +134,13 @@ function DonatePage() {
               </div>
 
               <div className="mt-8 space-y-3 border-t border-border/60 pt-6">
-                <button
-                  type="button"
-                  onClick={() => openDonateModal(stream.defaultCategory)}
+                <a
+                  href="#upi-qr-section"
                   className="flex w-full items-center justify-center gap-2 rounded-md bg-primary py-3 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow transition-colors hover:bg-maroon"
                 >
-                  <CreditCard className="h-4 w-4" />
-                  Donate Now
-                </button>
+                  <QrCode className="h-4 w-4" />
+                  Scan UPI QR to Donate
+                </a>
 
                 <div className="text-center">
                   <Link
@@ -169,6 +154,100 @@ function DonatePage() {
               </div>
             </div>
           ))}
+        </div>
+
+        {/* UPI QR Code Section */}
+        <div id="upi-qr-section" className="mx-auto mt-16 max-w-3xl scroll-mt-24 rounded-2xl border-2 border-gold/40 bg-card p-6 sm:p-8 shadow-md">
+          <div className="text-center">
+            <span className="text-xs font-semibold uppercase tracking-[0.2em] text-gold">Instant &amp; Direct Contribution</span>
+            <h3 className="mt-1 font-display text-2xl sm:text-3xl text-maroon">Scan to Donate via UPI</h3>
+            <p className="mt-2 text-sm text-foreground/80">
+              Zero transaction charges. Remit directly to the Trust&apos;s verified account at Indian Overseas Bank.
+            </p>
+          </div>
+
+          <div className="mt-8 flex flex-col items-center justify-center gap-6 sm:flex-row sm:items-center sm:justify-around">
+            {/* QR Image with Click to Enlarge */}
+            <div className="flex flex-col items-center">
+              <button
+                type="button"
+                onClick={() => setIsQrZoomed(true)}
+                className="group relative cursor-zoom-in rounded-2xl border-2 border-gold/40 bg-white p-3 shadow-lg transition-all duration-300 hover:scale-[1.02] hover:border-gold hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-gold"
+                title="Click to view larger in image viewer"
+              >
+                <img
+                  src={resolveMediaUrl(trust.upiQrUrl) || defaultUpiQr}
+                  alt="Vedashrama Gurukulam Official UPI QR Code"
+                  className="h-60 w-60 sm:h-64 sm:w-64 object-contain rounded-xl"
+                />
+                <div className="absolute inset-0 flex items-center justify-center rounded-2xl bg-black/35 opacity-0 backdrop-blur-xs transition-opacity duration-200 group-hover:opacity-100">
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3.5 py-1.5 text-xs font-bold text-maroon shadow-md">
+                    <Maximize2 className="h-3.5 w-3.5" />
+                    Click to Enlarge
+                  </span>
+                </div>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setIsQrZoomed(true)}
+                className="mt-2.5 inline-flex items-center gap-1 text-xs font-semibold text-primary transition-colors hover:text-maroon hover:underline"
+              >
+                <ZoomIn className="h-3.5 w-3.5" />
+                Tap to view larger / scan clearly
+              </button>
+            </div>
+
+            {/* UPI ID Details & Copy */}
+            <div className="flex flex-col items-center sm:items-start text-center sm:text-left space-y-4 max-w-sm">
+              <div className="w-full">
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Official UPI ID</p>
+                <div className="mt-1.5 flex items-center justify-between gap-2 rounded-xl border border-border bg-background px-4 py-2.5 shadow-sm">
+                  <span className="font-mono text-base font-bold text-primary">{trust.upiId}</span>
+                  <button
+                    type="button"
+                    onClick={handleCopyUpi}
+                    className="inline-flex items-center gap-1 rounded-md bg-muted px-2.5 py-1 text-xs font-semibold text-foreground hover:bg-gold/20 hover:text-maroon transition-colors"
+                    title="Copy UPI ID"
+                  >
+                    {copiedUpi ? (
+                      <>
+                        <Check className="h-3.5 w-3.5 text-green-600" />
+                        <span className="text-green-600">Copied!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy className="h-3.5 w-3.5" />
+                        <span>Copy</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+              </div>
+
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Supported Payment Apps</p>
+                <div className="mt-2 flex flex-wrap gap-2 justify-center sm:justify-start">
+                  {["Google Pay", "PhonePe", "Paytm", "BHIM", "Any UPI App"].map((app) => (
+                    <span
+                      key={app}
+                      className="rounded-md border border-border bg-background px-2.5 py-1 text-[0.72rem] font-medium text-foreground/80 shadow-2xs"
+                    >
+                      {app}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="rounded-lg border border-gold/30 bg-gold/5 p-3 text-xs text-foreground/85 leading-relaxed">
+                <p>
+                  <strong>Tax Exemption Note:</strong> Eligible for 80G tax deduction (URN: <span className="font-mono font-semibold">{trust.reg80g}</span>). After transferring, kindly send your transaction reference and PAN to{" "}
+                  <a href={`tel:${trust.phone}`} className="font-semibold text-maroon hover:underline">{trust.phone}</a> or{" "}
+                  <a href={`mailto:${trust.email}`} className="font-semibold text-maroon hover:underline">{trust.email}</a> so we may issue receipts and offer prayers with Sankalpam.
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
 
         {/* Bank & Cheque Details */}
@@ -244,154 +323,80 @@ function DonatePage() {
         </div>
       </section>
 
-      {/* Online Donation Modal */}
-      {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs">
-          <div className="relative w-full max-w-lg rounded-2xl border border-border bg-background p-6 shadow-2xl sm:p-8">
+      {/* Lightbox / Large Image Viewer Modal */}
+      {isQrZoomed && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm transition-all animate-in fade-in duration-200"
+          onClick={() => setIsQrZoomed(false)}
+        >
+          <div
+            className="relative flex flex-col items-center max-w-lg w-full rounded-3xl bg-white p-6 sm:p-8 shadow-2xl border border-stone-200"
+            onClick={(e) => e.stopPropagation()}
+          >
+            {/* Close Button */}
             <button
               type="button"
-              onClick={() => setModalOpen(false)}
-              aria-label="Close"
-              className="absolute right-4 top-4 rounded-md p-1.5 text-muted-foreground hover:bg-accent hover:text-foreground"
+              onClick={() => setIsQrZoomed(false)}
+              className="absolute right-4 top-4 rounded-full bg-stone-100 p-2 text-stone-600 transition-colors hover:bg-stone-200 hover:text-stone-900 focus:outline-none"
+              aria-label="Close QR image viewer"
             >
               <X className="h-5 w-5" />
             </button>
 
-            {!submitted ? (
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <span className="text-xs font-semibold uppercase tracking-wider text-gold">Online Donation</span>
-                <h3 className="font-display text-2xl text-maroon">Support Vedashrama Gurukulam</h3>
-                <p className="text-xs text-muted-foreground">Zero transaction charges apply.</p>
+            <div className="text-center pb-3">
+              <span className="text-xs font-semibold uppercase tracking-wider text-gold">Official UPI QR Code</span>
+              <h4 className="font-display text-xl sm:text-2xl font-bold text-maroon mt-0.5">
+                {trust.trustName}
+              </h4>
+              <p className="text-xs text-stone-500 mt-1">
+                Scan with Google Pay, PhonePe, Paytm, BHIM or any UPI banking app
+              </p>
+            </div>
 
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-foreground/75">
-                    Selected Purpose
-                  </label>
-                  <select
-                    value={selectedPurpose}
-                    onChange={(e) => setSelectedPurpose(e.target.value)}
-                    className="mt-1 w-full rounded-md border border-border bg-card px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                  >
-                    <option value="Sankara Jayanthi & Nithya Sevas">Sankara Jayanthi &amp; Nithya Sevas</option>
-                    <option value="Vidyarthi Sponsorship & Gurukulam Support">
-                      Vidyarthi Sponsorship &amp; Gurukulam Support
-                    </option>
-                    <option value="New Patasala Building Fund">New Patasala Building Fund</option>
-                    <option value="Sabha Sashwata Nidhi Fund (₹11,000)">
-                      Sabha Sashwata Nidhi Fund (₹11,000)
-                    </option>
-                    <option value="Mid-Day Samaradhana (₹6,000)">Mid-Day Samaradhana (₹6,000)</option>
-                    <option value="General Corpus Contribution">General Corpus Contribution</option>
-                  </select>
-                </div>
+            {/* High-Resolution Large QR Preview */}
+            <div className="rounded-2xl border-2 border-gold/40 bg-white p-4 shadow-md my-2">
+              <img
+                src={resolveMediaUrl(trust.upiQrUrl) || defaultUpiQr}
+                alt="Enlarged Official UPI QR Code"
+                className="max-h-[60vh] w-auto max-w-full object-contain rounded-xl"
+              />
+            </div>
 
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-foreground/75">
-                    Amount (₹ INR)
-                  </label>
-                  <div className="mt-1 flex gap-2">
-                    {["2000", "5000", "11000", "25000"].map((preset) => (
-                      <button
-                        key={preset}
-                        type="button"
-                        onClick={() => setAmount(preset)}
-                        className={`rounded-md border px-3 py-1.5 text-xs font-medium transition-colors ${
-                          amount === preset
-                            ? "border-primary bg-primary text-primary-foreground font-bold"
-                            : "border-border bg-card text-foreground hover:bg-muted"
-                        }`}
-                      >
-                        ₹{preset}
-                      </button>
-                    ))}
-                  </div>
-                  <input
-                    type="number"
-                    value={amount}
-                    onChange={(e) => setAmount(e.target.value)}
-                    required
-                    min="100"
-                    className="mt-2 w-full rounded-md border border-border bg-card px-3 py-2 text-sm font-semibold text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-xs font-semibold uppercase tracking-wider text-foreground/75">
-                    Full Name (For Sankalpam &amp; Receipt)
-                  </label>
-                  <input
-                    type="text"
-                    value={donorName}
-                    onChange={(e) => setDonorName(e.target.value)}
-                    required
-                    placeholder="Enter your name"
-                    className="mt-1 w-full rounded-md border border-border bg-card px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                  />
-                </div>
-
-                <div className="grid grid-cols-2 gap-3">
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-foreground/75">
-                      Phone Number
-                    </label>
-                    <input
-                      type="tel"
-                      value={donorPhone}
-                      onChange={(e) => setDonorPhone(e.target.value)}
-                      required
-                      placeholder="+91 Mobile"
-                      className="mt-1 w-full rounded-md border border-border bg-card px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold uppercase tracking-wider text-foreground/75">
-                      PAN Number (80G)
-                    </label>
-                    <input
-                      type="text"
-                      value={donorPan}
-                      onChange={(e) => setDonorPan(e.target.value.toUpperCase())}
-                      placeholder="ABCDE1234F"
-                      className="mt-1 w-full rounded-md border border-border bg-card px-3 py-2 text-sm uppercase text-foreground focus:outline-none focus:ring-2 focus:ring-primary"
-                    />
-                  </div>
-                </div>
-
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="w-full rounded-md bg-primary py-3 text-xs font-semibold uppercase tracking-wider text-primary-foreground shadow transition-colors hover:bg-maroon disabled:opacity-60"
-                  >
-                    {submitting ? "Registering..." : `Proceed with ₹${amount}`}
-                  </button>
-                </div>
-              </form>
-            ) : (
-              <div className="py-6 text-center space-y-4">
-                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-green-100 text-green-700">
-                  <CheckCircle2 className="h-8 w-8" />
-                </div>
-                <h3 className="font-display text-2xl text-maroon">Dhanyosmi! Thank You</h3>
-                <p className="text-sm leading-relaxed text-foreground/80">
-                  Thank you, <strong>{donorName}</strong>. Your intention to contribute{" "}
-                  <strong>₹{amount}</strong> towards <strong>{selectedPurpose}</strong> has been registered.
-                </p>
-                <p className="text-xs text-muted-foreground">
-                  Our Trustees will contact you directly at {donorPhone} with bank transfer verification, Sankalpam
-                  details, and your 80-G tax exemption receipt.
-                </p>
-                <div className="pt-4">
-                  <button
-                    type="button"
-                    onClick={() => setModalOpen(false)}
-                    className="rounded-md bg-primary px-6 py-2.5 text-xs font-semibold uppercase tracking-wider text-primary-foreground hover:bg-maroon"
-                  >
-                    Close
-                  </button>
-                </div>
+            {/* UPI ID Copy & Action Footer */}
+            <div className="mt-3 flex w-full flex-col sm:flex-row items-center justify-between gap-3 pt-3 border-t border-stone-100">
+              <div className="text-center sm:text-left">
+                <p className="text-[10px] font-semibold text-stone-400 uppercase tracking-wider">UPI ID</p>
+                <p className="font-mono text-sm font-bold text-maroon">{trust.upiId}</p>
               </div>
-            )}
+
+              <div className="flex items-center gap-2">
+                <button
+                  type="button"
+                  onClick={handleCopyUpi}
+                  className="inline-flex items-center gap-1.5 rounded-xl bg-amber-50 border border-amber-200 px-3.5 py-2 text-xs font-semibold text-amber-900 hover:bg-amber-100 transition-colors"
+                >
+                  {copiedUpi ? (
+                    <>
+                      <Check className="h-3.5 w-3.5 text-green-600" />
+                      <span className="text-green-600">Copied!</span>
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="h-3.5 w-3.5" />
+                      <span>Copy UPI ID</span>
+                    </>
+                  )}
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => setIsQrZoomed(false)}
+                  className="rounded-xl bg-stone-900 px-4 py-2 text-xs font-semibold text-white hover:bg-stone-800 transition-colors"
+                >
+                  Done
+                </button>
+              </div>
+            </div>
           </div>
         </div>
       )}

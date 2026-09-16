@@ -7,6 +7,7 @@ export interface TrustSettingsState {
   email: string;
   address: string;
   upiId: string;
+  upiQrUrl: string;
   bankName: string;
   bankBranch: string;
   accountNumber: string;
@@ -21,6 +22,7 @@ const DEFAULT_SETTINGS: TrustSettingsState = {
   email: TRUST_DETAILS.officialEmail || TRUST_DETAILS.contact.email,
   address: TRUST_DETAILS.registeredAddress || TRUST_DETAILS.address.full,
   upiId: TRUST_DETAILS.banking?.upiId || TRUST_DETAILS.upi.id,
+  upiQrUrl: (TRUST_DETAILS.banking as any)?.upiQrUrl || "/src/assets/UPI-QR/qr-code.jpeg",
   bankName: TRUST_DETAILS.banking?.bankName || TRUST_DETAILS.bank.bankName,
   bankBranch: TRUST_DETAILS.banking?.branch || TRUST_DETAILS.bank.branch,
   accountNumber: TRUST_DETAILS.banking?.accountNumber || TRUST_DETAILS.bank.accountNumber,
@@ -56,6 +58,7 @@ export function updateTrustSettingsCache(newSettings: Partial<TrustSettingsState
     email: newSettings.email || current.email,
     address: newSettings.address || current.address,
     upiId: newSettings.upiId || newSettings.upi_id || current.upiId,
+    upiQrUrl: newSettings.upiQrUrl || newSettings.upi_qr_url || current.upiQrUrl,
     bankName: newSettings.bankName || newSettings.bank_name || current.bankName,
     bankBranch: newSettings.bankBranch || newSettings.bank_branch || current.bankBranch,
     accountNumber: newSettings.accountNumber || newSettings.bank_account || current.accountNumber,

@@ -39,6 +39,7 @@ export const TRUST_DETAILS = {
     accountNumber: "212101000031000",
     ifscCode: "IOBA0002121",
     upiId: "9842327791@IOB",
+    upiQrUrl: "/src/assets/UPI-QR/qr-code.jpeg",
   },
   bank: {
     accountName: "Sri sai Sankara baktha sabha",
